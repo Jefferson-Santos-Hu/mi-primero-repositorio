@@ -1,0 +1,49 @@
+Bloque 4 — Ejecuta tu primera petición autenticada de prueba [Core]
+Proyecto: plantilla-repositorio-base
+Cliente HTTP: Thunder Client 3.0.0 en Visual Studio Code
+Verificación: 2026-10-21 13:05:29 (America/Santiago, UTC-03:00)
+Método: POST
+Endpoint: https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent
+Modelo solicitado: gemini-3.5-flash-lite
+Estado HTTP real: 200 OK
+Tiempo observado en Thunder Client: 38.36 segundos
+Tamaño de respuesta observado: 767 Bytes
+
+Entrada enviada:
+Confirma en una frase corta, en español, que esta conexión funciona.
+
+Texto generado real:
+¡Conexión establecida y funcionando correctamente!
+
+Fragmento de la respuesta real (campos relevantes transcritos de Thunder Client; no es el JSON completo):
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "¡Conexión establecida y funcionando correctamente!"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 15,
+    "candidatesTokenCount": 9,
+    "totalTokenCount": 24
+  }
+}
+
+Captura de la ejecución: evidencia_peticion_autenticada.jpg
+
+Autenticación: x-goog-api-key, obtenido del .env local. La clave se omite por completo.
+
+Diagnóstico durante la actividad:
+- gemini-3.8-flash: HTTP 503 UNAVAILABLE por alta demanda.
+- gemini-3.1-flash-lite: HTTP 503 UNAVAILABLE por alta demanda.
+- gemini-2.5-flash-lite: HTTP 404 NOT_FOUND; el proveedor indicó usar gemini-3.5-flash-lite.
+- gemini-3.5-flash-lite: HTTP 200 OK con texto generado.
