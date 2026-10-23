@@ -1,5 +1,6 @@
 """Primer módulo de Gemini: preparar, enviar, extraer y coordinar."""
 import argparse
+import json
 import os
 from pathlib import Path
 import re
@@ -9,10 +10,16 @@ from dotenv import load_dotenv
 import requests
 
 
-def armar_peticion(pregunta):
+def armar_peticion(pregunta, system_instruction=None, response_schema=None):
     """Valida la entrada y prepara la petición sin realizar llamadas de red."""
     if not isinstance(pregunta, str) or not pregunta.strip():
         raise ValueError("La pregunta debe ser un texto no vacío.")
+    if system_instruction is not None and (
+        not isinstance(system_instruction, str) or not system_instruction.strip()
+    ):
+        raise ValueError("La instrucción de sistema debe ser un texto no vacío.")
+    if response_schema is not None and not isinstance(response_schema, dict):
+        raise ValueError("El esquema de respuesta debe ser un diccionario.")
 
     load_dotenv(Path(__file__).resolve().parents[1] / ".env", override=False)
     clave = (os.getenv("GEMINI_API_KEY") or os.getenv("API_KEY") or "").strip()
@@ -25,6 +32,12 @@ def armar_peticion(pregunta):
     url = f"https://generativelanguage.googleapis.com/v1beta/models/{modelo}:generateContent"
     encabezados = {"Content-Type": "application/json", "x-goog-api-key": clave}
     cuerpo = {"contents": [{"parts": [{"text": pregunta.strip()}]}]}
+    if system_instruction is not None:
+        cuerpo["systemInstruction"] = {"parts": [{"text": system_instruction.strip()}]}
+    if response_schema is not None:
+        cuerpo["generationConfig"] = {
+            "responseMimeType": "application/json", "responseSchema": response_schema,
+        }
     return url, encabezados, cuerpo
 
 
@@ -69,6 +82,27 @@ def extraer_texto(datos):
     if not isinstance(texto, str) or not texto.strip():
         raise RuntimeError("La respuesta de Gemini contiene un texto vacío o inválido.")
     return texto.strip()
+
+
+def parsear_respuesta_json(texto):
+    """Limpia un bloque Markdown completo y exige un objeto JSON válido."""
+    if not isinstance(texto, str) or not texto.strip():
+        raise ValueError("La respuesta del modelo debe contener texto JSON.")
+    limpio = texto.strip()
+    bloque = re.fullmatch(r"```(?:json)?\s*([\s\S]*?)\s*```", limpio, re.IGNORECASE)
+    if bloque:
+        limpio = bloque.group(1)
+
+    def rechazar_constante(_):
+        raise ValueError("La respuesta contiene un número no permitido en JSON.")
+
+    try:
+        datos = json.loads(limpio, parse_constant=rechazar_constante)
+    except json.JSONDecodeError:
+        raise ValueError("La respuesta del modelo no es JSON válido.") from None
+    if not isinstance(datos, dict):
+        raise ValueError("La respuesta JSON debe ser un objeto con claves.")
+    return datos
 
 
 def obtener_dato_de_prueba(pregunta):
