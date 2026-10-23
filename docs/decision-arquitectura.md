@@ -1,7 +1,7 @@
 # Decisión de arquitectura: elección de modelo
 
-**Fecha del registro y las mediciones:** 2026-10-23 (America/Santiago).  
-**Responsable del proyecto:** Jefferson Santos.  
+**Fecha del registro y las mediciones:** 2026-10-23 (America/Santiago).
+**Responsable del proyecto:** Jefferson Santos.
 **Estado:** elección operativa vigente; comparación de calidad del candidato alternativo pendiente por falta de respuesta.
 
 ## Modelo elegido

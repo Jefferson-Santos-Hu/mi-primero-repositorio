@@ -45,7 +45,9 @@ Se revisaron los textos reales según pertinencia, corrección de conceptos bás
 
 Flash-Lite cumple el nivel introductorio de las tres consultas, con los límites descritos. No se concluye que supere la calidad de Flash, porque ese candidato no respondió.
 
-## Respuestas completas, sin editar
+## Respuestas completas
+
+Se normalizan únicamente espacios al final de las líneas para Markdown. El texto original exacto permanece en el JSON.
 
 ### Intento 1: gemini-3.5-flash-lite, P1
 
@@ -96,7 +98,7 @@ Gemini superó el tiempo de espera. Intenta nuevamente.
 Fecha: 2026-10-23T18:33:40-03:00. Duración: 1.285718 segundos.
 
 ```text
-Un entorno virtual de Python sirve para aislar las dependencias de un proyecto, evitando conflictos entre diferentes versiones de paquetes en tu sistema. 
+Un entorno virtual de Python sirve para aislar las dependencias de un proyecto, evitando conflictos entre diferentes versiones de paquetes en tu sistema.
 
 Para crearlo, abre tu terminal en la carpeta del proyecto y ejecuta el comando:
 
