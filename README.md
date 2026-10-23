@@ -121,3 +121,26 @@ El repositorio partía sin código en `src/`: en este avance se construyó la
 base descrita en los bloques 5 y 6 y se completó con la validación y las
 excepciones del Bloque 7. El historial conserva la prueba RED por módulo
 ausente y la implementación verificada; no se recrean avances anteriores.
+
+## Decisión de arquitectura — Bloque 9
+
+La [decisión de arquitectura](docs/decision-arquitectura.md) documenta el modelo
+elegido, el [diagrama del prototipo](docs/arquitectura.md), la comparación de
+precios, latencia y calidad, la justificación y la alternativa descartada.
+Incluye la fecha de consulta de precios y los límites de la medición.
+
+Los [registros reales](docs/mediciones_bloque9.json) conservan cada intento,
+sus tiempos y, cuando el proveedor respondió, el texto y los tokens reportados.
+Los errores y tiempos de espera también se guardan; no se cuentan como
+respuestas generadas ni se les atribuye una calidad no observada.
+
+Para repetir la comparación, revisa primero las tarifas en
+`docs/medir_modelos.py` y luego ejecuta desde la raíz:
+
+```powershell
+.\venv\Scripts\python.exe docs/medir_modelos.py
+```
+
+Esa herramienta hace 12 solicitudes reales, consume cuota y reemplaza el
+registro JSON; la decisión escrita debe actualizarse después si cambian los
+resultados. La CLI de `src/` conserva su funcionamiento del Bloque 7.
