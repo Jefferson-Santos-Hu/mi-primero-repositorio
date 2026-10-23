@@ -72,3 +72,52 @@ y respondió **HTTP 200 OK**. El texto generado fue:
 Consulta [la evidencia de la petición](docs/evidencia_peticion_autenticada.txt)
 para ver el endpoint exacto, la fecha, los tokens observados y la referencia a
 la captura de pantalla guardada junto al registro.
+
+## Módulo Python — Unidad U1.3, Bloque 7
+
+El archivo `src/consumir_gemini.py` implementa las cuatro funciones del curso:
+`armar_peticion` valida la pregunta y prepara la URL, los encabezados y el JSON;
+`enviar_peticion` envía el POST y maneja errores de conexión, tiempo de espera,
+HTTP y JSON; `extraer_texto` valida el campo de respuesta; y
+`obtener_dato_de_prueba` coordina las anteriores.
+
+Usa la credencial `API_KEY` que ya estaba configurada en el `.env` de este
+proyecto. También admite `GEMINI_API_KEY`, que tiene prioridad si ambas existen.
+El modelo predeterminado es `gemini-3.5-flash-lite`, el mismo verificado en el
+Bloque 4. Puedes cambiarlo con `GEMINI_MODEL` en `.env` según disponibilidad.
+La clave viaja en el encabezado `x-goog-api-key`; nunca se incorpora a la URL.
+
+Desde la raíz del repositorio, en PowerShell:
+
+```powershell
+.\venv\Scripts\python.exe -m src.consumir_gemini "Confirma que la conexión funciona."
+.\venv\Scripts\python.exe -m src.consumir_gemini ""
+.\venv\Scripts\python.exe -m unittest discover -s tests -v
+```
+
+El programa devuelve código 0 cuando funciona y 1 ante un error controlado.
+Los mensajes de error se muestran sin traceback ni datos de autenticación.
+El tiempo de espera es de 10 segundos para conectar y 90 para recibir datos.
+
+Las 13 pruebas locales no hacen llamadas de red: simulan las respuestas de
+Gemini para provocar conexión fallida, JSON inválido, campos ausentes y errores
+HTTP, además de verificar entradas y el flujo correcto. La cobertura medida
+del módulo fue del 99 % (69 instrucciones, una sin ejecutar: el punto de entrada).
+
+La [evidencia del Bloque 7](docs/evidencia_bloque7.txt) registra, en orden,
+la clave inválida real (HTTP 400), la entrada vacía y la respuesta real exitosa.
+Para repetir esa secuencia, usando dos peticiones reales a tu proveedor:
+
+```powershell
+.\venv\Scripts\python.exe -m tests.verificar_bloque7
+```
+
+La credencial inválida se sustituye únicamente en memoria durante esa prueba;
+el archivo `.env` se conserva. La última prueba usa tu credencial local.
+La respuesta generada puede variar y el proveedor puede rechazar solicitudes
+por cuota o disponibilidad. La evidencia se actualiza con el resultado real.
+
+El repositorio partía sin código en `src/`: en este avance se construyó la
+base descrita en los bloques 5 y 6 y se completó con la validación y las
+excepciones del Bloque 7. El historial conserva la prueba RED por módulo
+ausente y la implementación verificada; no se recrean avances anteriores.

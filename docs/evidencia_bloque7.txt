@@ -1,0 +1,13 @@
+Bloque 7 - Ejecución real y secuencial
+Fecha: 2026-10-23T18:25:23-03:00
+Modelo: gemini-3.5-flash-lite (configurable mediante GEMINI_MODEL)
+1. Credencial inválida (reemplazo temporal en memoria, sin editar .env)
+Error: Gemini respondió HTTP 400. Revisa la petición, la credencial y los permisos del proyecto.
+Código de salida: 1
+2. Entrada vacía (validación antes de la red)
+Error: La pregunta debe ser un texto no vacío.
+Código de salida: 1
+3. Credencial local restaurada y pregunta válida (API real)
+¡Conexión establecida y funcionando correctamente!
+Código de salida: 0
+Las pruebas de red desconectada, JSON y campos faltantes son simulaciones en unittest.
