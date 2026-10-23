@@ -1,115 +1,109 @@
 # Decisión de arquitectura: elección de modelo
 
-**Fecha del registro y las mediciones:** 2026-10-23 (America/Santiago).
-**Responsable del proyecto:** Jefferson Santos.
-**Estado:** elección operativa vigente; comparación de calidad del candidato alternativo pendiente por falta de respuesta.
+**Fecha del registro, precios y mediciones:** 2026-10-23 (America/Santiago).
+
+**Responsable del proyecto:** Jefferson Santos. **Estado:** aceptada para el prototipo actual.
 
 ## Modelo elegido
 
-Se mantiene **Gemini 3.5 Flash-Lite (`gemini-3.5-flash-lite`)**, ya utilizado en
-los bloques 4 y 7. Este registro documenta esa elección con mediciones nuevas;
-no cambia el modelo predeterminado del código.
-
-El caso evaluado es el prototipo actual: una CLI Python que recibe una pregunta
-y devuelve texto en español mediante una petición a Gemini. Para concretar la
-evaluación se usan consultas básicas de aprendizaje técnico (venv, protección
-de una API key y HTTP 429), acordes con el módulo implementado. No se presupone
-una aplicación de producción ni un asistente especializado ya construido.
+Se mantiene **Gemini 3.5 Flash-Lite (`gemini-3.5-flash-lite`)**, ya utilizado
+en los bloques 4 y 7. El caso evaluado es la CLI Python actual: recibe una
+pregunta y devuelve texto en español mediante una petición HTTPS a Gemini.
+Las consultas de prueba son de aprendizaje técnico básico: entornos virtuales,
+protección de credenciales y errores HTTP. No se presupone una aplicación de
+producción ni un asistente especializado ya construido.
 
 ## Diagrama de arquitectura
 
 ![Arquitectura del prototipo](diagrama_arquitectura.png)
 
-El [detalle del flujo](arquitectura.md) identifica `armar_peticion`,
-`enviar_peticion`, `extraer_texto`, el orquestador, la credencial local,
-los errores y los datos de cada conexión. Incluye también el cálculo documental
-del costo a partir de `usageMetadata`, separado de la CLI que imprime texto.
-El diagrama se incorpora en esta entrega porque aún no existía en el repositorio.
+El [detalle del flujo](arquitectura.md) identifica las tres funciones reales
+(`armar_peticion`, `enviar_peticion`, `extraer_texto`), su orquestador, la
+credencial local, las excepciones y el dato que cruza cada flecha. También
+identifica dónde la herramienta de medición calcula el costo desde
+`usageMetadata`. La CLI imprime texto; el costo se registra en la comparación.
 
 ## Comparación de candidatos
 
-Tarifas **Standard de pago**, en USD para texto sin caché, herramientas ni
-procesamiento por lotes, consultadas el 2026-10-23 en la
+Tarifas **Standard de pago**, USD para texto sin caché explícita, herramientas
+ni procesamiento por lotes. Consultadas el 2026-10-23 en la
 [página oficial de precios de Gemini](https://ai.google.dev/gemini-api/docs/pricing).
-La salida incluye tokens de razonamiento. Son tarifas públicas; no confirman
-el nivel de facturación ni un cargo real a esta cuenta.
+La tarifa de salida incluye razonamiento. No se afirma que estos importes
+se hayan cobrado: el nivel de facturación de la cuenta no se verificó.
 
-| Criterio | Gemini 3.5 Flash-Lite | Gemini 3.8 Flash |
+| Criterio | Gemini 3.5 Flash-Lite | Gemini 3.6 Flash |
 |---|---|---|
-| ID solicitado | `gemini-3.5-flash-lite` | `gemini-3.8-flash` |
+| ID solicitado | `gemini-3.5-flash-lite` | `gemini-3.6-flash` |
 | Costo por 1.000 tokens de entrada | 0,00030 USD | 0,00075 USD |
 | Costo por 1.000 tokens de salida | 0,00250 USD | 0,00375 USD |
-| Latencia promedio observada, P1 | 1,849 s; 4 respuestas correctas | Sin respuestas válidas; espera media de 90,084 s hasta Timeout en 4 intentos |
-| Calidad para las tres preguntas del prototipo | Buena para el alcance introductorio: cubre los conceptos esenciales en P1, P2 y P3; todas las respuestas tienen hasta 80 palabras por separación en espacios | No evaluable: el proveedor no devolvió texto en las tres preguntas |
-| Disponibilidad en la serie completa | 6/6 respuestas útiles | 0/6 respuestas útiles |
+| Latencia promedio observada, misma P1 repetida 4 veces | 1,908 segundos | 6,949 segundos |
+| Calidad para las tres preguntas del caso | Buena: 3/3 respuestas útiles; explica venv, .env y 429. En 429 atribuye imprecisamente el límite a seguridad. | Buena: 3/3 respuestas útiles; en 429 distingue rate limit y recomienda backoff. En credenciales usa una garantía demasiado absoluta. |
+| Peticiones exitosas en la serie completa | 6/6 | 6/6 |
 
-Precios originales por millón: 0,30/2,50 USD (entrada/salida) para Flash-Lite y
-0,75/3,75 USD para Flash. Se dividieron por 1.000 para la tabla.
-El precio de Flash es promocional hasta el 31 de diciembre de 2026; la página
-anuncia 1,50/7,50 USD por millón desde el 1 de enero de 2027.
-Las tarifas de Flash-Lite corresponden a la consulta indicada y deben revisarse.
+Precios originales por millón de tokens (entrada/salida): 0,30/2,50 USD para
+Flash-Lite y 0,75/3,75 USD para Flash. Se dividieron por 1.000 para la tabla.
+Los precios de Flash son promocionales hasta el 31 de diciembre de 2026;
+la página anuncia 1,50/7,50 USD por millón desde el 1 de enero de 2027.
+Las tarifas de ambos modelos deben volver a consultarse antes de presupuestar.
 
 **Método:** cuatro repeticiones de la misma P1 por modelo, alternando candidatos,
-cronometrajes con `time.perf_counter()` alrededor de `enviar_peticion`, y P2/P3
-una vez por modelo. Se usa el módulo existente, la misma conexión, los mismos
-prompts y la configuración predeterminada de cada modelo. El timeout de lectura
-es 90 segundos. La medición es hasta la respuesta JSON completa, no al primer
-token. No se excluyen repeticiones ni se activan reintentos automáticos.
+y una ejecución de P2 y P3 por candidato. Se cronometró `enviar_peticion` con
+`time.perf_counter()`, desde el envío hasta convertir la respuesta completa
+a JSON. Se usaron los mismos prompts, equipo, conexión y código, sin reintentos
+automáticos ni streaming; el timeout de lectura fue 90 segundos.
+Cada modelo conservó su configuración predeterminada de razonamiento, por lo
+que se compara el uso real de la aplicación y no una igualdad de cómputo interno.
 
-**Evaluación:** pertinencia, corrección técnica de los conceptos y utilidad de
-los pasos para una consulta introductoria. También se comprueba brevedad
-(la pregunta pide un máximo de 80 palabras). La revisión es cualitativa y la
-muestra es pequeña; no demuestra superioridad general de ningún modelo.
-Los prompts, las respuestas y el resultado de cada intento están en el
-[informe de mediciones](comparacion-modelos.md) y en el
-[registro JSON original](mediciones_bloque9.json).
-
-**Límite importante:** los tiempos de espera de Flash no son latencias de
-respuestas exitosas ni permiten juzgar su calidad intrínseca. Falta repetir la
-evaluación con dos candidatos que respondan para cerrar esa parte de la tabla
-solicitada en el curso. No se sustituyen esos datos por valores ilustrativos.
+La calidad se revisó sobre las tres preguntas distintas según pertinencia,
+corrección de los conceptos básicos, utilidad de los pasos y brevedad.
+Para P1 se tomó la primera respuesta para el análisis cualitativo; las cuatro
+se usaron para latencia y todas se conservan. Es una revisión cualitativa
+asistida, no ciega, y una muestra pequeña; no demuestra superioridad general.
+Los textos completos, tokens, costos calculados y tiempos están en el
+[informe de comparación](comparacion-modelos.md) y el [JSON original](mediciones_bloque9.json).
 
 ## Justificación
 
-El criterio principal es que el prototipo devuelva una explicación técnicamente
-útil sin hacer esperar al usuario hasta agotar el timeout. En esta sesión,
-Flash-Lite respondió las preguntas del caso y permitió medir su latencia;
-Flash no produjo una respuesta utilizable. Por ello se mantiene el modelo que
-ya funciona en la aplicación, dejando explícito el límite de esta evidencia.
+El criterio que más pesa para esta CLI educativa es **la latencia, siempre
+que la respuesta cubra lo esencial**. Ambos modelos respondieron las tres
+preguntas con pasos útiles. Flash fue más preciso al explicar 429, pero esa
+diferencia puntual no justifica para este alcance esperar aproximadamente
+3.64 veces más en la prueba repetida.
+La revisión también detectó límites en ambos, documentados en el informe;
+las respuestas generadas no sustituyen la verificación técnica.
 
-El costo refuerza la elección: las tarifas de Flash son 2,5 veces la entrada
-y 1,5 veces la salida de Flash-Lite. Esto compara precios por token, no costos
-reales por petición de Flash, porque no se recibieron sus contadores de uso.
-Para un prototipo de consultas breves no hay, con estas pruebas, una mejora
-observada que justifique migrar al candidato alternativo.
+El costo refuerza la decisión: Flash cobra 2,5 veces por token de entrada y
+1,5 veces por token de salida respecto de Flash-Lite. Es una comparación de
+tarifas por token; el costo por petición además depende de cuántos tokens
+produzca cada modelo, incluidos los de razonamiento.
 
-Como escenario de escala (hipotético, no medición), 1.000 tokens de entrada y
-200 de salida/razonamiento cuestan 0,00080 USD con Flash-Lite y 0,00150 USD
-con Flash a las tarifas consultadas. 50.000 peticiones equivalentes serían
-40 USD y 75 USD, respectivamente, sin impuestos ni servicios adicionales.
+Como escenario hipotético de escala, 1.000 tokens de entrada y 200 de salida
+(incluido razonamiento) equivalen a 0,00080 USD con Flash-Lite y 0,00150 USD
+con Flash. Con 50.000 peticiones iguales serían 40 USD y 75 USD, sin impuestos
+ni servicios adicionales. Este escenario no reemplaza los consumos medidos.
 
 ## Alternativa descartada y por qué
 
-Se descarta **Gemini 3.8 Flash (`gemini-3.8-flash`) para esta versión del
-prototipo** por no devolver texto dentro del timeout en la serie registrada y
-por su mayor tarifa. No se afirma que produzca peores respuestas: no hubo
-respuestas con las que evaluar ese punto.
+Se descarta **Gemini 3.6 Flash (`gemini-3.6-flash`) para esta versión**: aunque
+sus respuestas sirven para el caso y su explicación de 429 es más precisa,
+la mayor espera observada y las tarifas superiores no compensan ese beneficio
+para consultas introductorias breves. No se concluye que sea peor para tareas
+complejas ni que esta latencia sea permanente.
 
-La decisión se revisará si Flash-Lite deja de estar disponible, si cambian las
-tarifas o si el caso requiere razonamiento más complejo. En ese momento se
-repetirán los mismos prompts y se compararán respuestas válidas antes de
-modificar `GEMINI_MODEL`. La aplicación sigue dependiendo de internet, de la
-cuota y de la disponibilidad del proveedor; el control de errores no las elimina.
+La elección se revisará si cambia el caso de uso, la calidad exigida, los
+precios o la disponibilidad. La aplicación depende de internet y de la cuota
+del proveedor; el manejo de errores no elimina esas dependencias.
 
 ## Evidencia y reproducción
 
-- [Arquitectura y fórmula de costo](arquitectura.md).
-- [Resultados legibles y evaluación](comparacion-modelos.md).
-- [Cada ejecución con su fecha, texto, tokens y tiempo](mediciones_bloque9.json).
-- [Herramienta para repetir la medición](medir_modelos.py): revisar tarifas antes
-  de ejecutar `python docs/medir_modelos.py`; realiza 12 llamadas reales y
-  reemplaza el registro JSON. No modifica `.env` ni imprime credenciales.
+- [Diagrama y fórmula del costo](arquitectura.md).
+- [Tabla de cada ejecución y evaluación de respuestas](comparacion-modelos.md).
+- [Serie completa actual: 12 respuestas válidas](mediciones_bloque9.json).
+- [Registro inicial con fallos de Gemini 3.8 Flash](mediciones_bloque9_inicial.json).
+  Se conserva como antecedente; no se mezcla con los promedios actuales.
+- [Herramienta de medición](medir_modelos.py): revisar las tarifas y ejecutar
+  `python docs/medir_modelos.py` desde la raíz. Realiza 12 peticiones reales,
+  consume cuota y reemplaza el JSON; no modifica `.env` ni muestra claves.
 
-Fuente de precios: [Google AI for Developers — Gemini API pricing](https://ai.google.dev/gemini-api/docs/pricing),
-secciones Gemini 3.5 Flash-Lite y Gemini 3.8 Flash, Standard. La evidencia
-histórica del Bloque 4 queda separada de estas mediciones nuevas.
+Fuente de tarifas: [Google AI for Developers — Gemini API pricing](https://ai.google.dev/gemini-api/docs/pricing),
+secciones Gemini 3.5 Flash-Lite y Gemini 3.6 Flash, Standard, consulta 2026-10-23.

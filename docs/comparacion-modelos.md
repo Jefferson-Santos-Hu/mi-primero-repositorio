@@ -1,10 +1,10 @@
-# Comparación de modelos — evidencia del Bloque 9
+# Comparación de modelos — Bloque 9
 
-Fecha de inicio: 2026-10-23T18:32:08-03:00
+Fecha de inicio: 2026-10-23T18:45:04-03:00
 
 4 repeticiones de P1 por modelo, alternando modelos; P2 y P3 una vez por modelo. Mismo POST y configuración predeterminada del módulo; sin caché explícita, herramientas ni streaming.
 
-Las configuraciones de razonamiento son las predeterminadas de cada modelo; no se modificaron para igualarlas. La medición refleja cómo el módulo actual los solicita.
+La serie actual contiene 12 respuestas válidas, 6 por modelo. No se incorporan los fallos del registro inicial a estos promedios.
 
 ## Preguntas
 
@@ -14,69 +14,65 @@ Las configuraciones de razonamiento son las predeterminadas de cada modelo; no s
 
 **P3:** Responde en español en un máximo de 80 palabras: Mi petición HTTP devuelve 429. ¿Qué significa y qué debo hacer?
 
-## Todos los intentos, en orden de ejecución
+## Cada ejecución, en orden
 
-| Intento | Modelo solicitado | Pregunta | Segundos | Resultado | Costo equivalente Standard USD |
-|---:|---|---|---:|---|---:|
-| 1 | gemini-3.5-flash-lite | P1 | 2.176795 | Texto recibido | 0.0003493 |
-| 2 | gemini-3.8-flash | P1 | 90.072782 | Gemini superó el tiempo de espera. Intenta nuevamente. | No calculable: sin usageMetadata |
-| 3 | gemini-3.5-flash-lite | P1 | 1.285718 | Texto recibido | 0.0002418 |
-| 4 | gemini-3.8-flash | P1 | 90.088493 | Gemini superó el tiempo de espera. Intenta nuevamente. | No calculable: sin usageMetadata |
-| 5 | gemini-3.5-flash-lite | P1 | 2.009059 | Texto recibido | 0.0003568 |
-| 6 | gemini-3.8-flash | P1 | 90.094687 | Gemini superó el tiempo de espera. Intenta nuevamente. | No calculable: sin usageMetadata |
-| 7 | gemini-3.5-flash-lite | P1 | 1.925330 | Texto recibido | 0.0002593 |
-| 8 | gemini-3.8-flash | P1 | 90.081967 | Gemini superó el tiempo de espera. Intenta nuevamente. | No calculable: sin usageMetadata |
-| 9 | gemini-3.5-flash-lite | P2 | 2.022987 | Texto recibido | 0.0003349 |
-| 10 | gemini-3.8-flash | P2 | 90.087090 | Gemini superó el tiempo de espera. Intenta nuevamente. | No calculable: sin usageMetadata |
-| 11 | gemini-3.5-flash-lite | P3 | 2.341531 | Texto recibido | 0.0002965 |
-| 12 | gemini-3.8-flash | P3 | 4.428900 | Gemini respondió HTTP 503. El servicio no pudo completar la solicitud. Intenta más tarde. | No calculable: sin usageMetadata |
+| Intento | Modelo | Pregunta | Segundos | Entrada | Salida visible | Razonamiento | Equivalente Standard USD |
+|---:|---|---|---:|---:|---:|---:|---:|
+| 1 | gemini-3.5-flash-lite | P1 | 1.883243 | 31 | 97 | 0 | 0.0002518000 |
+| 2 | gemini-3.6-flash | P1 | 8.138419 | 31 | 132 | 1191 | 0.0049845000 |
+| 3 | gemini-3.5-flash-lite | P1 | 1.848427 | 31 | 134 | 0 | 0.0003443000 |
+| 4 | gemini-3.6-flash | P1 | 7.309327 | 31 | 120 | 1167 | 0.0048495000 |
+| 5 | gemini-3.5-flash-lite | P1 | 1.967179 | 31 | 127 | 0 | 0.0003268000 |
+| 6 | gemini-3.6-flash | P1 | 5.931747 | 31 | 115 | 819 | 0.0035257500 |
+| 7 | gemini-3.5-flash-lite | P1 | 1.934578 | 31 | 134 | 0 | 0.0003443000 |
+| 8 | gemini-3.6-flash | P1 | 6.415505 | 31 | 93 | 1063 | 0.0043582500 |
+| 9 | gemini-3.5-flash-lite | P2 | 2.034006 | 33 | 139 | 0 | 0.0003574000 |
+| 10 | gemini-3.6-flash | P2 | 6.605337 | 33 | 135 | 821 | 0.0036097500 |
+| 11 | gemini-3.5-flash-lite | P3 | 1.957089 | 30 | 107 | 0 | 0.0002765000 |
+| 12 | gemini-3.6-flash | P3 | 7.024738 | 30 | 135 | 1098 | 0.0046462500 |
 
-Los errores se incluyen y no se sustituyen por tiempos de respuesta exitosos. No se infiere facturación de las peticiones fallidas.
+## Promedios de P1
+
+- **gemini-3.5-flash-lite:** 1.908357 segundos, 4/4 respuestas. Costo equivalente medio de esas cuatro peticiones: 0.0003168000 USD.
+- **gemini-3.6-flash:** 6.948749 segundos, 4/4 respuestas. Costo equivalente medio de esas cuatro peticiones: 0.0044295000 USD.
 
 ## Evaluación cualitativa asistida
 
-Se revisaron los textos reales según pertinencia, corrección de conceptos básicos, utilidad de los pasos y brevedad. No es una evaluación ciega ni una muestra estadística.
+Criterios: pertinencia, corrección técnica de los conceptos básicos, utilidad de los pasos y brevedad. Se analiza la primera respuesta P1 y las respuestas P2/P3. La revisión no es ciega ni estadísticamente representativa.
 
 | Pregunta | Flash-Lite | Flash |
 |---|---|---|
-| P1 | Explica aislamiento de dependencias y muestra `python -m venv`; útil para el alcance básico. La activación en Windows debe elegirse según la terminal; el README ya indica `Activate.ps1` para PowerShell. | Sin texto: no evaluable. |
-| P2 | Indica `.env`, `.gitignore`, `load_dotenv` y `os.getenv`; cubre la protección básica. No explica cómo retirar una clave ya filtrada: sería necesario rotarla. | Sin texto: no evaluable. |
-| P3 | Identifica 429, `Retry-After`, reducción de frecuencia y backoff. Es una respuesta introductoria; no detalla cómo distinguir cuota agotada de límite temporal. | Sin texto: no evaluable. |
+| P1: venv | Explica aislamiento y cómo crear/activar el entorno. Útil. | Explica aislamiento y creación/activación. Útil. |
+| P2: API key | Muestra `.env`, `.gitignore` y carga desde Python, incluso código. Útil. | Explica los mismos pasos con menos código. Útil; la frase «jamás se subirá» es demasiado absoluta. |
+| P3: HTTP 429 | Recomienda `Retry-After`, reducir frecuencia y backoff. Útil, pero atribuirlo a «seguridad» es impreciso. | Identifica rate limit y recomienda `Retry-After`, menor frecuencia y backoff. Útil y más preciso en ese punto. |
 
-Flash-Lite cumple el nivel introductorio de las tres consultas, con los límites descritos. No se concluye que supere la calidad de Flash, porque ese candidato no respondió.
+Ambos dan respuestas útiles en 3/3 preguntas para el alcance introductorio. No se exige ni se demuestra una superioridad universal. En Windows la activación depende de la terminal: para PowerShell debe usarse `Activate.ps1`, como indica el README. `.gitignore` no retira secretos ya versionados; una clave expuesta debe rotarse. Un 429 también puede exigir revisar cuota o límites del proyecto. Son límites de las explicaciones breves, no funciones nuevas implementadas en el módulo.
 
 ## Respuestas completas
 
-Se normalizan únicamente espacios al final de las líneas para Markdown. El texto original exacto permanece en el JSON.
+Solo se normalizan espacios al final de las líneas para Markdown; los textos y contadores originales permanecen en el JSON.
 
 ### Intento 1: gemini-3.5-flash-lite, P1
 
-Fecha: 2026-10-23T18:32:08-03:00. Duración: 2.176795 segundos.
+Fecha: 2026-10-23T18:45:04-03:00. Duración: 1.883243 segundos. Modelo devuelto: `gemini-3.5-flash-lite`.
 
 ```text
-Un **entorno virtual** sirve para aislar las dependencias de un proyecto Python, evitando conflictos entre versiones de librerías en tu sistema.
+Un entorno virtual de Python sirve para aislar las dependencias de un proyecto, evitando conflictos entre versiones de paquetes en tu sistema.
 
-Para crearlo y activarlo con `venv`, usa estos comandos en tu terminal:
+Para crearlo, abre la terminal en la carpeta de tu proyecto y ejecuta el comando:
 
-1. **Crear el entorno** (reemplaza `mi_entorno` por el nombre que prefieras):
-   ```bash
-   python -m venv mi_entorno
-   ```
+`python -m venv mi_entorno`
 
-2. **Activar el entorno**:
-   * En Windows: `mi_entorno\Scripts\activate`
-   * En Mac/Linux: `source mi_entorno/bin/activate`
+Luego, actívalo con `mi_entorno\Scripts\activate` (en Windows) o `source mi_entorno/bin/activate` (en Mac/Linux).
 ```
 
-Palabras aproximadas (`len(texto.split())`): 63.
-
-usageMetadata devuelto:
+Palabras aproximadas (`len(texto.split())`): 52.
 
 ```json
 {
   "promptTokenCount": 31,
-  "candidatesTokenCount": 136,
-  "totalTokenCount": 167,
+  "candidatesTokenCount": 97,
+  "totalTokenCount": 128,
   "promptTokensDetails": [
     {
       "modality": "TEXT",
@@ -87,147 +83,251 @@ usageMetadata devuelto:
 }
 ```
 
-### Intento 2: gemini-3.8-flash, P1
+### Intento 2: gemini-3.6-flash, P1
 
-Fecha: 2026-10-23T18:32:10-03:00. Duración: 90.072782 segundos.
+Fecha: 2026-10-23T18:45:06-03:00. Duración: 8.138419 segundos. Modelo devuelto: `gemini-3.6-flash`.
 
-Gemini superó el tiempo de espera. Intenta nuevamente.
+```text
+Un entorno virtual aísla las dependencias y librerías de un proyecto específico, evitando conflictos de versiones entre distintas aplicaciones o con el sistema global. Mantiene tus desarrollos limpios y reproducibles.
+
+Para crearlo usando el módulo integrado `venv`, abre la terminal en la carpeta de tu proyecto y ejecuta:
+
+`python -m venv nombre_entorno`
+
+Esto creará un directorio con la copia aislada de Python. Para usarlo, solo debes activarlo según tu sistema operativo (`source nombre_entorno/bin/activate` en Linux/Mac o `nombre_entorno\Scripts\activate` en Windows).
+```
+
+Palabras aproximadas (`len(texto.split())`): 79.
+
+```json
+{
+  "promptTokenCount": 31,
+  "candidatesTokenCount": 132,
+  "totalTokenCount": 1354,
+  "promptTokensDetails": [
+    {
+      "modality": "TEXT",
+      "tokenCount": 31
+    }
+  ],
+  "thoughtsTokenCount": 1191,
+  "serviceTier": "standard"
+}
+```
 
 ### Intento 3: gemini-3.5-flash-lite, P1
 
-Fecha: 2026-10-23T18:33:40-03:00. Duración: 1.285718 segundos.
+Fecha: 2026-10-23T18:45:14-03:00. Duración: 1.848427 segundos. Modelo devuelto: `gemini-3.5-flash-lite`.
 
 ```text
-Un entorno virtual de Python sirve para aislar las dependencias de un proyecto, evitando conflictos entre diferentes versiones de paquetes en tu sistema.
+Un **entorno virtual** sirve para aislar las dependencias de un proyecto Python, evitando conflictos entre versiones de paquetes en tu sistema.
 
-Para crearlo, abre tu terminal en la carpeta del proyecto y ejecuta el comando:
+Para crearlo y activarlo, usa estos comandos en la terminal:
 
-`python -m venv venv`
+1. **Crear:**
+   `python -m venv mi_entorno`
+2. **Activar (Windows):**
+   `mi_entorno\Scripts\activate`
+3. **Activar (Mac/Linux):**
+   `source mi_entorno/bin/activate`
 
-Luego, actívalo con `venv\Scripts\activate` (en Windows) o `source venv/bin/activate` (en Mac/Linux). ¡Listo!
+Una vez activo, cualquier paquete que instales (`pip install`) solo afectará a este proyecto.
 ```
 
-Palabras aproximadas (`len(texto.split())`): 53.
+Palabras aproximadas (`len(texto.split())`): 60.
 
-usageMetadata devuelto:
+```json
+{
+  "promptTokenCount": 31,
+  "candidatesTokenCount": 134,
+  "totalTokenCount": 165,
+  "promptTokensDetails": [
+    {
+      "modality": "TEXT",
+      "tokenCount": 31
+    }
+  ],
+  "serviceTier": "standard"
+}
+```
+
+### Intento 4: gemini-3.6-flash, P1
+
+Fecha: 2026-10-23T18:45:16-03:00. Duración: 7.309327 segundos. Modelo devuelto: `gemini-3.6-flash`.
+
+```text
+Un entorno virtual aísla las dependencias y paquetes de un proyecto específico, evitando conflictos entre versiones de diferentes proyectos o con la instalación global de Python.
+
+Para crearlo con **`venv`**, abre la terminal en la carpeta de tu proyecto y ejecuta:
+
+`python -m venv nombre_del_entorno`
+
+Esto generará una carpeta aislada con su propio ejecutable de Python. Después, solo debes activarlo (por ejemplo, con `source nombre_del_entorno/bin/activate` en Linux/Mac) para instalar librerías independientemente.
+```
+
+Palabras aproximadas (`len(texto.split())`): 71.
+
+```json
+{
+  "promptTokenCount": 31,
+  "candidatesTokenCount": 120,
+  "totalTokenCount": 1318,
+  "promptTokensDetails": [
+    {
+      "modality": "TEXT",
+      "tokenCount": 31
+    }
+  ],
+  "thoughtsTokenCount": 1167,
+  "serviceTier": "standard"
+}
+```
+
+### Intento 5: gemini-3.5-flash-lite, P1
+
+Fecha: 2026-10-23T18:45:23-03:00. Duración: 1.967179 segundos. Modelo devuelto: `gemini-3.5-flash-lite`.
+
+```text
+Un **entorno virtual** sirve para aislar las dependencias de un proyecto Python, evitando conflictos entre versiones de librerías en tu sistema.
+
+Para crearlo y activarlo, usa estos comandos en tu terminal:
+
+1. **Crear:** `python -m venv mi_entorno`
+2. **Activar (Windows):** `mi_entorno\Scripts\activate`
+3. **Activar (Mac/Linux):** `source mi_entorno/bin/activate`
+
+Una vez activo, cualquier librería que instales con `pip` solo afectará a ese proyecto.
+```
+
+Palabras aproximadas (`len(texto.split())`): 60.
+
+```json
+{
+  "promptTokenCount": 31,
+  "candidatesTokenCount": 127,
+  "totalTokenCount": 158,
+  "promptTokensDetails": [
+    {
+      "modality": "TEXT",
+      "tokenCount": 31
+    }
+  ],
+  "serviceTier": "standard"
+}
+```
+
+### Intento 6: gemini-3.6-flash, P1
+
+Fecha: 2026-10-23T18:45:25-03:00. Duración: 5.931747 segundos. Modelo devuelto: `gemini-3.6-flash`.
+
+```text
+Un entorno virtual de Python sirve para aislar las dependencias y librerías de un proyecto específico, evitando conflictos entre versiones de diferentes proyectos o el sistema global.
+
+Para crearlo con **venv**, abre la terminal y ejecuta:
+`python -m venv nombre_entorno`
+
+Esto creará una carpeta con el entorno. Para empezarlo a usar, actívalo según tu sistema:
+* **Linux/Mac:** `source nombre_entorno/bin/activate`
+* **Windows:** `nombre_entorno\Scripts\activate`
+```
+
+Palabras aproximadas (`len(texto.split())`): 62.
+
+```json
+{
+  "promptTokenCount": 31,
+  "candidatesTokenCount": 115,
+  "totalTokenCount": 965,
+  "promptTokensDetails": [
+    {
+      "modality": "TEXT",
+      "tokenCount": 31
+    }
+  ],
+  "thoughtsTokenCount": 819,
+  "serviceTier": "standard"
+}
+```
+
+### Intento 7: gemini-3.5-flash-lite, P1
+
+Fecha: 2026-10-23T18:45:31-03:00. Duración: 1.934578 segundos. Modelo devuelto: `gemini-3.5-flash-lite`.
+
+```text
+Un **entorno virtual** sirve para aislar las dependencias de un proyecto Python, evitando conflictos entre versiones de librerías en tu sistema.
+
+Para crearlo y activarlo, usa estos comandos en tu terminal:
+
+1. **Crear el entorno** (llamado *venv*):
+   `python -m venv venv`
+
+2. **Activar el entorno**:
+   * **Windows:** `venv\Scripts\activate`
+   * **Mac/Linux:** `source venv/bin/activate`
+
+Una vez activo, cualquier librería que instales con `pip` quedará confinada exclusivamente a ese proyecto.
+```
+
+Palabras aproximadas (`len(texto.split())`): 67.
+
+```json
+{
+  "promptTokenCount": 31,
+  "candidatesTokenCount": 134,
+  "totalTokenCount": 165,
+  "promptTokensDetails": [
+    {
+      "modality": "TEXT",
+      "tokenCount": 31
+    }
+  ],
+  "serviceTier": "standard"
+}
+```
+
+### Intento 8: gemini-3.6-flash, P1
+
+Fecha: 2026-10-23T18:45:33-03:00. Duración: 6.415505 segundos. Modelo devuelto: `gemini-3.6-flash`.
+
+```text
+Un entorno virtual de Python aísla las dependencias de un proyecto específico, evitando conflictos de versiones entre paquetes y manteniendo limpio el sistema global.
+
+Para crearlo con `venv`, abre la terminal en la carpeta de tu proyecto y ejecuta el siguiente comando:
+
+`python -m venv nombre_del_entorno`
+
+Esto generará una carpeta con una copia aislada de Python y su propio gestor de paquetes, lista para ser activada.
+```
+
+Palabras aproximadas (`len(texto.split())`): 66.
 
 ```json
 {
   "promptTokenCount": 31,
   "candidatesTokenCount": 93,
-  "totalTokenCount": 124,
+  "totalTokenCount": 1187,
   "promptTokensDetails": [
     {
       "modality": "TEXT",
       "tokenCount": 31
     }
   ],
+  "thoughtsTokenCount": 1063,
   "serviceTier": "standard"
 }
 ```
-
-### Intento 4: gemini-3.8-flash, P1
-
-Fecha: 2026-10-23T18:33:41-03:00. Duración: 90.088493 segundos.
-
-Gemini superó el tiempo de espera. Intenta nuevamente.
-
-### Intento 5: gemini-3.5-flash-lite, P1
-
-Fecha: 2026-10-23T18:35:11-03:00. Duración: 2.009059 segundos.
-
-```text
-Un **entorno virtual** sirve para aislar las dependencias de un proyecto Python, evitando conflictos entre versiones de librerías instaladas en el sistema.
-
-Para crearlo y activarlo, usa estos comandos en tu terminal:
-
-1. **Crear el entorno** (llamado *venv*):
-   ```bash
-   python -m venv venv
-   ```
-
-2. **Activar el entorno**:
-   * En Windows: `venv\Scripts\activate`
-   * En Mac/Linux: `source venv/bin/activate`
-
-Una vez activo, cualquier librería que instales con `pip` solo afectará a ese proyecto.
-```
-
-Palabras aproximadas (`len(texto.split())`): 71.
-
-usageMetadata devuelto:
-
-```json
-{
-  "promptTokenCount": 31,
-  "candidatesTokenCount": 139,
-  "totalTokenCount": 170,
-  "promptTokensDetails": [
-    {
-      "modality": "TEXT",
-      "tokenCount": 31
-    }
-  ],
-  "serviceTier": "standard"
-}
-```
-
-### Intento 6: gemini-3.8-flash, P1
-
-Fecha: 2026-10-23T18:35:13-03:00. Duración: 90.094687 segundos.
-
-Gemini superó el tiempo de espera. Intenta nuevamente.
-
-### Intento 7: gemini-3.5-flash-lite, P1
-
-Fecha: 2026-10-23T18:36:43-03:00. Duración: 1.925330 segundos.
-
-```text
-Un **entorno virtual** de Python sirve para aislar las dependencias de un proyecto, evitando conflictos entre diferentes versiones de paquetes en tu sistema.
-
-Para crearlo, abre tu terminal en la carpeta del proyecto y ejecuta el siguiente comando:
-
-```bash
-python -m venv venv
-```
-
-Esto genera una carpeta llamada `venv`. Para activarlo, usa `venv\Scripts\activate` en Windows o `source venv/bin/activate` en macOS/Linux.
-```
-
-Palabras aproximadas (`len(texto.split())`): 61.
-
-usageMetadata devuelto:
-
-```json
-{
-  "promptTokenCount": 31,
-  "candidatesTokenCount": 100,
-  "totalTokenCount": 131,
-  "promptTokensDetails": [
-    {
-      "modality": "TEXT",
-      "tokenCount": 31
-    }
-  ],
-  "serviceTier": "standard"
-}
-```
-
-### Intento 8: gemini-3.8-flash, P1
-
-Fecha: 2026-10-23T18:36:45-03:00. Duración: 90.081967 segundos.
-
-Gemini superó el tiempo de espera. Intenta nuevamente.
 
 ### Intento 9: gemini-3.5-flash-lite, P2
 
-Fecha: 2026-10-23T18:38:15-03:00. Duración: 2.022987 segundos.
+Fecha: 2026-10-23T18:45:39-03:00. Duración: 2.034006 segundos. Modelo devuelto: `gemini-3.5-flash-lite`.
 
 ```text
+Para proteger tu API key:
+
 1. Instala la librería para variables de entorno: `pip install python-dotenv`.
 2. Crea un archivo llamado `.env` en la raíz de tu proyecto y guarda tu clave así: `API_KEY=tu_clave_secreta`.
-3. Crea un archivo `.gitignore` y añade `.env` para evitar que Git lo suba al repositorio.
-4. En tu código Python, cárgala de forma segura:
+3. Crea un archivo `.gitignore` y añade la línea `.env` para evitar que Git lo suba al repositorio.
+4. En tu código Python, carga y usa la clave así:
    ```python
    import os
    from dotenv import load_dotenv
@@ -237,15 +337,13 @@ Fecha: 2026-10-23T18:38:15-03:00. Duración: 2.022987 segundos.
 ```
 ```
 
-Palabras aproximadas (`len(texto.split())`): 66.
-
-usageMetadata devuelto:
+Palabras aproximadas (`len(texto.split())`): 75.
 
 ```json
 {
   "promptTokenCount": 33,
-  "candidatesTokenCount": 130,
-  "totalTokenCount": 163,
+  "candidatesTokenCount": 139,
+  "totalTokenCount": 172,
   "promptTokensDetails": [
     {
       "modality": "TEXT",
@@ -256,33 +354,57 @@ usageMetadata devuelto:
 }
 ```
 
-### Intento 10: gemini-3.8-flash, P2
+### Intento 10: gemini-3.6-flash, P2
 
-Fecha: 2026-10-23T18:38:17-03:00. Duración: 90.087090 segundos.
+Fecha: 2026-10-23T18:45:41-03:00. Duración: 6.605337 segundos. Modelo devuelto: `gemini-3.6-flash`.
 
-Gemini superó el tiempo de espera. Intenta nuevamente.
+```text
+Sigue estos pasos para proteger tu API key:
+
+1. **Crea un archivo `.env`** en la raíz del proyecto y guarda tu clave: `API_KEY=tu_clave_secreta`.
+2. **Añade `.env` a tu `.gitignore`** para evitar que Git rastree y publique tus credenciales en el repositorio.
+3. **Accede desde Python:** Instala `python-dotenv`, carga el archivo con `load_dotenv()` y lee la variable usando `os.getenv("API_KEY")`.
+
+Así, tu clave se mantendrá segura localmente y jamás se subirá a GitHub.
+```
+
+Palabras aproximadas (`len(texto.split())`): 71.
+
+```json
+{
+  "promptTokenCount": 33,
+  "candidatesTokenCount": 135,
+  "totalTokenCount": 989,
+  "promptTokensDetails": [
+    {
+      "modality": "TEXT",
+      "tokenCount": 33
+    }
+  ],
+  "thoughtsTokenCount": 821,
+  "serviceTier": "standard"
+}
+```
 
 ### Intento 11: gemini-3.5-flash-lite, P3
 
-Fecha: 2026-10-23T18:39:48-03:00. Duración: 2.341531 segundos.
+Fecha: 2026-10-23T18:45:48-03:00. Duración: 1.957089 segundos. Modelo devuelto: `gemini-3.5-flash-lite`.
 
 ```text
-El código **429 (Too Many Requests)** significa que has superado el límite de peticiones permitidas por el servidor en un tiempo determinado (por ejemplo, 100 solicitudes por minuto).
+El código **429 (Too Many Requests)** significa que has enviado demasiadas peticiones al servidor en muy poco tiempo y te ha bloqueado temporalmente por seguridad (límite de velocidad).
 
 **Qué debes hacer:**
-1. **Espera:** Revisa la cabecera `Retry-After` para saber cuánto tiempo esperar antes de reintentar.
-2. **Optimiza:** Reduce la frecuencia de tus peticiones, implementa la técnica de *caching* y usa esperas exponenciales (*backoff*) en tu código.
+1. **Espera:** Revisa si la cabecera `Retry-After` indica cuánto tiempo debes aguardar.
+2. **Optimiza:** Reduce la frecuencia de tus peticiones, añade pausas (reintentos con *backoff* exponencial) y evita bucles.
 ```
 
-Palabras aproximadas (`len(texto.split())`): 66.
-
-usageMetadata devuelto:
+Palabras aproximadas (`len(texto.split())`): 60.
 
 ```json
 {
   "promptTokenCount": 30,
-  "candidatesTokenCount": 115,
-  "totalTokenCount": 145,
+  "candidatesTokenCount": 107,
+  "totalTokenCount": 137,
   "promptTokensDetails": [
     {
       "modality": "TEXT",
@@ -293,18 +415,46 @@ usageMetadata devuelto:
 }
 ```
 
-### Intento 12: gemini-3.8-flash, P3
+### Intento 12: gemini-3.6-flash, P3
 
-Fecha: 2026-10-23T18:39:50-03:00. Duración: 4.428900 segundos.
+Fecha: 2026-10-23T18:45:50-03:00. Duración: 7.024738 segundos. Modelo devuelto: `gemini-3.6-flash`.
 
-Gemini respondió HTTP 503. El servicio no pudo completar la solicitud. Intenta más tarde.
+```text
+El error **429 (Too Many Requests)** significa que has superado el límite de peticiones permitidas por el servidor en un periodo determinado (*rate limit*).
 
-## Fuente de precios y reproducción
+**Qué hacer:**
+1. **Espera:** Revisa la cabecera `Retry-After` en la respuesta para saber cuántos segundos esperar antes de reintentar.
+2. **Espacia las solicitudes:** Disminuye la frecuencia de tus peticiones.
+3. **Usa *Exponential Backoff*:** Duplica progresivamente el tiempo entre reintentos fallidos.
+4. **Solicita más margen:** Contacta al proveedor para aumentar tu límite.
+```
 
-[Precios oficiales de Gemini](https://ai.google.dev/gemini-api/docs/pricing), consulta 2026-10-23; Standard de pago, USD por millón: Flash-Lite 0,30 entrada / 2,50 salida; Flash 0,75 entrada / 3,75 salida (promoción hasta 2026-12-31). Incluye razonamiento en salida.
+Palabras aproximadas (`len(texto.split())`): 75.
 
-El costo calculado es una estimación a tarifa de pago; no acredita un cobro real. No hay herramientas ni caché explícita en las peticiones.
+```json
+{
+  "promptTokenCount": 30,
+  "candidatesTokenCount": 135,
+  "totalTokenCount": 1263,
+  "promptTokensDetails": [
+    {
+      "modality": "TEXT",
+      "tokenCount": 30
+    }
+  ],
+  "thoughtsTokenCount": 1098,
+  "serviceTier": "standard"
+}
+```
 
-Para reproducir: revisar las tarifas de `medir_modelos.py` y ejecutar `python docs/medir_modelos.py` desde la raíz. Consume cuota y reemplaza el JSON. Las credenciales permanecen en `.env` y no se registran.
+## Precios, cálculo y reproducción
 
-[Volver a la decisión](decision-arquitectura.md).
+[Precios oficiales de Gemini](https://ai.google.dev/gemini-api/docs/pricing), consultados el 2026-10-23. Standard de pago por millón de tokens: Flash-Lite 0,30 USD entrada / 2,50 USD salida; Flash 0,75 USD entrada / 3,75 USD salida, promocional hasta 2026-12-31. La tarifa de salida incluye razonamiento.
+
+La fórmula está en [arquitectura.md](arquitectura.md): entrada por su tarifa más salida visible y razonamiento por la tarifa de salida. Los costos son equivalentes a tarifas de pago; no verifican un cobro a la cuenta. No se activaron herramientas ni caché explícita.
+
+Para reproducir, revisar las tarifas en `medir_modelos.py` y ejecutar `python docs/medir_modelos.py` desde la raíz. Hace 12 llamadas reales y reemplaza el JSON.
+
+El [registro inicial con Gemini 3.8 Flash](mediciones_bloque9_inicial.json) se conserva separado. Los intentos exploratorios para escoger un candidato disponible no forman parte de esta serie controlada.
+
+[Volver a la decisión de arquitectura](decision-arquitectura.md).

@@ -15,7 +15,7 @@ REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO))
 from src.consumir_gemini import armar_peticion, enviar_peticion, extraer_texto
 
-MODELOS = ("gemini-3.5-flash-lite", "gemini-3.8-flash")
+MODELOS = ("gemini-3.5-flash-lite", "gemini-3.6-flash")
 PRECIOS = {MODELOS[0]: (0.30, 2.50), MODELOS[1]: (0.75, 3.75)}
 PREGUNTAS = (
     "Responde en español en un máximo de 80 palabras: ¿Para qué sirve un entorno virtual de Python y cómo lo creas con venv?",

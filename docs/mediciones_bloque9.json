@@ -1,5 +1,5 @@
 {
-  "fecha_inicio": "2026-10-23T18:32:08-03:00",
+  "fecha_inicio": "2026-10-23T18:45:04-03:00",
   "protocolo": "4 repeticiones de P1 por modelo, alternando modelos; P2 y P3 una vez por modelo. Mismo POST y configuración predeterminada del módulo; sin caché explícita, herramientas ni streaming.",
   "fuente_precios": "https://ai.google.dev/gemini-api/docs/pricing",
   "precios_usd_por_millon_entrada_salida": {
@@ -7,7 +7,7 @@
       0.3,
       2.5
     ],
-    "gemini-3.8-flash": [
+    "gemini-3.6-flash": [
       0.75,
       3.75
     ]
@@ -21,13 +21,13 @@
     {
       "modelo_solicitado": "gemini-3.5-flash-lite",
       "pregunta": 1,
-      "fecha": "2026-10-23T18:32:08-03:00",
-      "segundos": 2.176795,
-      "texto": "Un **entorno virtual** sirve para aislar las dependencias de un proyecto Python, evitando conflictos entre versiones de librerías en tu sistema.\n\nPara crearlo y activarlo con `venv`, usa estos comandos en tu terminal:\n\n1. **Crear el entorno** (reemplaza `mi_entorno` por el nombre que prefieras):\n   ```bash\n   python -m venv mi_entorno\n   ```\n\n2. **Activar el entorno**:\n   * En Windows: `mi_entorno\\Scripts\\activate`\n   * En Mac/Linux: `source mi_entorno/bin/activate`",
+      "fecha": "2026-10-23T18:45:04-03:00",
+      "segundos": 1.883243,
+      "texto": "Un entorno virtual de Python sirve para aislar las dependencias de un proyecto, evitando conflictos entre versiones de paquetes en tu sistema. \n\nPara crearlo, abre la terminal en la carpeta de tu proyecto y ejecuta el comando:\n\n`python -m venv mi_entorno`\n\nLuego, actívalo con `mi_entorno\\Scripts\\activate` (en Windows) o `source mi_entorno/bin/activate` (en Mac/Linux).",
       "usageMetadata": {
         "promptTokenCount": 31,
-        "candidatesTokenCount": 136,
-        "totalTokenCount": 167,
+        "candidatesTokenCount": 97,
+        "totalTokenCount": 128,
         "promptTokensDetails": [
           {
             "modality": "TEXT",
@@ -37,117 +37,177 @@
         "serviceTier": "standard"
       },
       "modelo_devuelto": "gemini-3.5-flash-lite",
-      "costo_equivalente_pago_usd": 0.0003493,
+      "costo_equivalente_pago_usd": 0.0002518,
       "resultado": "correcto"
     },
     {
-      "modelo_solicitado": "gemini-3.8-flash",
+      "modelo_solicitado": "gemini-3.6-flash",
       "pregunta": 1,
-      "fecha": "2026-10-23T18:32:10-03:00",
-      "segundos": 90.072782,
-      "resultado": "error",
-      "mensaje": "Gemini superó el tiempo de espera. Intenta nuevamente."
+      "fecha": "2026-10-23T18:45:06-03:00",
+      "segundos": 8.138419,
+      "texto": "Un entorno virtual aísla las dependencias y librerías de un proyecto específico, evitando conflictos de versiones entre distintas aplicaciones o con el sistema global. Mantiene tus desarrollos limpios y reproducibles.\n\nPara crearlo usando el módulo integrado `venv`, abre la terminal en la carpeta de tu proyecto y ejecuta:\n\n`python -m venv nombre_entorno`\n\nEsto creará un directorio con la copia aislada de Python. Para usarlo, solo debes activarlo según tu sistema operativo (`source nombre_entorno/bin/activate` en Linux/Mac o `nombre_entorno\\Scripts\\activate` en Windows).",
+      "usageMetadata": {
+        "promptTokenCount": 31,
+        "candidatesTokenCount": 132,
+        "totalTokenCount": 1354,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 31
+          }
+        ],
+        "thoughtsTokenCount": 1191,
+        "serviceTier": "standard"
+      },
+      "modelo_devuelto": "gemini-3.6-flash",
+      "costo_equivalente_pago_usd": 0.0049845,
+      "resultado": "correcto"
     },
     {
       "modelo_solicitado": "gemini-3.5-flash-lite",
       "pregunta": 1,
-      "fecha": "2026-10-23T18:33:40-03:00",
-      "segundos": 1.285718,
-      "texto": "Un entorno virtual de Python sirve para aislar las dependencias de un proyecto, evitando conflictos entre diferentes versiones de paquetes en tu sistema. \n\nPara crearlo, abre tu terminal en la carpeta del proyecto y ejecuta el comando:\n\n`python -m venv venv`\n\nLuego, actívalo con `venv\\Scripts\\activate` (en Windows) o `source venv/bin/activate` (en Mac/Linux). ¡Listo!",
+      "fecha": "2026-10-23T18:45:14-03:00",
+      "segundos": 1.848427,
+      "texto": "Un **entorno virtual** sirve para aislar las dependencias de un proyecto Python, evitando conflictos entre versiones de paquetes en tu sistema.\n\nPara crearlo y activarlo, usa estos comandos en la terminal:\n\n1. **Crear:** \n   `python -m venv mi_entorno`\n2. **Activar (Windows):** \n   `mi_entorno\\Scripts\\activate`\n3. **Activar (Mac/Linux):** \n   `source mi_entorno/bin/activate`\n\nUna vez activo, cualquier paquete que instales (`pip install`) solo afectará a este proyecto.",
+      "usageMetadata": {
+        "promptTokenCount": 31,
+        "candidatesTokenCount": 134,
+        "totalTokenCount": 165,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 31
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "modelo_devuelto": "gemini-3.5-flash-lite",
+      "costo_equivalente_pago_usd": 0.0003443,
+      "resultado": "correcto"
+    },
+    {
+      "modelo_solicitado": "gemini-3.6-flash",
+      "pregunta": 1,
+      "fecha": "2026-10-23T18:45:16-03:00",
+      "segundos": 7.309327,
+      "texto": "Un entorno virtual aísla las dependencias y paquetes de un proyecto específico, evitando conflictos entre versiones de diferentes proyectos o con la instalación global de Python.\n\nPara crearlo con **`venv`**, abre la terminal en la carpeta de tu proyecto y ejecuta:\n\n`python -m venv nombre_del_entorno`\n\nEsto generará una carpeta aislada con su propio ejecutable de Python. Después, solo debes activarlo (por ejemplo, con `source nombre_del_entorno/bin/activate` en Linux/Mac) para instalar librerías independientemente.",
+      "usageMetadata": {
+        "promptTokenCount": 31,
+        "candidatesTokenCount": 120,
+        "totalTokenCount": 1318,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 31
+          }
+        ],
+        "thoughtsTokenCount": 1167,
+        "serviceTier": "standard"
+      },
+      "modelo_devuelto": "gemini-3.6-flash",
+      "costo_equivalente_pago_usd": 0.0048495,
+      "resultado": "correcto"
+    },
+    {
+      "modelo_solicitado": "gemini-3.5-flash-lite",
+      "pregunta": 1,
+      "fecha": "2026-10-23T18:45:23-03:00",
+      "segundos": 1.967179,
+      "texto": "Un **entorno virtual** sirve para aislar las dependencias de un proyecto Python, evitando conflictos entre versiones de librerías en tu sistema.\n\nPara crearlo y activarlo, usa estos comandos en tu terminal:\n\n1. **Crear:** `python -m venv mi_entorno`\n2. **Activar (Windows):** `mi_entorno\\Scripts\\activate`\n3. **Activar (Mac/Linux):** `source mi_entorno/bin/activate`\n\nUna vez activo, cualquier librería que instales con `pip` solo afectará a ese proyecto.",
+      "usageMetadata": {
+        "promptTokenCount": 31,
+        "candidatesTokenCount": 127,
+        "totalTokenCount": 158,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 31
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "modelo_devuelto": "gemini-3.5-flash-lite",
+      "costo_equivalente_pago_usd": 0.0003268,
+      "resultado": "correcto"
+    },
+    {
+      "modelo_solicitado": "gemini-3.6-flash",
+      "pregunta": 1,
+      "fecha": "2026-10-23T18:45:25-03:00",
+      "segundos": 5.931747,
+      "texto": "Un entorno virtual de Python sirve para aislar las dependencias y librerías de un proyecto específico, evitando conflictos entre versiones de diferentes proyectos o el sistema global.\n\nPara crearlo con **venv**, abre la terminal y ejecuta:\n`python -m venv nombre_entorno`\n\nEsto creará una carpeta con el entorno. Para empezarlo a usar, actívalo según tu sistema:\n* **Linux/Mac:** `source nombre_entorno/bin/activate`\n* **Windows:** `nombre_entorno\\Scripts\\activate`",
+      "usageMetadata": {
+        "promptTokenCount": 31,
+        "candidatesTokenCount": 115,
+        "totalTokenCount": 965,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 31
+          }
+        ],
+        "thoughtsTokenCount": 819,
+        "serviceTier": "standard"
+      },
+      "modelo_devuelto": "gemini-3.6-flash",
+      "costo_equivalente_pago_usd": 0.00352575,
+      "resultado": "correcto"
+    },
+    {
+      "modelo_solicitado": "gemini-3.5-flash-lite",
+      "pregunta": 1,
+      "fecha": "2026-10-23T18:45:31-03:00",
+      "segundos": 1.934578,
+      "texto": "Un **entorno virtual** sirve para aislar las dependencias de un proyecto Python, evitando conflictos entre versiones de librerías en tu sistema.\n\nPara crearlo y activarlo, usa estos comandos en tu terminal:\n\n1. **Crear el entorno** (llamado *venv*):\n   `python -m venv venv`\n\n2. **Activar el entorno**:\n   * **Windows:** `venv\\Scripts\\activate`\n   * **Mac/Linux:** `source venv/bin/activate`\n\nUna vez activo, cualquier librería que instales con `pip` quedará confinada exclusivamente a ese proyecto.",
+      "usageMetadata": {
+        "promptTokenCount": 31,
+        "candidatesTokenCount": 134,
+        "totalTokenCount": 165,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 31
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "modelo_devuelto": "gemini-3.5-flash-lite",
+      "costo_equivalente_pago_usd": 0.0003443,
+      "resultado": "correcto"
+    },
+    {
+      "modelo_solicitado": "gemini-3.6-flash",
+      "pregunta": 1,
+      "fecha": "2026-10-23T18:45:33-03:00",
+      "segundos": 6.415505,
+      "texto": "Un entorno virtual de Python aísla las dependencias de un proyecto específico, evitando conflictos de versiones entre paquetes y manteniendo limpio el sistema global.\n\nPara crearlo con `venv`, abre la terminal en la carpeta de tu proyecto y ejecuta el siguiente comando:\n\n`python -m venv nombre_del_entorno`\n\nEsto generará una carpeta con una copia aislada de Python y su propio gestor de paquetes, lista para ser activada.",
       "usageMetadata": {
         "promptTokenCount": 31,
         "candidatesTokenCount": 93,
-        "totalTokenCount": 124,
+        "totalTokenCount": 1187,
         "promptTokensDetails": [
           {
             "modality": "TEXT",
             "tokenCount": 31
           }
         ],
+        "thoughtsTokenCount": 1063,
         "serviceTier": "standard"
       },
-      "modelo_devuelto": "gemini-3.5-flash-lite",
-      "costo_equivalente_pago_usd": 0.0002418,
+      "modelo_devuelto": "gemini-3.6-flash",
+      "costo_equivalente_pago_usd": 0.00435825,
       "resultado": "correcto"
-    },
-    {
-      "modelo_solicitado": "gemini-3.8-flash",
-      "pregunta": 1,
-      "fecha": "2026-10-23T18:33:41-03:00",
-      "segundos": 90.088493,
-      "resultado": "error",
-      "mensaje": "Gemini superó el tiempo de espera. Intenta nuevamente."
-    },
-    {
-      "modelo_solicitado": "gemini-3.5-flash-lite",
-      "pregunta": 1,
-      "fecha": "2026-10-23T18:35:11-03:00",
-      "segundos": 2.009059,
-      "texto": "Un **entorno virtual** sirve para aislar las dependencias de un proyecto Python, evitando conflictos entre versiones de librerías instaladas en el sistema.\n\nPara crearlo y activarlo, usa estos comandos en tu terminal:\n\n1. **Crear el entorno** (llamado *venv*):\n   ```bash\n   python -m venv venv\n   ```\n\n2. **Activar el entorno**:\n   * En Windows: `venv\\Scripts\\activate`\n   * En Mac/Linux: `source venv/bin/activate`\n\nUna vez activo, cualquier librería que instales con `pip` solo afectará a ese proyecto.",
-      "usageMetadata": {
-        "promptTokenCount": 31,
-        "candidatesTokenCount": 139,
-        "totalTokenCount": 170,
-        "promptTokensDetails": [
-          {
-            "modality": "TEXT",
-            "tokenCount": 31
-          }
-        ],
-        "serviceTier": "standard"
-      },
-      "modelo_devuelto": "gemini-3.5-flash-lite",
-      "costo_equivalente_pago_usd": 0.0003568,
-      "resultado": "correcto"
-    },
-    {
-      "modelo_solicitado": "gemini-3.8-flash",
-      "pregunta": 1,
-      "fecha": "2026-10-23T18:35:13-03:00",
-      "segundos": 90.094687,
-      "resultado": "error",
-      "mensaje": "Gemini superó el tiempo de espera. Intenta nuevamente."
-    },
-    {
-      "modelo_solicitado": "gemini-3.5-flash-lite",
-      "pregunta": 1,
-      "fecha": "2026-10-23T18:36:43-03:00",
-      "segundos": 1.92533,
-      "texto": "Un **entorno virtual** de Python sirve para aislar las dependencias de un proyecto, evitando conflictos entre diferentes versiones de paquetes en tu sistema.\n\nPara crearlo, abre tu terminal en la carpeta del proyecto y ejecuta el siguiente comando:\n\n```bash\npython -m venv venv\n```\n\nEsto genera una carpeta llamada `venv`. Para activarlo, usa `venv\\Scripts\\activate` en Windows o `source venv/bin/activate` en macOS/Linux.",
-      "usageMetadata": {
-        "promptTokenCount": 31,
-        "candidatesTokenCount": 100,
-        "totalTokenCount": 131,
-        "promptTokensDetails": [
-          {
-            "modality": "TEXT",
-            "tokenCount": 31
-          }
-        ],
-        "serviceTier": "standard"
-      },
-      "modelo_devuelto": "gemini-3.5-flash-lite",
-      "costo_equivalente_pago_usd": 0.0002593,
-      "resultado": "correcto"
-    },
-    {
-      "modelo_solicitado": "gemini-3.8-flash",
-      "pregunta": 1,
-      "fecha": "2026-10-23T18:36:45-03:00",
-      "segundos": 90.081967,
-      "resultado": "error",
-      "mensaje": "Gemini superó el tiempo de espera. Intenta nuevamente."
     },
     {
       "modelo_solicitado": "gemini-3.5-flash-lite",
       "pregunta": 2,
-      "fecha": "2026-10-23T18:38:15-03:00",
-      "segundos": 2.022987,
-      "texto": "1. Instala la librería para variables de entorno: `pip install python-dotenv`.\n2. Crea un archivo llamado `.env` en la raíz de tu proyecto y guarda tu clave así: `API_KEY=tu_clave_secreta`.\n3. Crea un archivo `.gitignore` y añade `.env` para evitar que Git lo suba al repositorio.\n4. En tu código Python, cárgala de forma segura:\n   ```python\n   import os\n   from dotenv import load_dotenv\n\n   load_dotenv()\n   api_key = os.getenv(\"API_KEY\")\n```",
+      "fecha": "2026-10-23T18:45:39-03:00",
+      "segundos": 2.034006,
+      "texto": "Para proteger tu API key:\n\n1. Instala la librería para variables de entorno: `pip install python-dotenv`.\n2. Crea un archivo llamado `.env` en la raíz de tu proyecto y guarda tu clave así: `API_KEY=tu_clave_secreta`.\n3. Crea un archivo `.gitignore` y añade la línea `.env` para evitar que Git lo suba al repositorio.\n4. En tu código Python, carga y usa la clave así:\n   ```python\n   import os\n   from dotenv import load_dotenv\n\n   load_dotenv()\n   api_key = os.getenv(\"API_KEY\")\n```",
       "usageMetadata": {
         "promptTokenCount": 33,
-        "candidatesTokenCount": 130,
-        "totalTokenCount": 163,
+        "candidatesTokenCount": 139,
+        "totalTokenCount": 172,
         "promptTokensDetails": [
           {
             "modality": "TEXT",
@@ -157,27 +217,42 @@
         "serviceTier": "standard"
       },
       "modelo_devuelto": "gemini-3.5-flash-lite",
-      "costo_equivalente_pago_usd": 0.0003349,
+      "costo_equivalente_pago_usd": 0.0003574,
       "resultado": "correcto"
     },
     {
-      "modelo_solicitado": "gemini-3.8-flash",
+      "modelo_solicitado": "gemini-3.6-flash",
       "pregunta": 2,
-      "fecha": "2026-10-23T18:38:17-03:00",
-      "segundos": 90.08709,
-      "resultado": "error",
-      "mensaje": "Gemini superó el tiempo de espera. Intenta nuevamente."
+      "fecha": "2026-10-23T18:45:41-03:00",
+      "segundos": 6.605337,
+      "texto": "Sigue estos pasos para proteger tu API key:\n\n1. **Crea un archivo `.env`** en la raíz del proyecto y guarda tu clave: `API_KEY=tu_clave_secreta`.\n2. **Añade `.env` a tu `.gitignore`** para evitar que Git rastree y publique tus credenciales en el repositorio.\n3. **Accede desde Python:** Instala `python-dotenv`, carga el archivo con `load_dotenv()` y lee la variable usando `os.getenv(\"API_KEY\")`.\n\nAsí, tu clave se mantendrá segura localmente y jamás se subirá a GitHub.",
+      "usageMetadata": {
+        "promptTokenCount": 33,
+        "candidatesTokenCount": 135,
+        "totalTokenCount": 989,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 33
+          }
+        ],
+        "thoughtsTokenCount": 821,
+        "serviceTier": "standard"
+      },
+      "modelo_devuelto": "gemini-3.6-flash",
+      "costo_equivalente_pago_usd": 0.00360975,
+      "resultado": "correcto"
     },
     {
       "modelo_solicitado": "gemini-3.5-flash-lite",
       "pregunta": 3,
-      "fecha": "2026-10-23T18:39:48-03:00",
-      "segundos": 2.341531,
-      "texto": "El código **429 (Too Many Requests)** significa que has superado el límite de peticiones permitidas por el servidor en un tiempo determinado (por ejemplo, 100 solicitudes por minuto).\n\n**Qué debes hacer:**\n1. **Espera:** Revisa la cabecera `Retry-After` para saber cuánto tiempo esperar antes de reintentar.\n2. **Optimiza:** Reduce la frecuencia de tus peticiones, implementa la técnica de *caching* y usa esperas exponenciales (*backoff*) en tu código.",
+      "fecha": "2026-10-23T18:45:48-03:00",
+      "segundos": 1.957089,
+      "texto": "El código **429 (Too Many Requests)** significa que has enviado demasiadas peticiones al servidor en muy poco tiempo y te ha bloqueado temporalmente por seguridad (límite de velocidad).\n\n**Qué debes hacer:**\n1. **Espera:** Revisa si la cabecera `Retry-After` indica cuánto tiempo debes aguardar.\n2. **Optimiza:** Reduce la frecuencia de tus peticiones, añade pausas (reintentos con *backoff* exponencial) y evita bucles.",
       "usageMetadata": {
         "promptTokenCount": 30,
-        "candidatesTokenCount": 115,
-        "totalTokenCount": 145,
+        "candidatesTokenCount": 107,
+        "totalTokenCount": 137,
         "promptTokensDetails": [
           {
             "modality": "TEXT",
@@ -187,16 +262,31 @@
         "serviceTier": "standard"
       },
       "modelo_devuelto": "gemini-3.5-flash-lite",
-      "costo_equivalente_pago_usd": 0.0002965,
+      "costo_equivalente_pago_usd": 0.0002765,
       "resultado": "correcto"
     },
     {
-      "modelo_solicitado": "gemini-3.8-flash",
+      "modelo_solicitado": "gemini-3.6-flash",
       "pregunta": 3,
-      "fecha": "2026-10-23T18:39:50-03:00",
-      "segundos": 4.4289,
-      "resultado": "error",
-      "mensaje": "Gemini respondió HTTP 503. El servicio no pudo completar la solicitud. Intenta más tarde."
+      "fecha": "2026-10-23T18:45:50-03:00",
+      "segundos": 7.024738,
+      "texto": "El error **429 (Too Many Requests)** significa que has superado el límite de peticiones permitidas por el servidor en un periodo determinado (*rate limit*).\n\n**Qué hacer:**\n1. **Espera:** Revisa la cabecera `Retry-After` en la respuesta para saber cuántos segundos esperar antes de reintentar.\n2. **Espacia las solicitudes:** Disminuye la frecuencia de tus peticiones.\n3. **Usa *Exponential Backoff*:** Duplica progresivamente el tiempo entre reintentos fallidos.\n4. **Solicita más margen:** Contacta al proveedor para aumentar tu límite.",
+      "usageMetadata": {
+        "promptTokenCount": 30,
+        "candidatesTokenCount": 135,
+        "totalTokenCount": 1263,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 30
+          }
+        ],
+        "thoughtsTokenCount": 1098,
+        "serviceTier": "standard"
+      },
+      "modelo_devuelto": "gemini-3.6-flash",
+      "costo_equivalente_pago_usd": 0.00464625,
+      "resultado": "correcto"
     }
   ]
 }
