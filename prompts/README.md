@@ -35,7 +35,7 @@ y `generationConfig.responseSchema` del endpoint REST `generateContent`.
 `parsear_respuesta_json` retira un bloque Markdown completo, si existe, y
 convierte el texto a un objeto con `json.loads`. Rechaza prosa extra, JSON
 cortado, arrays en la raíz y constantes no JSON como `NaN` o `Infinity`.
-`validar_estructura` comprueba claves, tipos, enum, intervalos, strings no vacíos
+`validar_estructura`, compartido desde `src/validacion_json.py`, comprueba claves, tipos, enum, intervalos, strings no vacíos
 y tamaños e ítems de listas. Implementa el subconjunto usado por este banco;
 no pretende validar cualquier esquema JSON Schema externo.
 
@@ -106,10 +106,11 @@ Tres repeticiones son el mínimo del curso, no evidencia de fiabilidad universal
 .\venv\Scripts\python.exe -m unittest discover -s tests -v
 ```
 
-Las 26 pruebas locales no llaman a Gemini. Cubren compatibilidad con el flujo
+Las 26 pruebas del banco y del cliente no llaman a Gemini. Cubren compatibilidad con el flujo
 anterior, separación de sistema/usuario, limpieza, JSON inválido, tipos,
 claves, límites, errores de red y cómputo de éxitos/fallos. Cobertura medida:
-99 % sobre `src/` y `prompts/`; las líneas sin ejecutar son puntos de entrada.
+99 % sobre `src/` y `prompts/` en la medición del Bloque 10; las líneas sin ejecutar son puntos de entrada.
+El Gate 1 agrega seis pruebas de la miniaplicación, para un total de 32.
 
 Referencias: [consigna del Bloque 10](https://learning-pro.skillnest.com/mod/page/view.php?id=20316),
 [API REST generateContent](https://ai.google.dev/api/generate-content) y

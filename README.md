@@ -1,171 +1,144 @@
-# Plantilla de repositorio base — Especialización en Desarrollo con IA Generativa (Accenture)
+# Asistente técnico con Gemini — Gate 1
 
-Esta es la estructura base que vas a usar como punto de partida para tu proyecto en este programa. Es la misma estructura que vas a ir ampliando bloque a bloque, hasta llegar a la aplicación completa que entregas en el Gate 3.
+Miniaplicación de consola de Jefferson Santos para el Módulo 1 de la
+Especialización en Desarrollo con IA Generativa. Clasifica consultas técnicas,
+extrae el contexto de una incidencia o resume una explicación. Consulta la
+API real de Gemini y entrega un objeto JSON después de validar su estructura.
 
-## Cómo empezar
+## Requisitos
 
-Estos pasos se completan de forma progresiva a lo largo de la Unidad U1.2, no todos el mismo día:
+- Python 3.14, Git y conexión a internet. Verificado en Windows con PowerShell.
+- Una API key propia de Gemini y acceso a `gemini-3.5-flash-lite`.
+- Cuota disponible: una ejecución normal hace una petición real. El ensayo del
+  banco hace nueve. Los errores de cuota o disponibilidad no son resultados válidos.
 
-1. Descarga este archivo comprimido (adjunto en la plataforma) y descomprímelo en tu computador. Inicializa el control de versiones sobre esa carpeta y registra tu primer commit con esta estructura base, tal como llegó, antes de modificar nada.
-2. Crea tu entorno virtual de Python (por ejemplo, con `venv`) y actívalo.
-3. Instala las dependencias que necesites y regístralas en `requirements.txt` (al inicio puede estar vacío o con muy pocas).
-4. Copia `.env.example` a un archivo nuevo llamado `.env`, y completa ahí tus credenciales reales (llaves de API, tokens). El archivo `.env` nunca se sube al repositorio: ya está excluido en `.gitignore`.
+## Instalar desde una clonación nueva
 
-## Estructura de carpetas
-
-- `src/` : todo el código fuente de tu proyecto va aquí.
-- `docs/` : documentación técnica del proyecto (diagramas, decisiones de arquitectura, notas).
-- `tests/` : pruebas de tu código (las vas a usar más adelante en el programa, cuando el proyecto lo requiera).
-- `requirements.txt` : dependencias de Python de tu proyecto, para que cualquier otra persona pueda reconstruir tu entorno con un solo comando.
-- `.env.example` : plantilla de las variables de entorno que tu proyecto necesita, sin valores reales. Tu archivo `.env` real (con tus credenciales) nunca se commitea.
-- `.gitignore` : le dice a Git qué archivos y carpetas ignorar (entre ellos, tu entorno virtual y tu archivo `.env`).
-
-## Reglas que se mantienen durante todo el programa
-
-- Ningún secreto (contraseña, llave de API, token) va escrito directamente en el código ni en ningún archivo que se suba al repositorio.
-- Cada proyecto nuevo tiene su propio entorno virtual: no se comparten dependencias entre proyectos distintos.
-- Todo el trabajo que se entrega en este programa vive en un repositorio de GitHub, sin excepción.
-
-## Entorno de trabajo — Unidad U1.2, bloques 2 a 4
-
-El proyecto utiliza Python 3.14 y un entorno virtual local llamado `venv`.
-Desde la raíz del repositorio, en PowerShell:
+En PowerShell, desde una carpeta donde quieras guardar el proyecto:
 
 ```powershell
+git clone https://github.com/Jefferson-Santos-Hu/mi-primero-repositorio.git
+cd mi-primero-repositorio
 python -m venv venv
-.\venv\Scripts\Activate.ps1
-python -m pip install -r requirements.txt
-Copy-Item .env.example .env
-```
-
-La copia de `.env.example` se hace solo la primera vez, si todavía no existe
-`.env`, para conservar cualquier credencial configurada. Completa localmente
-`API_KEY` con tu clave de Gemini. Nunca subas `.env` ni compartas su contenido.
-
-Si usas el intérprete del entorno directamente, no necesitas activar scripts:
-
-```powershell
 .\venv\Scripts\python.exe -m pip install -r requirements.txt
 .\venv\Scripts\python.exe -m pip check
+if (-not (Test-Path .env)) { Copy-Item .env.example .env }
 ```
 
-Las dependencias incluyen `requests`, `python-dotenv` y el cliente de Gemini
-`google-genai`, con sus versiones instaladas registradas en `requirements.txt`.
+Abre `.env` en tu editor y reemplaza **solo el valor de `API_KEY`** por tu
+clave real de Gemini, creada en [Google AI Studio](https://aistudio.google.com/apikey).
+La clave no se escribe en el código, en comandos ni en Git. El archivo contiene:
 
-### Primera petición autenticada — Bloque 4
+```dotenv
+API_KEY=tu_llave_aqui
+GEMINI_MODEL=gemini-3.5-flash-lite
+```
 
-La prueba se realiza desde Thunder Client en VS Code, usando una petición POST
-al endpoint `generateContent` de Gemini. La autenticación usa el encabezado
-`x-goog-api-key`, cuyo valor se copia del `.env` local; el cuerpo se envía como
-JSON con una pregunta breve. La versión instalada de Thunder Client requiere
-iniciar sesión antes de crear peticiones.
+`API_KEY` es obligatorio salvo que uses la alternativa `GEMINI_API_KEY`.
+Si defines ambas, `GEMINI_API_KEY` tiene prioridad. `GEMINI_MODEL` es opcional:
+el código usa `gemini-3.5-flash-lite` cuando se omite. Las variables de proceso
+prevalecen sobre `.env`. No dejes el valor de ejemplo como si fuera una clave real.
 
-La evidencia de la ejecución se guarda dentro de `docs/`, con fecha, endpoint,
-modelo, estado HTTP y respuesta real. Los encabezados de autenticación no deben
-aparecer en capturas o archivos versionados. Para repetir la prueba se necesita
-una clave propia y acceso al modelo elegido.
+Se utiliza directamente el Python de `venv`: no hace falta activar scripts ni
+cambiar la política de ejecución de PowerShell. En macOS/Linux usa `python3`
+para crear el entorno y `./venv/bin/python` en lugar de `.\venv\Scripts\python.exe`.
 
-La ejecución del 21 de octubre de 2026 se realizó con `gemini-3.5-flash-lite`
-y respondió **HTTP 200 OK**. El texto generado fue:
-«¡Conexión establecida y funcionando correctamente!».
+## Ejecutar la miniaplicación
 
-Consulta [la evidencia de la petición](docs/evidencia_peticion_autenticada.txt)
-para ver el endpoint exacto, la fecha, los tokens observados y la referencia a
-la captura de pantalla guardada junto al registro.
-
-## Módulo Python — Unidad U1.3, Bloque 7
-
-El archivo `src/consumir_gemini.py` implementa las cuatro funciones del curso:
-`armar_peticion` valida la pregunta y prepara la URL, los encabezados y el JSON;
-`enviar_peticion` envía el POST y maneja errores de conexión, tiempo de espera,
-HTTP y JSON; `extraer_texto` valida el campo de respuesta; y
-`obtener_dato_de_prueba` coordina las anteriores.
-
-Usa la credencial `API_KEY` que ya estaba configurada en el `.env` de este
-proyecto. También admite `GEMINI_API_KEY`, que tiene prioridad si ambas existen.
-El modelo predeterminado es `gemini-3.5-flash-lite`, el mismo verificado en el
-Bloque 4. Puedes cambiarlo con `GEMINI_MODEL` en `.env` según disponibilidad.
-La clave viaja en el encabezado `x-goog-api-key`; nunca se incorpora a la URL.
-
-Desde la raíz del repositorio, en PowerShell:
+Desde la raíz del repositorio:
 
 ```powershell
-.\venv\Scripts\python.exe -m src.consumir_gemini "Confirma que la conexión funciona."
-.\venv\Scripts\python.exe -m src.consumir_gemini ""
+.\venv\Scripts\python.exe main.py
+```
+
+Sin argumentos, usa el ejemplo de clasificación de una consulta que recibe
+HTTP 429. Imprime un objeto con `categoria` (string) y `confianza` (número).
+La respuesta y su confianza vienen del modelo y pueden variar entre llamadas.
+
+Para usar una entrada propia o elegir otra tarea:
+
+```powershell
+.\venv\Scripts\python.exe main.py --prompt clasificar_consulta_tecnica --texto "Mi petición a Gemini devuelve HTTP 429."
+.\venv\Scripts\python.exe main.py --prompt extraer_contexto_tecnico
+.\venv\Scripts\python.exe main.py --prompt resumir_explicacion_tecnica
+.\venv\Scripts\python.exe main.py --help
+```
+
+Al omitir `--texto`, cada tarea usa su ejemplo incluido en el banco.
+Una entrada vacía se rechaza antes de enviar una petición. El programa devuelve
+código **0** cuando imprime una salida válida y **1** si falla la operación;
+los errores se muestran sin traceback ni credenciales. En PowerShell puedes
+consultar `$LASTEXITCODE` inmediatamente después del comando.
+
+La consulta de texto libre del Bloque 7 también se conserva:
+
+```powershell
+.\venv\Scripts\python.exe -m src.consumir_gemini "Explica brevemente para qué sirve venv."
+```
+
+## Qué procesa y valida
+
+`main.py` coordina el banco y las funciones `armar_peticion`, `enviar_peticion`,
+`extraer_texto` y `parsear_respuesta_json`. La instrucción de sistema se envía
+separada de la entrada de usuario, junto con `responseSchema`. El validador
+compartido de `src/validacion_json.py` revisa claves, tipos, enum, intervalos,
+listas y textos no vacíos. La clave viaja por HTTPS en `x-goog-api-key`.
+
+El cliente controla conexión, tiempo de espera, estado HTTP, JSON inválido y
+campos faltantes. El timeout es 10 segundos para conectar y 90 para leer.
+La aplicación no implementa reintentos automáticos, interfaz web ni RAG.
+La consistencia estructural no garantiza que todo el contenido sea correcto:
+las respuestas técnicas requieren revisión antes de aplicarlas.
+
+## Pruebas y banco de prompts
+
+Las pruebas locales no usan internet ni una clave real:
+
+```powershell
 .\venv\Scripts\python.exe -m unittest discover -s tests -v
 ```
 
-El programa devuelve código 0 cuando funciona y 1 ante un error controlado.
-Los mensajes de error se muestran sin traceback ni datos de autenticación.
-El tiempo de espera es de 10 segundos para conectar y 90 para recibir datos.
+Suite actual: **32 pruebas**. El banco del Bloque 10 tiene tres prompts y su
+[registro final](prompts/registro_resultados.json) contiene **9/9 respuestas
+estructuralmente válidas** (tres por prompt). La [documentación del banco](prompts/README.md)
+explica los esquemas, los límites de esa medición y el ajuste del resumen.
 
-Las 13 pruebas locales originales del Bloque 7 no hacen llamadas de red: simulan las respuestas de
-Gemini para provocar conexión fallida, JSON inválido, campos ausentes y errores
-HTTP, además de verificar entradas y el flujo correcto. La cobertura medida
-del módulo fue del 99 % (69 instrucciones, una sin ejecutar: el punto de entrada).
-
-La [evidencia del Bloque 7](docs/evidencia_bloque7.txt) registra, en orden,
-la clave inválida real (HTTP 400), la entrada vacía y la respuesta real exitosa.
-Para repetir esa secuencia, usando dos peticiones reales a tu proveedor:
-
-```powershell
-.\venv\Scripts\python.exe -m tests.verificar_bloque7
-```
-
-La credencial inválida se sustituye únicamente en memoria durante esa prueba;
-el archivo `.env` se conserva. La última prueba usa tu credencial local.
-La respuesta generada puede variar y el proveedor puede rechazar solicitudes
-por cuota o disponibilidad. La evidencia se actualiza con el resultado real.
-
-El repositorio partía sin código en `src/`: en este avance se construyó la
-base descrita en los bloques 5 y 6 y se completó con la validación y las
-excepciones del Bloque 7. El historial conserva la prueba RED por módulo
-ausente y la implementación verificada; no se recrean avances anteriores.
-
-## Decisión de arquitectura — Bloque 9
-
-La [decisión de arquitectura](docs/decision-arquitectura.md) documenta el modelo
-elegido, el [diagrama del prototipo](docs/arquitectura.md), la comparación de
-precios, latencia y calidad, la justificación y la alternativa descartada.
-Incluye la fecha de consulta de precios y los límites de la medición.
-
-Los [registros reales](docs/mediciones_bloque9.json) conservan cada intento,
-sus tiempos y, cuando el proveedor respondió, el texto y los tokens reportados.
-Los errores y tiempos de espera también se guardan; no se cuentan como
-respuestas generadas ni se les atribuye una calidad no observada.
-
-Para repetir la comparación, revisa primero las tarifas en
-`docs/medir_modelos.py` y luego ejecuta desde la raíz:
-
-```powershell
-.\venv\Scripts\python.exe docs/medir_modelos.py
-```
-
-Esa herramienta hace 12 solicitudes reales, consume cuota y reemplaza el
-registro JSON; la decisión escrita debe actualizarse después si cambian los
-resultados. La CLI de `src/` conserva su funcionamiento del Bloque 7.
-
-## Banco de prompts y consistencia — Bloque 10
-
-El [banco documentado](prompts/README.md) reúne tres tareas del asistente de
-aprendizaje técnico: clasificar una consulta, extraer su contexto y resumir
-una explicación. Cada prompt define por separado sistema, entrada de ejemplo
-y esquema JSON con claves y tipos.
-
-La prueba real se ejecuta desde la raíz:
+Para repetir la medición real, que consume cuota y reemplaza el registro:
 
 ```powershell
 .\venv\Scripts\python.exe -m prompts.test_consistencia
 ```
 
-Hace tres repeticiones por prompt y genera
-[`prompts/registro_resultados.json`](prompts/registro_resultados.json), con cada
-respuesta real y los conteos de éxitos y fallos. Valida tanto el JSON como su
-estructura, tipos y límites. Puede consumir cuota y reemplaza el registro.
-El historial conserva la primera ejecución y la documentación explica el
-ajuste de la versión 2 del prompt de resumen.
+Para guardarla aparte, añade `--destino prompts/historial/otra_medicion.json`.
+La [primera medición](prompts/historial/registro_inicial.json) permanece como
+antecedente. No se fabrican resultados ni se excluyen intentos fallidos.
 
-La consulta de texto existente mantiene su uso habitual. La función
-`armar_peticion` ahora también admite instrucciones de sistema y esquemas
-opcionales; `parsear_respuesta_json` añade el parseo seguro del texto generado.
-La suite local completa tiene 26 pruebas, sin llamadas de red.
+## Si algo falla
+
+| Situación | Qué revisar |
+|---|---|
+| Clave ausente o HTTP 400/401/403 | `.env` en la raíz, valor real y acceso al proyecto/modelo; también la forma de la petición si hubo cambios al esquema |
+| HTTP 404 | Modelo configurado y disponibilidad para la cuenta |
+| HTTP 429 | Cuota y límites del proyecto; esperar y repetir cuando corresponda |
+| HTTP 5xx o timeout | Disponibilidad del proveedor y conexión; volver a ejecutar después |
+| JSON o estructura inválida | El programa lo rechaza; revisar el esquema y el texto antes de ajustar el prompt |
+| Dependencias ausentes | Usar el Python de `venv` e instalar desde `requirements.txt` |
+
+## Estructura y evidencias del Módulo 1
+
+- `main.py`: entrada de la miniaplicación con salida JSON validada.
+- `src/`: cliente Gemini y validación compartida.
+- `prompts/`: banco, script de consistencia, resultados y explicación del ajuste.
+- `tests/`: pruebas locales con respuestas simuladas.
+- `requirements.txt`: versiones fijadas del entorno, incluidas las dependencias
+  instaladas en el Bloque 4; la aplicación usa `requests` y `python-dotenv`.
+- `.env.example`: variables de referencia sin credenciales reales.
+- [Arquitectura y diagrama](docs/arquitectura.md).
+- [Decisión de modelo y comparación real](docs/decision-arquitectura.md).
+- [Evidencia de la petición del Bloque 4](docs/evidencia_peticion_autenticada.txt).
+- [Validación y errores del Bloque 7](docs/evidencia_bloque7.txt).
+- [Ensayo de instalación limpia y lista de comprobación del Gate 1](docs/verificacion_gate1.md).
+
+`.env`, `venv/` y las cachés están excluidos por `.gitignore`. Cada persona que
+clone el repositorio configura su propia clave; ninguna entrega incluye `.env`.
+El historial de Git conserva los avances y pruebas de los bloques del módulo.
