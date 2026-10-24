@@ -1,0 +1,277 @@
+{
+  "fecha_inicio": "2026-10-23T18:52:44-03:00",
+  "banco_sha256": "a7f1fc7b2d8cb7350985d3fc3ae923bd1c11ecea453ba30ac87afe4f5ac0e669",
+  "repeticiones_por_prompt": 3,
+  "pausa_segundos": 1,
+  "criterio": "Objeto JSON, claves exactas, tipos, textos no vacíos, enum, intervalos y longitud de listas. No mide equivalencia literal ni garantiza corrección semántica.",
+  "prompts": {
+    "clasificar_consulta_tecnica": {
+      "version": 1,
+      "intentos": 3,
+      "exitos": 3,
+      "fallos": 0,
+      "repeticiones": [
+        {
+          "intento": 1,
+          "fecha": "2026-10-23T18:52:44-03:00",
+          "modelo_solicitado": "gemini-3.5-flash-lite",
+          "modelo_devuelto": "gemini-3.5-flash-lite",
+          "usageMetadata": {
+            "promptTokenCount": 118,
+            "candidatesTokenCount": 22,
+            "totalTokenCount": 140,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 118
+              }
+            ],
+            "serviceTier": "standard"
+          },
+          "texto_original": "{\n  \"categoria\": \"http\",\n  \"confianza\": 0.95\n}",
+          "valida": true,
+          "datos": {
+            "categoria": "http",
+            "confianza": 0.95
+          },
+          "segundos": 1.668354
+        },
+        {
+          "intento": 2,
+          "fecha": "2026-10-23T18:52:46-03:00",
+          "modelo_solicitado": "gemini-3.5-flash-lite",
+          "modelo_devuelto": "gemini-3.5-flash-lite",
+          "usageMetadata": {
+            "promptTokenCount": 118,
+            "candidatesTokenCount": 22,
+            "totalTokenCount": 140,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 118
+              }
+            ],
+            "serviceTier": "standard"
+          },
+          "texto_original": "{\n  \"categoria\": \"http\",\n  \"confianza\": 0.95\n}",
+          "valida": true,
+          "datos": {
+            "categoria": "http",
+            "confianza": 0.95
+          },
+          "segundos": 0.946532
+        },
+        {
+          "intento": 3,
+          "fecha": "2026-10-23T18:52:48-03:00",
+          "modelo_solicitado": "gemini-3.5-flash-lite",
+          "modelo_devuelto": "gemini-3.5-flash-lite",
+          "usageMetadata": {
+            "promptTokenCount": 118,
+            "candidatesTokenCount": 22,
+            "totalTokenCount": 140,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 118
+              }
+            ],
+            "serviceTier": "standard"
+          },
+          "texto_original": "{\n  \"categoria\": \"http\",\n  \"confianza\": 0.95\n}",
+          "valida": true,
+          "datos": {
+            "categoria": "http",
+            "confianza": 0.95
+          },
+          "segundos": 1.831385
+        }
+      ],
+      "consistencia": 1.0
+    },
+    "extraer_contexto_tecnico": {
+      "version": 1,
+      "intentos": 3,
+      "exitos": 3,
+      "fallos": 0,
+      "repeticiones": [
+        {
+          "intento": 1,
+          "fecha": "2026-10-23T18:52:51-03:00",
+          "modelo_solicitado": "gemini-3.5-flash-lite",
+          "modelo_devuelto": "gemini-3.5-flash-lite",
+          "usageMetadata": {
+            "promptTokenCount": 146,
+            "candidatesTokenCount": 50,
+            "totalTokenCount": 196,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 146
+              }
+            ],
+            "serviceTier": "standard"
+          },
+          "texto_original": "{\n  \"tecnologia\": \"Python\",\n  \"codigo_http\": 429,\n  \"problema\": \"La petición a Gemini devuelve HTTP 429 y no se recibe el texto generado\"\n}",
+          "valida": true,
+          "datos": {
+            "tecnologia": "Python",
+            "codigo_http": 429,
+            "problema": "La petición a Gemini devuelve HTTP 429 y no se recibe el texto generado"
+          },
+          "segundos": 1.806583
+        },
+        {
+          "intento": 2,
+          "fecha": "2026-10-23T18:52:54-03:00",
+          "modelo_solicitado": "gemini-3.5-flash-lite",
+          "modelo_devuelto": "gemini-3.5-flash-lite",
+          "usageMetadata": {
+            "promptTokenCount": 146,
+            "candidatesTokenCount": 50,
+            "totalTokenCount": 196,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 146
+              }
+            ],
+            "serviceTier": "standard"
+          },
+          "texto_original": "{\n  \"tecnologia\": \"Python\",\n  \"codigo_http\": 429,\n  \"problema\": \"La petición a Gemini devuelve HTTP 429 y no se recibe el texto generado\"\n}",
+          "valida": true,
+          "datos": {
+            "tecnologia": "Python",
+            "codigo_http": 429,
+            "problema": "La petición a Gemini devuelve HTTP 429 y no se recibe el texto generado"
+          },
+          "segundos": 1.715142
+        },
+        {
+          "intento": 3,
+          "fecha": "2026-10-23T18:52:57-03:00",
+          "modelo_solicitado": "gemini-3.5-flash-lite",
+          "modelo_devuelto": "gemini-3.5-flash-lite",
+          "usageMetadata": {
+            "promptTokenCount": 146,
+            "candidatesTokenCount": 44,
+            "totalTokenCount": 190,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 146
+              }
+            ],
+            "serviceTier": "standard"
+          },
+          "texto_original": "{\n  \"tecnologia\": \"Python\",\n  \"codigo_http\": 429,\n  \"problema\": \"La peticion a Gemini devuelve HTTP 429\"\n}",
+          "valida": true,
+          "datos": {
+            "tecnologia": "Python",
+            "codigo_http": 429,
+            "problema": "La peticion a Gemini devuelve HTTP 429"
+          },
+          "segundos": 1.805029
+        }
+      ],
+      "consistencia": 1.0
+    },
+    "resumir_explicacion_tecnica": {
+      "version": 1,
+      "intentos": 3,
+      "exitos": 3,
+      "fallos": 0,
+      "repeticiones": [
+        {
+          "intento": 1,
+          "fecha": "2026-10-23T18:53:00-03:00",
+          "modelo_solicitado": "gemini-3.5-flash-lite",
+          "modelo_devuelto": "gemini-3.5-flash-lite",
+          "usageMetadata": {
+            "promptTokenCount": 173,
+            "candidatesTokenCount": 58,
+            "totalTokenCount": 231,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 173
+              }
+            ],
+            "serviceTier": "standard"
+          },
+          "texto_original": "{\"resumen\":\"Un entorno virtual permite aislar las dependencias de tus proyectos de Python de forma sencilla.\",\"pasos\":[\"Crear el entorno con python -m venv venv\",\"Activar el entorno en PowerShell con el comando correspondiente\",\"Instalar las dependencias con pip\"]}",
+          "valida": true,
+          "datos": {
+            "resumen": "Un entorno virtual permite aislar las dependencias de tus proyectos de Python de forma sencilla.",
+            "pasos": [
+              "Crear el entorno con python -m venv venv",
+              "Activar el entorno en PowerShell con el comando correspondiente",
+              "Instalar las dependencias con pip"
+            ]
+          },
+          "segundos": 1.775921
+        },
+        {
+          "intento": 2,
+          "fecha": "2026-10-23T18:53:02-03:00",
+          "modelo_solicitado": "gemini-3.5-flash-lite",
+          "modelo_devuelto": "gemini-3.5-flash-lite",
+          "usageMetadata": {
+            "promptTokenCount": 173,
+            "candidatesTokenCount": 53,
+            "totalTokenCount": 226,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 173
+              }
+            ],
+            "serviceTier": "standard"
+          },
+          "texto_original": "{\"resumen\":\"Un entorno virtual sirve para aislar las dependencias de tus proyectos de programación.\",\"pasos\":[\"Crear el entorno con python -m venv venv\",\"Activar el entorno con el comando correspondiente\",\"Instalar las dependencias necesarias\"]}",
+          "valida": true,
+          "datos": {
+            "resumen": "Un entorno virtual sirve para aislar las dependencias de tus proyectos de programación.",
+            "pasos": [
+              "Crear el entorno con python -m venv venv",
+              "Activar el entorno con el comando correspondiente",
+              "Instalar las dependencias necesarias"
+            ]
+          },
+          "segundos": 1.818472
+        },
+        {
+          "intento": 3,
+          "fecha": "2026-10-23T18:53:05-03:00",
+          "modelo_solicitado": "gemini-3.5-flash-lite",
+          "modelo_devuelto": "gemini-3.5-flash-lite",
+          "usageMetadata": {
+            "promptTokenCount": 173,
+            "candidatesTokenCount": 78,
+            "totalTokenCount": 251,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 173
+              }
+            ],
+            "serviceTier": "standard"
+          },
+          "texto_original": "{\"resumen\":\"Un entorno virtual sirve para aislar las dependencias de tus proyectos de programación.\",\"pasos\":[\"Crea el entorno con python -m venv venv\",\"Actívalo ejecutando .\\textbackslash venv\\textbackslash Scripts\\textbackslash Activate.ps1 en PowerShell\",\"Instala las dependencias con python -m pip install -r requirements.txt\"]}",
+          "valida": true,
+          "datos": {
+            "resumen": "Un entorno virtual sirve para aislar las dependencias de tus proyectos de programación.",
+            "pasos": [
+              "Crea el entorno con python -m venv venv",
+              "Actívalo ejecutando .\textbackslash venv\textbackslash Scripts\textbackslash Activate.ps1 en PowerShell",
+              "Instala las dependencias con python -m pip install -r requirements.txt"
+            ]
+          },
+          "segundos": 1.982921
+        }
+      ],
+      "consistencia": 1.0
+    }
+  },
+  "fecha_fin": "2026-10-23T18:53:08-03:00"
+}

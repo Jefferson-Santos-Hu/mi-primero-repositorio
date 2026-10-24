@@ -1,6 +1,6 @@
 {
-  "fecha_inicio": "2026-10-23T18:52:44-03:00",
-  "banco_sha256": "a7f1fc7b2d8cb7350985d3fc3ae923bd1c11ecea453ba30ac87afe4f5ac0e669",
+  "fecha_inicio": "2026-10-23T18:53:58-03:00",
+  "banco_sha256": "c0530aa1be3155575e9b426c9b3d01ccf7458e5541092e22b8ab2fbb34f6330c",
   "repeticiones_por_prompt": 3,
   "pausa_segundos": 1,
   "criterio": "Objeto JSON, claves exactas, tipos, textos no vacíos, enum, intervalos y longitud de listas. No mide equivalencia literal ni garantiza corrección semántica.",
@@ -13,7 +13,7 @@
       "repeticiones": [
         {
           "intento": 1,
-          "fecha": "2026-10-23T18:52:44-03:00",
+          "fecha": "2026-10-23T18:53:58-03:00",
           "modelo_solicitado": "gemini-3.5-flash-lite",
           "modelo_devuelto": "gemini-3.5-flash-lite",
           "usageMetadata": {
@@ -28,17 +28,17 @@
             ],
             "serviceTier": "standard"
           },
-          "texto_original": "{\n  \"categoria\": \"http\",\n  \"confianza\": 0.95\n}",
+          "texto_original": "{\n  \"categoria\": \"http\",\n  \"confianza\": 0.99\n}",
           "valida": true,
           "datos": {
             "categoria": "http",
-            "confianza": 0.95
+            "confianza": 0.99
           },
-          "segundos": 1.668354
+          "segundos": 1.707585
         },
         {
           "intento": 2,
-          "fecha": "2026-10-23T18:52:46-03:00",
+          "fecha": "2026-10-23T18:54:01-03:00",
           "modelo_solicitado": "gemini-3.5-flash-lite",
           "modelo_devuelto": "gemini-3.5-flash-lite",
           "usageMetadata": {
@@ -59,11 +59,11 @@
             "categoria": "http",
             "confianza": 0.95
           },
-          "segundos": 0.946532
+          "segundos": 1.978313
         },
         {
           "intento": 3,
-          "fecha": "2026-10-23T18:52:48-03:00",
+          "fecha": "2026-10-23T18:54:04-03:00",
           "modelo_solicitado": "gemini-3.5-flash-lite",
           "modelo_devuelto": "gemini-3.5-flash-lite",
           "usageMetadata": {
@@ -84,7 +84,7 @@
             "categoria": "http",
             "confianza": 0.95
           },
-          "segundos": 1.831385
+          "segundos": 1.757012
         }
       ],
       "consistencia": 1.0
@@ -97,13 +97,13 @@
       "repeticiones": [
         {
           "intento": 1,
-          "fecha": "2026-10-23T18:52:51-03:00",
+          "fecha": "2026-10-23T18:54:06-03:00",
           "modelo_solicitado": "gemini-3.5-flash-lite",
           "modelo_devuelto": "gemini-3.5-flash-lite",
           "usageMetadata": {
             "promptTokenCount": 146,
-            "candidatesTokenCount": 50,
-            "totalTokenCount": 196,
+            "candidatesTokenCount": 35,
+            "totalTokenCount": 181,
             "promptTokensDetails": [
               {
                 "modality": "TEXT",
@@ -112,24 +112,24 @@
             ],
             "serviceTier": "standard"
           },
-          "texto_original": "{\n  \"tecnologia\": \"Python\",\n  \"codigo_http\": 429,\n  \"problema\": \"La petición a Gemini devuelve HTTP 429 y no se recibe el texto generado\"\n}",
+          "texto_original": "{\"tecnologia\":\"Python\",\"codigo_http\":429,\"problema\":\"La peticion devuelve HTTP 429 y no se recibe el texto generado\"}",
           "valida": true,
           "datos": {
             "tecnologia": "Python",
             "codigo_http": 429,
-            "problema": "La petición a Gemini devuelve HTTP 429 y no se recibe el texto generado"
+            "problema": "La peticion devuelve HTTP 429 y no se recibe el texto generado"
           },
-          "segundos": 1.806583
+          "segundos": 1.782665
         },
         {
           "intento": 2,
-          "fecha": "2026-10-23T18:52:54-03:00",
+          "fecha": "2026-10-23T18:54:09-03:00",
           "modelo_solicitado": "gemini-3.5-flash-lite",
           "modelo_devuelto": "gemini-3.5-flash-lite",
           "usageMetadata": {
             "promptTokenCount": 146,
-            "candidatesTokenCount": 50,
-            "totalTokenCount": 196,
+            "candidatesTokenCount": 29,
+            "totalTokenCount": 175,
             "promptTokensDetails": [
               {
                 "modality": "TEXT",
@@ -138,18 +138,18 @@
             ],
             "serviceTier": "standard"
           },
-          "texto_original": "{\n  \"tecnologia\": \"Python\",\n  \"codigo_http\": 429,\n  \"problema\": \"La petición a Gemini devuelve HTTP 429 y no se recibe el texto generado\"\n}",
+          "texto_original": "{\"tecnologia\":\"Python\",\"codigo_http\":429,\"problema\":\"La petición a Gemini devuelve HTTP 429\"}",
           "valida": true,
           "datos": {
             "tecnologia": "Python",
             "codigo_http": 429,
-            "problema": "La petición a Gemini devuelve HTTP 429 y no se recibe el texto generado"
+            "problema": "La petición a Gemini devuelve HTTP 429"
           },
-          "segundos": 1.715142
+          "segundos": 1.846209
         },
         {
           "intento": 3,
-          "fecha": "2026-10-23T18:52:57-03:00",
+          "fecha": "2026-10-23T18:54:12-03:00",
           "modelo_solicitado": "gemini-3.5-flash-lite",
           "modelo_devuelto": "gemini-3.5-flash-lite",
           "usageMetadata": {
@@ -171,107 +171,107 @@
             "codigo_http": 429,
             "problema": "La peticion a Gemini devuelve HTTP 429"
           },
-          "segundos": 1.805029
+          "segundos": 2.242072
         }
       ],
       "consistencia": 1.0
     },
     "resumir_explicacion_tecnica": {
-      "version": 1,
+      "version": 2,
       "intentos": 3,
       "exitos": 3,
       "fallos": 0,
       "repeticiones": [
         {
           "intento": 1,
-          "fecha": "2026-10-23T18:53:00-03:00",
+          "fecha": "2026-10-23T18:54:15-03:00",
           "modelo_solicitado": "gemini-3.5-flash-lite",
           "modelo_devuelto": "gemini-3.5-flash-lite",
           "usageMetadata": {
-            "promptTokenCount": 173,
-            "candidatesTokenCount": 58,
-            "totalTokenCount": 231,
+            "promptTokenCount": 201,
+            "candidatesTokenCount": 43,
+            "totalTokenCount": 244,
             "promptTokensDetails": [
               {
                 "modality": "TEXT",
-                "tokenCount": 173
+                "tokenCount": 201
               }
             ],
             "serviceTier": "standard"
           },
-          "texto_original": "{\"resumen\":\"Un entorno virtual permite aislar las dependencias de tus proyectos de Python de forma sencilla.\",\"pasos\":[\"Crear el entorno con python -m venv venv\",\"Activar el entorno en PowerShell con el comando correspondiente\",\"Instalar las dependencias con pip\"]}",
-          "valida": true,
-          "datos": {
-            "resumen": "Un entorno virtual permite aislar las dependencias de tus proyectos de Python de forma sencilla.",
-            "pasos": [
-              "Crear el entorno con python -m venv venv",
-              "Activar el entorno en PowerShell con el comando correspondiente",
-              "Instalar las dependencias con pip"
-            ]
-          },
-          "segundos": 1.775921
-        },
-        {
-          "intento": 2,
-          "fecha": "2026-10-23T18:53:02-03:00",
-          "modelo_solicitado": "gemini-3.5-flash-lite",
-          "modelo_devuelto": "gemini-3.5-flash-lite",
-          "usageMetadata": {
-            "promptTokenCount": 173,
-            "candidatesTokenCount": 53,
-            "totalTokenCount": 226,
-            "promptTokensDetails": [
-              {
-                "modality": "TEXT",
-                "tokenCount": 173
-              }
-            ],
-            "serviceTier": "standard"
-          },
-          "texto_original": "{\"resumen\":\"Un entorno virtual sirve para aislar las dependencias de tus proyectos de programación.\",\"pasos\":[\"Crear el entorno con python -m venv venv\",\"Activar el entorno con el comando correspondiente\",\"Instalar las dependencias necesarias\"]}",
+          "texto_original": "{\"resumen\":\"Un entorno virtual sirve para aislar las dependencias de tus proyectos de programación.\",\"pasos\":[\"Crear el entorno virtual\",\"Activar el entorno virtual\",\"Instalar las dependencias necesarias\"]}",
           "valida": true,
           "datos": {
             "resumen": "Un entorno virtual sirve para aislar las dependencias de tus proyectos de programación.",
             "pasos": [
-              "Crear el entorno con python -m venv venv",
-              "Activar el entorno con el comando correspondiente",
+              "Crear el entorno virtual",
+              "Activar el entorno virtual",
               "Instalar las dependencias necesarias"
             ]
           },
-          "segundos": 1.818472
+          "segundos": 2.064095
         },
         {
-          "intento": 3,
-          "fecha": "2026-10-23T18:53:05-03:00",
+          "intento": 2,
+          "fecha": "2026-10-23T18:54:18-03:00",
           "modelo_solicitado": "gemini-3.5-flash-lite",
           "modelo_devuelto": "gemini-3.5-flash-lite",
           "usageMetadata": {
-            "promptTokenCount": 173,
-            "candidatesTokenCount": 78,
-            "totalTokenCount": 251,
+            "promptTokenCount": 201,
+            "candidatesTokenCount": 43,
+            "totalTokenCount": 244,
             "promptTokensDetails": [
               {
                 "modality": "TEXT",
-                "tokenCount": 173
+                "tokenCount": 201
               }
             ],
             "serviceTier": "standard"
           },
-          "texto_original": "{\"resumen\":\"Un entorno virtual sirve para aislar las dependencias de tus proyectos de programación.\",\"pasos\":[\"Crea el entorno con python -m venv venv\",\"Actívalo ejecutando .\\textbackslash venv\\textbackslash Scripts\\textbackslash Activate.ps1 en PowerShell\",\"Instala las dependencias con python -m pip install -r requirements.txt\"]}",
+          "texto_original": "{\"resumen\":\"Un entorno virtual es útil para aislar las dependencias de tus proyectos de programación.\",\"pasos\":[\"Crear el entorno virtual\",\"Activar el entorno\",\"Instalar las dependencias necesarias\"]}",
           "valida": true,
           "datos": {
-            "resumen": "Un entorno virtual sirve para aislar las dependencias de tus proyectos de programación.",
+            "resumen": "Un entorno virtual es útil para aislar las dependencias de tus proyectos de programación.",
             "pasos": [
-              "Crea el entorno con python -m venv venv",
-              "Actívalo ejecutando .\textbackslash venv\textbackslash Scripts\textbackslash Activate.ps1 en PowerShell",
-              "Instala las dependencias con python -m pip install -r requirements.txt"
+              "Crear el entorno virtual",
+              "Activar el entorno",
+              "Instalar las dependencias necesarias"
             ]
           },
-          "segundos": 1.982921
+          "segundos": 1.230124
+        },
+        {
+          "intento": 3,
+          "fecha": "2026-10-23T18:54:21-03:00",
+          "modelo_solicitado": "gemini-3.5-flash-lite",
+          "modelo_devuelto": "gemini-3.5-flash-lite",
+          "usageMetadata": {
+            "promptTokenCount": 201,
+            "candidatesTokenCount": 43,
+            "totalTokenCount": 244,
+            "promptTokensDetails": [
+              {
+                "modality": "TEXT",
+                "tokenCount": 201
+              }
+            ],
+            "serviceTier": "standard"
+          },
+          "texto_original": "{\"resumen\":\"Un entorno virtual sirve para aislar las dependencias de tus proyectos de forma sencilla.\",\"pasos\":[\"Crear el entorno virtual\",\"Activar el entorno\",\"Instalar las dependencias necesarias\"]}",
+          "valida": true,
+          "datos": {
+            "resumen": "Un entorno virtual sirve para aislar las dependencias de tus proyectos de forma sencilla.",
+            "pasos": [
+              "Crear el entorno virtual",
+              "Activar el entorno",
+              "Instalar las dependencias necesarias"
+            ]
+          },
+          "segundos": 1.77553
         }
       ],
       "consistencia": 1.0
     }
   },
-  "fecha_fin": "2026-10-23T18:53:08-03:00"
+  "fecha_fin": "2026-10-23T18:54:23-03:00"
 }

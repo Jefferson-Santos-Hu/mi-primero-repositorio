@@ -44,3 +44,12 @@ facturación efectiva. Las tarifas de salida incluyen razonamiento.
 
 La [decisión de modelo](decision-arquitectura.md) utiliza esta arquitectura y
 las mediciones reales. Las credenciales permanecen fuera de Git y de la evidencia.
+
+## Ampliación del Bloque 10
+
+El flujo de la CLI de texto del diagrama se conserva. El
+[banco de prompts](../prompts/README.md) reutiliza sus funciones y agrega una
+rama de salida estructurada: instrucción de sistema y esquema en
+`armar_peticion`, seguida por `parsear_respuesta_json` y validación de claves,
+tipos y valores. Esa rama y su registro de consistencia se muestran en el
+diagrama de la documentación de `prompts/`.

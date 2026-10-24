@@ -99,7 +99,7 @@ El programa devuelve código 0 cuando funciona y 1 ante un error controlado.
 Los mensajes de error se muestran sin traceback ni datos de autenticación.
 El tiempo de espera es de 10 segundos para conectar y 90 para recibir datos.
 
-Las 13 pruebas locales no hacen llamadas de red: simulan las respuestas de
+Las 13 pruebas locales originales del Bloque 7 no hacen llamadas de red: simulan las respuestas de
 Gemini para provocar conexión fallida, JSON inválido, campos ausentes y errores
 HTTP, además de verificar entradas y el flujo correcto. La cobertura medida
 del módulo fue del 99 % (69 instrucciones, una sin ejecutar: el punto de entrada).
@@ -144,3 +144,28 @@ Para repetir la comparación, revisa primero las tarifas en
 Esa herramienta hace 12 solicitudes reales, consume cuota y reemplaza el
 registro JSON; la decisión escrita debe actualizarse después si cambian los
 resultados. La CLI de `src/` conserva su funcionamiento del Bloque 7.
+
+## Banco de prompts y consistencia — Bloque 10
+
+El [banco documentado](prompts/README.md) reúne tres tareas del asistente de
+aprendizaje técnico: clasificar una consulta, extraer su contexto y resumir
+una explicación. Cada prompt define por separado sistema, entrada de ejemplo
+y esquema JSON con claves y tipos.
+
+La prueba real se ejecuta desde la raíz:
+
+```powershell
+.\venv\Scripts\python.exe -m prompts.test_consistencia
+```
+
+Hace tres repeticiones por prompt y genera
+[`prompts/registro_resultados.json`](prompts/registro_resultados.json), con cada
+respuesta real y los conteos de éxitos y fallos. Valida tanto el JSON como su
+estructura, tipos y límites. Puede consumir cuota y reemplaza el registro.
+El historial conserva la primera ejecución y la documentación explica el
+ajuste de la versión 2 del prompt de resumen.
+
+La consulta de texto existente mantiene su uso habitual. La función
+`armar_peticion` ahora también admite instrucciones de sistema y esquemas
+opcionales; `parsear_respuesta_json` añade el parseo seguro del texto generado.
+La suite local completa tiene 26 pruebas, sin llamadas de red.
