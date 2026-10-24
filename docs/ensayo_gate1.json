@@ -1,0 +1,81 @@
+{
+  "fecha": "2026-10-24T17:39:53-03:00",
+  "commit_clonado": "f855371aeb855b0d52c2b7035218444fc1297599",
+  "repositorio": "https://github.com/Jefferson-Santos-Hu/mi-primero-repositorio",
+  "metodo": "Clonacion remota en carpeta nueva, venv nuevo aislado, pip install -r requirements.txt. .env creado desde la plantilla con la clave propia configurada localmente. Variables del proceso relacionadas con API y PYTHONPATH retiradas solo en los subprocesos de prueba.",
+  "requirements_sha256": "450b02bbbd9175880156445d9f6924447d32dfd4d225d1b4f13c0bbe57597a69",
+  "pasos": [
+    {
+      "comando": "python -c verificar_interprete_y_aislamiento",
+      "codigo_salida": 0,
+      "salida": "{\"python\": \"3.14.8\", \"venv_aislado\": true}",
+      "errores": ""
+    },
+    {
+      "comando": "python -m pip check",
+      "codigo_salida": 0,
+      "salida": "No broken requirements found.",
+      "errores": ""
+    },
+    {
+      "comando": "python -m pip freeze",
+      "codigo_salida": 0,
+      "salida": "annotated-types==0.8.0\nanyio==4.15.1\ncertifi==2026.7.22\ncffi==2.1.1\ncharset-normalizer==3.5.2\ncryptography==50.0.2\ndistro==1.9.0\ngoogle-auth==2.62.0\ngoogle-genai==2.32.0\nh11==0.16.0\nhttpcore==1.0.9\nhttpx==0.28.1\nidna==3.20\npyasn1==0.6.4\npyasn1_modules==0.4.2\npycparser==3.11\npydantic==2.14.1\npydantic_core==2.50.1\npython-dotenv==1.2.4\nrequests==2.34.2\nsniffio==1.3.1\ntenacity==9.1.4\ntyping-inspection==0.4.4\ntyping_extensions==4.16.0\nurllib3==2.8.0\nwebsockets==16.1.1",
+      "errores": ""
+    },
+    {
+      "comando": "python -m unittest discover -s tests -q",
+      "codigo_salida": 0,
+      "salida": "",
+      "errores": "----------------------------------------------------------------------\nRan 32 tests in 0.052s\n\nOK"
+    },
+    {
+      "comando": "python main.py --prompt clasificar_consulta_tecnica",
+      "codigo_salida": 0,
+      "salida": "{\n  \"categoria\": \"http\",\n  \"confianza\": 0.99\n}",
+      "errores": "",
+      "json_generado": {
+        "categoria": "http",
+        "confianza": 0.99
+      }
+    },
+    {
+      "comando": "python main.py --prompt extraer_contexto_tecnico",
+      "codigo_salida": 0,
+      "salida": "{\n  \"tecnologia\": \"Python\",\n  \"codigo_http\": 429,\n  \"problema\": \"La petici�n a Gemini devuelve HTTP 429\"\n}",
+      "errores": "",
+      "json_generado": {
+        "tecnologia": "Python",
+        "codigo_http": 429,
+        "problema": "La petici�n a Gemini devuelve HTTP 429"
+      }
+    },
+    {
+      "comando": "python main.py --prompt resumir_explicacion_tecnica",
+      "codigo_salida": 0,
+      "salida": "{\n  \"resumen\": \"Un entorno virtual permite aislar las dependencias necesarias para cada proyecto.\",\n  \"pasos\": [\n    \"Crear el entorno\",\n    \"Activar el entorno\",\n    \"Instalar las dependencias\"\n  ]\n}",
+      "errores": "",
+      "json_generado": {
+        "resumen": "Un entorno virtual permite aislar las dependencias necesarias para cada proyecto.",
+        "pasos": [
+          "Crear el entorno",
+          "Activar el entorno",
+          "Instalar las dependencias"
+        ]
+      }
+    },
+    {
+      "comando": "python main.py --texto \"\"",
+      "codigo_salida": 1,
+      "salida": "",
+      "errores": "Error: La pregunta debe ser un texto no vac�o."
+    }
+  ],
+  "seguridad_clon": {
+    "env_ignorado": true,
+    "venv_ignorado": true,
+    "arbol_limpio": true,
+    "env_ausente_del_historial": true
+  },
+  "resultado": "correcto"
+}
