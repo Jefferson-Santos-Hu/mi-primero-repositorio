@@ -1,0 +1,101 @@
+{
+  "revision_formato": [
+    {
+      "id": 1,
+      "incumple_formato": false
+    },
+    {
+      "id": 2,
+      "incumple_formato": false
+    },
+    {
+      "id": 3,
+      "incumple_formato": false
+    },
+    {
+      "id": 4,
+      "incumple_formato": false
+    },
+    {
+      "id": 5,
+      "incumple_formato": false
+    },
+    {
+      "id": 6,
+      "incumple_formato": false
+    },
+    {
+      "id": 7,
+      "incumple_formato": false
+    },
+    {
+      "id": 8,
+      "incumple_formato": false
+    },
+    {
+      "id": 9,
+      "incumple_formato": false
+    },
+    {
+      "id": 10,
+      "incumple_formato": false
+    },
+    {
+      "id": 11,
+      "incumple_formato": false
+    },
+    {
+      "id": 12,
+      "incumple_formato": false
+    },
+    {
+      "id": 13,
+      "incumple_formato": false
+    },
+    {
+      "id": 14,
+      "incumple_formato": false
+    },
+    {
+      "id": 15,
+      "incumple_formato": false
+    },
+    {
+      "id": 16,
+      "incumple_formato": false
+    },
+    {
+      "id": 17,
+      "incumple_formato": false
+    },
+    {
+      "id": 18,
+      "incumple_formato": false
+    },
+    {
+      "id": 19,
+      "incumple_formato": false
+    },
+    {
+      "id": 20,
+      "incumple_formato": false
+    }
+  ],
+  "criterio": "Sin Markdown/saltos de línea y hasta 60 palabras. No evalúa factualidad ni tono semántico.",
+  "incumplimientos": 0,
+  "respuestas": {
+    "informacion_cambia_seguido": false,
+    "problema_de_formato_o_tono": false,
+    "dataset_grande_y_de_calidad": false,
+    "presupuesto_limitado_o_iterar_rapido": true,
+    "necesita_multiples_variantes": false
+  },
+  "puntos": {
+    "RAG": 2,
+    "Fine-tuning completo": 0,
+    "PEFT": 1
+  },
+  "ganadoras": [
+    "RAG"
+  ]
+}

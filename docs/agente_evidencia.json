@@ -1,0 +1,45 @@
+{
+  "fecha": "2026-11-25",
+  "modelo": "gemini-3.6-flash",
+  "ejecuciones": [
+    {
+      "sesion": "A",
+      "entrada": "Consulta el código HTTP 429 con detalle.",
+      "respuesta": "El código de estado HTTP **429 (Too Many Requests / Demasiadas solicitudes)** indica que se ha superado el límite de frecuencia (*rate limit*) o la cuota de peticiones permitida por el servidor o la API dentro de un periodo de tiempo determinado.\n\n### Diagnóstico y Recomendaciones Técnicas:\n* **Causa principal:** Has alcanzado el número máximo de solicitudes autorizadas por segundo, minuto o día para tu clave de API o dirección IP.\n* **Solución recomendada:**\n  1. **Estrategia de reintentos (Backoff Exponencial con Jitter):** Implementa un tiempo de espera creciente entre cada intento fallido, añadiendo una pequeña variación aleatoria (*jitter*) para evitar colisiones de peticiones masivas en el servidor.\n  2. **Establecer un límite de reintentos:** Define un número máximo de intentos antes de fallar definitivamente.\n  3. **Revisar encabezados de respuesta:** Inspecciona si la respuesta del servidor incluye el encabezado `Retry-After`, el cual indica exactamente cuántos segundos esperar antes de realizar una nueva petición.\n  4. **Revisar tu cuota:** Verifica tu plan en la consola del proveedor para confirmar si necesitas solicitar un aumento de cuota o modificar tu flujo de peticiones.",
+      "pasos": [
+        {
+          "herramienta": "consultar_error_http",
+          "argumentos": {
+            "codigo": 429,
+            "incluir_detalle": true
+          },
+          "observacion": "Límite de cuota o frecuencia. Usar backoff exponencial con jitter y máximo de intentos; revisar la cuota."
+        }
+      ]
+    },
+    {
+      "sesion": "B",
+      "entrada": "Usa la herramienta para estimar el costo de 1000 tokens de entrada y 1000 de salida.",
+      "respuesta": "El costo estimado para **1,000 tokens de entrada** y **1,000 tokens de salida** en Gemini 3.5 Flash Lite (tarifa estándar de referencia) es de aproximadamente **USD 0.0028**. \n\n*Nota: Esta es una estimación basada en la tarifa de referencia y no representa una factura real.*",
+      "pasos": [
+        {
+          "herramienta": "calcular_presupuesto",
+          "argumentos": {
+            "tokens_entrada": 1000,
+            "tokens_salida": 1000
+          },
+          "observacion": "Estimación: USD 0.00280000; tarifa estándar de referencia al 2026-11-25, no factura real."
+        }
+      ]
+    },
+    {
+      "sesion": "C",
+      "entrada": "Hola, ¿cómo contacto a soporte?",
+      "respuesta": "¡Hola! Puedes realizar tus consultas técnicas o reportar dudas directamente por este medio conmigo, ya que soy tu asistente de soporte para Python y la API de Gemini. \n\nSi necesitas contactar al soporte oficial de Google Cloud / Google AI Studio:\n\n1. **Google AI Studio:** Visita [aistudio.google.com](https://aistudio.google.com/) y busca la opción de ayuda/comentarios (*Send Feedback* / *Help*) en la esquina superior derecha.\n2. **Google Cloud Support:** Si usas la API mediante Vertex AI o tu cuenta de Google Cloud, accede a la sección de [Soporte de Google Cloud Console](https://console.cloud.google.com/support).\n3. **Comunidad:** También puedes consultar la comunidad de desarrolladores en la [Comunidad de Google Cloud](https://www.googlecloudcommunity.com/).\n\n¿En qué te puedo ayudar hoy respecto a Python o Gemini?",
+      "pasos": []
+    }
+  ],
+  "cadena": "Aquí tienes tres pasos de verificación seguros para diagnosticar y solucionar este problema sin poner en riesgo la seguridad de tus credenciales:\n\n### **Paso 1: Consulta los límites de tu plan en el panel oficial (Sin compartir tu API Key)**\n* **Qué hacer:** Ingresa a **Google AI Studio** o a la **Consola de Google Cloud** con tu cuenta para revisar la cuota asignada a tu clave.\n* **Qué verificar:** Confirma si estás en el nivel gratuito (*Free Tier*). Por ejemplo, modelos como Gemini 1.5 Flash en cuotas gratuitas suelen tener límites de **15 peticiones por minuto (RPM)**. Si tu script envía solicitudes en ráfaga, alcanzará el límite inmediatamente (error 429).\n\n---\n\n### **Paso 2: Agrega una pausa intencional entre peticiones en tu código**\n* **Qué hacer:** Si estás procesando varios elementos dentro de un bucle (`for` o `while`), añade un retardo controlado utilizando la librería nativa `time`.\n* **Ejemplo de prueba rápida:**\n  ```python\n  import time\n\n  # Agrega una pausa entre llamadas para no superar las RPM permitidas\n  time.sleep(4)  # Espera 4 segundos entre cada petición\n```\n* **Qué verificar:** Ejecuta de nuevo tu programa. Si el error desaparece, confirma que el origen era la frecuencia con la que enviabas las solicitudes.\n\n---\n\n### **Paso 3: Implementa un manejo de reintentos con retroceso exponencial**\n* **Qué hacer:** Captura la excepción específica de límite de cuota (`ResourceExhausted`) e implementa un bucle de reintentos que incremente gradualmente el tiempo de espera.\n* **Ejemplo de verificación:**\n  ```python\n  import time\n  from google.api_core.exceptions import ResourceExhausted\n\n\n  def generar_con_reintento(prompt, reintentos_max=3):\n      espera = 5\n      for intento in range(reintentos_max):\n          try:\n              return model.generate_content(prompt)\n          except ResourceExhausted:\n              if intento < reintentos_max - 1:\n                  print(\n                      f\"Límite alcanzado. Reintentando en {espera} segundos...\"\n                  )\n                  time.sleep(espera)\n                  espera *= 2  # Duplica la espera en cada reintento fallido\n              else:\n                  print(\"Se superó el número máximo de reintentos.\")\n                  raise\n```\n* **Qué verificar:** Comprueba que tu código responda adecuadamente a las pausas solicitadas por el servidor en lugar de fallar al primer intento o detener la ejecución de forma abrupta.",
+  "estado": "herramientas_verificadas_memoria_real_pendiente",
+  "nota_modelo": "Gemini 3.6 Flash como alternativa explícita para orquestación; el cliente de costo permanece en 3.5 Flash Lite."
+}
