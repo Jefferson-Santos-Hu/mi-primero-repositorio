@@ -47,3 +47,7 @@ Promedio ponderado: 88.0/100. Los cuatro criterios no compensables se comprueban
 
 El costo de generación es equivalente a tarifa estándar y no factura. No se inventa costo de embeddings; permanece sin determinar. La revisión cualitativa es asistida. Las evaluaciones de recuperación no prueban generalización ni resistencia a ataques nuevos. La revisión cruzada por Javier está pendiente: las observaciones propuestas no se atribuyen como hechas por él. El checkpoint de supervisión se pierde al reiniciar y no autentica al revisor; es el mecanismo didáctico requerido, no un flujo de autorización de producción. Docker corresponde al Módulo 3 y no es requisito de este Gate 2.
 
+
+## Instalación desde clon nuevo
+
+Verificación adicional completada desde GitHub con entorno virtual nuevo: 98 pruebas aprobadas, índice nuevo de 6 chunks con embeddings reales y consulta final citando cliente.md. Procedimiento y límites en docs/verificacion_gate2_clon_limpio.md.
