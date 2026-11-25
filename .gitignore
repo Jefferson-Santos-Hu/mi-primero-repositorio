@@ -19,3 +19,8 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Índices regenerables y estado local
+vectorstore/
+.coverage
+.pytest_cache/
