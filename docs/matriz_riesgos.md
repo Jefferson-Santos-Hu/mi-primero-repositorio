@@ -25,3 +25,17 @@ R-03 exige revisión humana de los archivos públicos antes de cambios de despli
 ## Incertidumbre y frecuencia
 
 Revisar esta matriz en cada cambio de corpus, prompt, modelo, herramienta o endpoint, y semanalmente en uso. R-01, R-02, R-04, R-06 y R-07 están cerca de cambios de categoría al variar un punto una de sus estimaciones; requieren especial contraste con otra persona. Ante fuga, retirar publicación afectada y rotar la clave con el titular; ante respuestas incorrectas, suspender generación y conservar evidencia sintética del fallo.
+
+## Puntos de supervisión por riesgo inicial alto o crítico
+
+| Riesgo | Punto concreto de supervisión | Responsable previsto | Acción ante fallo |
+|---|---|---|---|
+| R-01 | Revisar corpus y descartes antes de indexar material nuevo y antes de autorizar un prompt | titular/revisor técnico | Retirar documento y repetir prueba de inyección |
+| R-02 | Revisar fuentes y resultados de citas antes de habilitar una versión | titular/revisor técnico | Mantener rechazo de respuesta y corregir generación |
+| R-03 | Revisión del diff y escaneo de secretos antes de publicar o ampliar logs | titular del repositorio | Bloquear publicación y rotar credencial si se expuso |
+| R-04 | Revisar cuota y consumo después de agotamiento de reintentos; no autorizar bucles ilimitados | titular de la API | Pausar consultas y resolver cuota manualmente |
+| R-05 | Aprobar cambios de corpus y ejecutar actualización incremental con servicio detenido | titular/revisor técnico | Restaurar versión anterior del corpus y directorio |
+| R-06 | Contrastar respuesta con fuente antes de aplicar cualquier recomendación técnica | usuario del asistente | No ejecutar recomendación no sustentada |
+| R-07 | Revisar pruebas de aislamiento antes de modificar el manejo de sesiones | titular/revisor técnico | Deshabilitar memoria y corregir contrato de sesión |
+
+La aprobación programática del cambio de prompt corresponde a `crear_supervision`; las revisiones anteriores son procedimientos operativos previstos, no afirmaciones de que otra persona ya los haya realizado.

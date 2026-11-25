@@ -156,7 +156,7 @@ python -m venv venv
 .\venv\Scripts\python.exe -m uvicorn api:app --host 127.0.0.1 --port 8000
 ```
 
-La clave `API_KEY` o `GEMINI_API_KEY` se configura en `.env`, ignorado por Git. No la pegues en capturas ni entregas. El índice `vectorstore/` es regenerable e ignorado. Tras crearlo, las siguientes corridas lo reabren sin volver a indexar; si cambia el corpus se debe usar un directorio nuevo. No se mezcla contenido de versiones.
+La clave `API_KEY` o `GEMINI_API_KEY` se configura en `.env`, ignorado por Git. No la pegues en capturas ni entregas. El índice `vectorstore/` es regenerable e ignorado. Tras crearlo, las siguientes corridas lo reabren sin volver a indexar; si cambia el corpus, detener el servicio y ejecutar `python indexar_documentos.py --actualizar`. Esta operación explícita recalcula solo chunks nuevos/modificados y elimina IDs obsoletos. Para conservar una versión anterior, utilizar otro directorio. La lectura normal rechaza cambios sin actualizar.
 
 - Cliente, backoff y costo: `cliente.py`, `test_cliente.py`, `docs/cliente_modular_evidencia.json`.
 - Pipeline, 20 respuestas reales y revisión asistida de 10 casos: `pipeline_texto.py`, `resultados_metricas.json`, `revision_manual.json`, `docs/limites_metrica.md`.
@@ -170,3 +170,13 @@ La clave `API_KEY` o `GEMINI_API_KEY` se configura en `.env`, ignorado por Git. 
 La API publica `GET /salud`, `GET /errores/{codigo}`, `POST /consultas`, `/docs` y `/openapi.json`. Salud indica que el proceso está vivo; no prueba disponibilidad o cuota de Gemini. Las respuestas con fuentes deben revisarse: una cita existente no garantiza fidelidad semántica.
 
 La revisión por pares permanece pendiente. `docs/revision_propuesta_javier.md` es una propuesta de observaciones para el compañero, no una revisión atribuida a él.
+
+## Gate 2 — entrega y verificación
+
+```powershell
+.\venv\Scripts\python.exe verificar_entorno.py
+.\venv\Scripts\python.exe -m pytest test_gate2.py test_indice_incremental.py -q
+.\venv\Scripts\python.exe verificar_gate2.py
+```
+
+`verificar_gate2.py` realiza una consulta con embeddings y generación reales, comprueba reapertura del índice, fuentes, logs sin contenido crudo y la pausa/reanudación de LangGraph. Las decisiones de aprobación y rechazo del ensayo están marcadas como simuladas: no autorizan despliegue. Guarda `docs/gate2_evidencia.json`. La autoevaluación, los entregables y límites están en [docs/gate2.md](docs/gate2.md). Las consultas reales consumen cuota del proveedor; las pruebas pytest usan dobles explícitos.

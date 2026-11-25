@@ -26,22 +26,29 @@ def crear_embeddings():
     return GoogleGenerativeAIEmbeddings(model='models/gemini-embedding-001',google_api_key=headers['x-goog-api-key'])
 
 
-def cargar_indice(carpeta='vectorstore',corpus='corpus',embeddings=None):
+def cargar_indice(carpeta='vectorstore',corpus='corpus',embeddings=None,actualizar=False):
     from langchain_chroma import Chroma
     documentos=preparar_chunks(corpus)
     huella=hashlib.sha256(json.dumps([(d.id,d.page_content) for d in documentos],ensure_ascii=False).encode()).hexdigest()
     destino=Path(carpeta)
     manifiesto=destino/'manifiesto.json'
-    if manifiesto.exists() and json.loads(manifiesto.read_text())['sha256']!=huella:
+    if not actualizar and manifiesto.exists() and json.loads(manifiesto.read_text())['sha256']!=huella:
         raise ValueError('El corpus cambió: usar un directorio de índice nuevo para esta versión')
     store=Chroma(collection_name='soporte_tecnico',persist_directory=str(destino),embedding_function=embeddings or crear_embeddings(),collection_metadata={'hnsw:space':'cosine'})
-    existentes=set(store.get()['ids'])
+    datos=store.get()
+    anteriores=dict(zip(datos['ids'],datos['documents']))
+    existentes=set(anteriores)
     esperados={d.id for d in documentos}
-    if existentes and existentes!=esperados:
+    if not actualizar and existentes and existentes!=esperados:
         raise ValueError('Índice incompleto o incompatible; crear un directorio nuevo')
     creado=not existentes
-    if creado:
-        store.add_documents(documentos,ids=[d.id for d in documentos])
+    if creado or actualizar:
+        cambios=[d for d in documentos if anteriores.get(d.id)!=d.page_content]
+        if cambios:
+            store.add_documents(cambios,ids=[d.id for d in cambios])
+        obsoletos=sorted(existentes-esperados)
+        if obsoletos:
+            store.delete(ids=obsoletos)
         manifiesto.write_text(json.dumps({'sha256':huella,'modelo':'models/gemini-embedding-001','chunk_size':500,'chunk_overlap':60,'chunks':len(documentos)},indent=2),encoding='utf8')
     return store,creado
 
@@ -65,5 +72,9 @@ def construir_prompt(pregunta,store,k=3):
 
 
 if __name__=='__main__':
-    store,creado=cargar_indice()
+    import argparse
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--actualizar',action='store_true',help='Reconciliar cambios del corpus, con el servicio detenido')
+    argumentos=parser.parse_args()
+    store,creado=cargar_indice(actualizar=argumentos.actualizar)
     print(json.dumps({'indice_creado':creado,'chunks':len(store.get()['ids'])}))

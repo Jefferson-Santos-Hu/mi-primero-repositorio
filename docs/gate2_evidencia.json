@@ -1,0 +1,132 @@
+{
+  "fecha": "2026-11-25T15:51:28.675664+00:00",
+  "modelo": "gemini-3.5-flash-lite",
+  "tipo": "Embeddings y generación reales; reanudaciones de supervisión simuladas explícitamente",
+  "indice_creado": false,
+  "reapertura_sin_reindexar": true,
+  "chunks_antes": 6,
+  "chunks_despues": 6,
+  "consulta": "¿Qué hace el cliente ante HTTP 429?",
+  "resultado": {
+    "trace_id": "trace-c761abb5151946b6a8157c06b7aea0cf",
+    "respuesta": "El cliente considera que HTTP 429 es transitorio [1].",
+    "fuentes": [
+      "cliente.md"
+    ],
+    "auditoria": [
+      {
+        "timestamp": "2026-11-25T15:51:25.051022+00:00",
+        "evento": "consulta_recibida",
+        "trace_id": "trace-c761abb5151946b6a8157c06b7aea0cf",
+        "pregunta_len": 35,
+        "prompt_version": "11236a4b45989dbdf96acc1883dc40cfb41b7b338feb9c2ebe6224887d8861b7"
+      },
+      {
+        "timestamp": "2026-11-25T15:51:26.127349+00:00",
+        "evento": "documentos_recuperados",
+        "trace_id": "trace-c761abb5151946b6a8157c06b7aea0cf",
+        "n": 1
+      },
+      {
+        "timestamp": "2026-11-25T15:51:26.127836+00:00",
+        "evento": "contexto_filtrado",
+        "trace_id": "trace-c761abb5151946b6a8157c06b7aea0cf",
+        "n_limpios": 1,
+        "n_descartados": 0
+      },
+      {
+        "timestamp": "2026-11-25T15:51:28.633044+00:00",
+        "evento": "consumo_llm",
+        "trace_id": "trace-c761abb5151946b6a8157c06b7aea0cf",
+        "input_tokens": 154,
+        "output_tokens": 15,
+        "thought_tokens": 0,
+        "costo_generacion_usd": 8.369999999999999e-05
+      },
+      {
+        "timestamp": "2026-11-25T15:51:28.633220+00:00",
+        "evento": "respuesta_validada",
+        "trace_id": "trace-c761abb5151946b6a8157c06b7aea0cf",
+        "n_fuentes": 1
+      }
+    ],
+    "estado": "ok",
+    "tokens": {
+      "promptTokenCount": 154,
+      "candidatesTokenCount": 15,
+      "totalTokenCount": 169,
+      "promptTokensDetails": [
+        {
+          "modality": "TEXT",
+          "tokenCount": 154
+        }
+      ],
+      "serviceTier": "standard"
+    },
+    "costo_generacion_usd": 8.369999999999999e-05,
+    "tiempos_ms": {
+      "embed": 1074.3684000335634,
+      "busqueda": 1.8004999728873372,
+      "generacion": 2505.1426000427455
+    },
+    "tiempo_total_ms": 3582.236699992791,
+    "prompt_version": "11236a4b45989dbdf96acc1883dc40cfb41b7b338feb9c2ebe6224887d8861b7"
+  },
+  "logs": [
+    {
+      "timestamp": "2026-11-25T15:51:25.051022+00:00",
+      "evento": "consulta_recibida",
+      "trace_id": "trace-c761abb5151946b6a8157c06b7aea0cf",
+      "pregunta_len": 35,
+      "prompt_version": "11236a4b45989dbdf96acc1883dc40cfb41b7b338feb9c2ebe6224887d8861b7"
+    },
+    {
+      "timestamp": "2026-11-25T15:51:26.127349+00:00",
+      "evento": "documentos_recuperados",
+      "trace_id": "trace-c761abb5151946b6a8157c06b7aea0cf",
+      "n": 1
+    },
+    {
+      "timestamp": "2026-11-25T15:51:26.127836+00:00",
+      "evento": "contexto_filtrado",
+      "trace_id": "trace-c761abb5151946b6a8157c06b7aea0cf",
+      "n_limpios": 1,
+      "n_descartados": 0
+    },
+    {
+      "timestamp": "2026-11-25T15:51:28.633044+00:00",
+      "evento": "consumo_llm",
+      "trace_id": "trace-c761abb5151946b6a8157c06b7aea0cf",
+      "input_tokens": 154,
+      "output_tokens": 15,
+      "thought_tokens": 0,
+      "costo_generacion_usd": 8.369999999999999e-05
+    },
+    {
+      "timestamp": "2026-11-25T15:51:28.633220+00:00",
+      "evento": "respuesta_validada",
+      "trace_id": "trace-c761abb5151946b6a8157c06b7aea0cf",
+      "n_fuentes": 1
+    }
+  ],
+  "supervision": [
+    {
+      "caso": "aprobacion-simulada",
+      "pausado": true,
+      "aprobado": true,
+      "activa": "11236a4b45989dbdf96acc1883dc40cfb41b7b338feb9c2ebe6224887d8861b7"
+    },
+    {
+      "caso": "rechazo-simulado",
+      "pausado": true,
+      "aprobado": false,
+      "activa": null
+    }
+  ],
+  "no_compensables": {
+    "pipeline_corre_de_punta_a_punta": true,
+    "respuestas_citan_fuente": true,
+    "logs_sin_contenido_crudo": true,
+    "supervision_humana_funciona": true
+  }
+}
