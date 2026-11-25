@@ -1,0 +1,10 @@
+{
+  "huella": "11236a4b45989dbdf96acc1883dc40cfb41b7b338feb9c2ebe6224887d8861b7",
+  "pausado": true,
+  "solicitud": {
+    "motivo": "Revisión humana previa a activar una versión del prompt",
+    "huella_propuesta": "11236a4b45989dbdf96acc1883dc40cfb41b7b338feb9c2ebe6224887d8861b7"
+  },
+  "version_activada": null,
+  "nota": "Ejecución real del grafo local, pendiente de un revisor; las reanudaciones true/false se prueban por separado con datos simulados."
+}
