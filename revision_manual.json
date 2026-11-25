@@ -1,0 +1,112 @@
+[
+  {
+    "id": 9,
+    "consulta": "¿Para qué sirve .gitignore?",
+    "respuesta": "Sirve para indicar a Git qué archivos o directorios del proyecto deben excluirse del control de versiones.",
+    "f1": 0.07142857142857142,
+    "correccion_factual": "no",
+    "completitud": "no",
+    "contradiccion": "no",
+    "nota": "Omite que .gitignore no retira archivos ya rastreados; su formulación general necesita esa condición.",
+    "metodo": "revisión cualitativa asistida de la respuesta real"
+  },
+  {
+    "id": 5,
+    "consulta": "¿Qué es un diccionario en Python?",
+    "respuesta": "Un diccionario en Python es una estructura de datos mutable que almacena pares de clave-valor mediante una tabla hash.",
+    "f1": 0.15384615384615383,
+    "correccion_factual": "si",
+    "completitud": "si",
+    "contradiccion": "no",
+    "nota": "Explica pares clave-valor y mutabilidad; el F1 bajo refleja vocabulario distinto a la referencia.",
+    "metodo": "revisión cualitativa asistida de la respuesta real"
+  },
+  {
+    "id": 14,
+    "consulta": "¿Qué representa requirements.txt?",
+    "respuesta": "Representa un archivo de texto plano que lista las dependencias y versiones de paquetes necesarios para ejecutar un proyecto en Python.",
+    "f1": 0.20689655172413796,
+    "correccion_factual": "si",
+    "completitud": "si",
+    "contradiccion": "no",
+    "nota": "Explica dependencias y versiones del proyecto con una paráfrasis correcta.",
+    "metodo": "revisión cualitativa asistida de la respuesta real"
+  },
+  {
+    "id": 17,
+    "consulta": "¿Para qué sirve try except?",
+    "respuesta": "Sirve para capturar y gestionar excepciones en tiempo de ejecución, evitando que el programa se interrumpa abruptamente ante un error.",
+    "f1": 0.2222222222222222,
+    "correccion_factual": "si",
+    "completitud": "si",
+    "contradiccion": "no",
+    "nota": "Explica captura de excepciones y continuidad controlada; no equivale a evitar cualquier interrupción.",
+    "metodo": "revisión cualitativa asistida de la respuesta real"
+  },
+  {
+    "id": 2,
+    "consulta": "¿Para qué sirve venv?",
+    "respuesta": "Venv sirve para crear entornos virtuales aislados que permiten gestionar dependencias de Python específicas para cada proyecto.",
+    "f1": 0.23076923076923078,
+    "correccion_factual": "si",
+    "completitud": "si",
+    "contradiccion": "no",
+    "nota": "Describe aislamiento y gestión de dependencias; cambia el vocabulario de la referencia.",
+    "metodo": "revisión cualitativa asistida de la respuesta real"
+  },
+  {
+    "id": 13,
+    "consulta": "¿Qué hace pip install?",
+    "respuesta": "Pip install descarga e instala paquetes y sus dependencias desde el índice oficial PyPI en el entorno de Python.",
+    "f1": 0.4799999999999999,
+    "correccion_factual": "no",
+    "completitud": "no",
+    "contradiccion": "no",
+    "nota": "Generaliza PyPI como origen único; pip también instala archivos, otras ubicaciones e índices.",
+    "metodo": "revisión cualitativa asistida de la respuesta real"
+  },
+  {
+    "id": 8,
+    "consulta": "¿Qué significa HTTP 404?",
+    "respuesta": "Indica que el servidor no ha podido encontrar el recurso solicitado.",
+    "f1": 0.5,
+    "correccion_factual": "si",
+    "completitud": "si",
+    "contradiccion": "no",
+    "nota": "Describe correctamente que el recurso no fue encontrado.",
+    "metodo": "revisión cualitativa asistida de la respuesta real"
+  },
+  {
+    "id": 1,
+    "consulta": "¿Qué es Python?",
+    "respuesta": "Python es un lenguaje de programación de alto nivel, interpretado y de tipado dinámico, enfocado en la legibilidad del código.",
+    "f1": 0.5185185185185185,
+    "correccion_factual": "si",
+    "completitud": "si",
+    "contradiccion": "no",
+    "nota": "Añade información correcta sobre tipado dinámico y legibilidad; reduce precisión léxica sin ser incorrecta.",
+    "metodo": "revisión cualitativa asistida de la respuesta real"
+  },
+  {
+    "id": 4,
+    "consulta": "¿Qué es una tupla en Python?",
+    "respuesta": "Una tupla en Python es una estructura de datos secuencial, ordenada e inmutable que permite almacenar elementos heterogéneos.",
+    "f1": 0.5384615384615385,
+    "correccion_factual": "si",
+    "completitud": "si",
+    "contradiccion": "no",
+    "nota": "Describe orden, inmutabilidad y elementos heterogéneos; coincide con el alcance de la pregunta.",
+    "metodo": "revisión cualitativa asistida de la respuesta real"
+  },
+  {
+    "id": 15,
+    "consulta": "¿Qué es JSON?",
+    "respuesta": "JSON es un formato ligero de intercambio de datos basado en texto plano, estructurado en pares clave-valor y matrices.",
+    "f1": 0.5714285714285715,
+    "correccion_factual": "si",
+    "completitud": "no",
+    "contradiccion": "no",
+    "nota": "Describe el uso común de JSON en objetos y arrays, pero no menciona los valores primitivos también admitidos.",
+    "metodo": "revisión cualitativa asistida de la respuesta real"
+  }
+]

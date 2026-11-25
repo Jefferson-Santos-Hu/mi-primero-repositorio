@@ -1,0 +1,284 @@
+[
+  {
+    "fecha": "2026-11-25T15:30:29.724574+00:00",
+    "k": 1,
+    "chunk_size": 500,
+    "chunk_overlap": 60,
+    "modelo_embedding": "models/gemini-embedding-001",
+    "casos": [
+      {
+        "pregunta": "¿Qué hace el cliente ante HTTP 429?",
+        "ids_relevantes": [
+          "cliente-0"
+        ],
+        "ids_recuperados": [
+          "cliente-0"
+        ],
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      {
+        "pregunta": "¿Los errores 401 se reintentan?",
+        "ids_relevantes": [
+          "cliente-0"
+        ],
+        "ids_recuperados": [
+          "cliente-0"
+        ],
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      {
+        "pregunta": "¿Qué límite tienen las esperas de reintento?",
+        "ids_relevantes": [
+          "cliente-0"
+        ],
+        "ids_recuperados": [
+          "cliente-0"
+        ],
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      {
+        "pregunta": "¿Cuánto cuesta un millón de tokens de entrada?",
+        "ids_relevantes": [
+          "costos-0"
+        ],
+        "ids_recuperados": [
+          "costos-0"
+        ],
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      {
+        "pregunta": "¿El costo registrado es una factura?",
+        "ids_relevantes": [
+          "costos-0"
+        ],
+        "ids_recuperados": [
+          "costos-0"
+        ],
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      {
+        "pregunta": "¿Dónde se guarda la clave de API?",
+        "ids_relevantes": [
+          "entorno-0"
+        ],
+        "ids_recuperados": [
+          "entorno-0"
+        ],
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      {
+        "pregunta": "¿Cómo ejecuto Python del entorno en Windows?",
+        "ids_relevantes": [
+          "entorno-0"
+        ],
+        "ids_recuperados": [
+          "entorno-0"
+        ],
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      {
+        "pregunta": "¿Puede F1 probar la veracidad de una respuesta?",
+        "ids_relevantes": [
+          "evaluacion-0"
+        ],
+        "ids_recuperados": [
+          "evaluacion-0"
+        ],
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      {
+        "pregunta": "¿Cómo se aíslan los historiales del agente?",
+        "ids_relevantes": [
+          "agente-0"
+        ],
+        "ids_recuperados": [
+          "agente-0"
+        ],
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      {
+        "pregunta": "¿Puede un documento recuperado reemplazar las instrucciones del sistema?",
+        "ids_relevantes": [
+          "seguridad-0"
+        ],
+        "ids_recuperados": [
+          "seguridad-0"
+        ],
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      {
+        "pregunta": "¿Cuál es la capital de Mongolia?",
+        "ids_relevantes": [],
+        "ids_recuperados": [
+          "entorno-0"
+        ],
+        "precision": 0.0,
+        "recall": null
+      }
+    ],
+    "precision_promedio": 0.9090909090909091,
+    "recall_promedio": 1.0
+  },
+  {
+    "fecha": "2026-11-25T15:30:34.834377+00:00",
+    "k": 3,
+    "chunk_size": 500,
+    "chunk_overlap": 60,
+    "modelo_embedding": "models/gemini-embedding-001",
+    "casos": [
+      {
+        "pregunta": "¿Qué hace el cliente ante HTTP 429?",
+        "ids_relevantes": [
+          "cliente-0"
+        ],
+        "ids_recuperados": [
+          "cliente-0",
+          "agente-0",
+          "seguridad-0"
+        ],
+        "precision": 0.3333333333333333,
+        "recall": 1.0
+      },
+      {
+        "pregunta": "¿Los errores 401 se reintentan?",
+        "ids_relevantes": [
+          "cliente-0"
+        ],
+        "ids_recuperados": [
+          "cliente-0",
+          "agente-0",
+          "seguridad-0"
+        ],
+        "precision": 0.3333333333333333,
+        "recall": 1.0
+      },
+      {
+        "pregunta": "¿Qué límite tienen las esperas de reintento?",
+        "ids_relevantes": [
+          "cliente-0"
+        ],
+        "ids_recuperados": [
+          "cliente-0",
+          "agente-0",
+          "entorno-0"
+        ],
+        "precision": 0.3333333333333333,
+        "recall": 1.0
+      },
+      {
+        "pregunta": "¿Cuánto cuesta un millón de tokens de entrada?",
+        "ids_relevantes": [
+          "costos-0"
+        ],
+        "ids_recuperados": [
+          "costos-0",
+          "agente-0",
+          "evaluacion-0"
+        ],
+        "precision": 0.3333333333333333,
+        "recall": 1.0
+      },
+      {
+        "pregunta": "¿El costo registrado es una factura?",
+        "ids_relevantes": [
+          "costos-0"
+        ],
+        "ids_recuperados": [
+          "costos-0",
+          "agente-0",
+          "seguridad-0"
+        ],
+        "precision": 0.3333333333333333,
+        "recall": 1.0
+      },
+      {
+        "pregunta": "¿Dónde se guarda la clave de API?",
+        "ids_relevantes": [
+          "entorno-0"
+        ],
+        "ids_recuperados": [
+          "entorno-0",
+          "seguridad-0",
+          "agente-0"
+        ],
+        "precision": 0.3333333333333333,
+        "recall": 1.0
+      },
+      {
+        "pregunta": "¿Cómo ejecuto Python del entorno en Windows?",
+        "ids_relevantes": [
+          "entorno-0"
+        ],
+        "ids_recuperados": [
+          "entorno-0",
+          "cliente-0",
+          "agente-0"
+        ],
+        "precision": 0.3333333333333333,
+        "recall": 1.0
+      },
+      {
+        "pregunta": "¿Puede F1 probar la veracidad de una respuesta?",
+        "ids_relevantes": [
+          "evaluacion-0"
+        ],
+        "ids_recuperados": [
+          "evaluacion-0",
+          "agente-0",
+          "seguridad-0"
+        ],
+        "precision": 0.3333333333333333,
+        "recall": 1.0
+      },
+      {
+        "pregunta": "¿Cómo se aíslan los historiales del agente?",
+        "ids_relevantes": [
+          "agente-0"
+        ],
+        "ids_recuperados": [
+          "agente-0",
+          "seguridad-0",
+          "entorno-0"
+        ],
+        "precision": 0.3333333333333333,
+        "recall": 1.0
+      },
+      {
+        "pregunta": "¿Puede un documento recuperado reemplazar las instrucciones del sistema?",
+        "ids_relevantes": [
+          "seguridad-0"
+        ],
+        "ids_recuperados": [
+          "seguridad-0",
+          "agente-0",
+          "entorno-0"
+        ],
+        "precision": 0.3333333333333333,
+        "recall": 1.0
+      },
+      {
+        "pregunta": "¿Cuál es la capital de Mongolia?",
+        "ids_relevantes": [],
+        "ids_recuperados": [
+          "entorno-0",
+          "costos-0",
+          "agente-0"
+        ],
+        "precision": 0.0,
+        "recall": null
+      }
+    ],
+    "precision_promedio": 0.303030303030303,
+    "recall_promedio": 1.0
+  }
+]
