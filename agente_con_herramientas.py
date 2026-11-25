@@ -4,6 +4,7 @@ from langchain_core.tools import tool
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.chat_history import InMemoryChatMessageHistory
 from langchain_core.runnables.history import RunnableWithMessageHistory
+from langchain_core.runnables import RunnableLambda
 from langchain_classic.agents import AgentExecutor, create_tool_calling_agent
 
 
@@ -55,5 +56,11 @@ def crear_agente_con_memoria(modelo=None,ejecutor=None):
         if session_id not in historiales:
             historiales[session_id]=InMemoryChatMessageHistory()
         return historiales[session_id]
-    agente=RunnableWithMessageHistory(ejecutor if ejecutor is not None else crear_ejecutor(modelo),obtener_historial,input_messages_key='entrada',history_messages_key='chat_history',output_messages_key='output')
+    def normalizar_salida(resultado):
+        salida=resultado['output']
+        if isinstance(salida,list):
+            salida='\n'.join(b.get('text','') for b in salida if isinstance(b,dict) and b.get('type')=='text')
+        return {**resultado,'output':salida}
+    base=(ejecutor if ejecutor is not None else crear_ejecutor(modelo)) | RunnableLambda(normalizar_salida)
+    agente=RunnableWithMessageHistory(base,obtener_historial,input_messages_key='entrada',history_messages_key='chat_history',output_messages_key='output')
     return agente,historiales

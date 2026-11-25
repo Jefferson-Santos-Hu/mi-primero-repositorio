@@ -31,3 +31,12 @@ def test_memoria_dos_turnos_y_aislamiento():
     assert otro['output']=='Hola'
     assert len(historiales['A'].messages)==4
     assert len(historiales['B'].messages)==2
+
+
+def test_memoria_normaliza_bloques_del_sdk_antes_de_guardar():
+    ejecutor=RunnableLambda(lambda d:{'output':[{'type':'text','text':'Recuerdo 429','extras':{'signature':'no guardar'}}],'intermediate_steps':[]})
+    agente,historiales=crear_agente_con_memoria(ejecutor=ejecutor)
+    cfg={'configurable':{'session_id':'bloques'}}
+    assert agente.invoke({'entrada':'429'},cfg)['output']=='Recuerdo 429'
+    assert agente.invoke({'entrada':'cual'},cfg)['output']=='Recuerdo 429'
+    assert historiales['bloques'].messages[1].content=='Recuerdo 429'

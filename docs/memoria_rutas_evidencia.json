@@ -1,0 +1,31 @@
+{
+  "modelo": "gemini-3.6-flash",
+  "rutas": [
+    {
+      "entrada": "Mi clave devuelve 401",
+      "respuesta": "El error **HTTP 401 (Unauthorized)** indica que los servidores de Google recibieron tu petición, pero rechazaron la autenticación. Esto ocurre casi siempre por tres razones: la variable de entorno está vacía, el código no la está leyendo bien, o la clave ha sido revocada o restringida.\n\nAquí tienes una guía paso a paso para **verificar localmente** tu configuración y permisos sin exponer tu clave.\n\n---\n\n### Paso 1: Verificación local de la Variable de Entorno\n\nAntes de revisar la clave en sí, debes comprobar si tu script realmente la está cargando.\n\n#### En Python:\nCrea un script de prueba local llamado `check_env.py` para verificar que la variable existe y tiene texto (sin imprimir la clave completa por seguridad):\n\n```python\nimport os\n\n# Cambia \"GEMINI_API_KEY\" si usaste otro nombre de variable\napi_key = os.environ.get(\"GEMINI_API_KEY\")\n\nif not api_key:\n    print(\n        \"❌ ERROR: La variable de entorno NO existe o está vacía en este entorno.\"\n    )\nelse:\n    # Verificamos longitud y mostramos solo los primeros 4 caracteres\n    print(\"✅ Variable detectada correctamente.\")\n    print(f\"   Longitud: {len(api_key)} caracteres\")\n    print(f\"   Inicio de la clave: {api_key[:4]}...\")\n```\n\n#### Causas comunes en el entorno local:\n1. **No reiniciaste la terminal:** Si añadiste la variable a tu sistema (`.bashrc`, `.zshrc` o Variables de Entorno de Windows), debes cerrar y volver a abrir la terminal.\n2. **Archivos `.env` no cargados:** Si usas un archivo `.env`, asegúrate de estar ejecutando `python-dotenv`:\n   ```python\n   from dotenv import load_dotenv\n\n   load_dotenv()  # Carga el archivo .env antes de leer la variable\n```\n3. **Espacios invisibles:** Asegúrate de que no haya espacios o comillas adicionales al definirla (ejemplo correcto: `GEMINI_API_KEY=AIzaSy...`, no `GEMINI_API_KEY = \"AIzaSy...\" `).\n\n---\n\n### Paso 2: Verificación de Permisos en la Consola\n\nSi la variable se lee correctamente pero sigues recibiendo el error 401, el problema está en la consola de administración.\n\n#### A. Si usas Google AI Studio (Lo más común):\n1. Entra a [Google AI Studio](https://aistudio.google.com/).\n2. Ve a la sección **Get API Key**.\n3. **Estado:** Comprueba que la clave no aparezca como eliminada o desactivada.\n4. **Proyecto asignado:** Verifica que la clave esté vinculada a un proyecto de Google Cloud válido.\n\n#### B. Si usas Google Cloud Platform (Vertex AI o API empresarial):\n1. Entra a la [Consola de Google Cloud](https://console.cloud.google.com/).\n2. **API Habilitada:** Busca \"Generative Language API\" o \"Vertex AI API\" y asegúrate de que el botón diga **\"API habilitada\"**.\n3. **Restricciones de Clave (API Restrictions):**\n   * Ve a **APIs y servicios > Credenciales**.\n   * Haz clic en tu clave de API.\n   * En \"Restricciones de API\", verifica que no estés bloqueando la *Generative Language API*. Si está restringida, añade la API de Gemini a la lista permitida.\n   * En \"Restricciones de aplicación\", verifica si restringiste la clave por IP o HTTP Referrer y si tu entorno local cumple con esa regla.\n\n---\n\n### Paso 3: Inicialización correcta en el código\n\nAsegúrate de pasar la clave correctamente a la librería oficial de Gemini (`google-generativeai`):\n\n```python\nimport os\nimport google.generativeai as genai\n\n# Cargar la clave desde el entorno\napi_key = os.environ.get(\"GEMINI_API_KEY\")\n\n# Configurar la librería\ngenai.configure(api_key=api_key)\n\n# Prueba rápida con un modelo ligero\ntry:\n    model = genai.GenerativeModel(\"gemini-1.5-flash\")\n    response = model.generate_content(\"Hola\")\n    print(\" Autenticación exitosa. Respuesta recibida.\")\nexcept Exception as e:\n    print(f\"❌ Error durante la llamada: {e}\")\n```\n\n### Resumen de diagnóstico rápido:\n| Síntoma | Posible causa | Solución |\n| :--- | :--- | :--- |\n| `len(api_key)` es `0` o `None` | La variable de entorno no está cargada | Revisa tu `.env` o exporta la variable en la terminal. |\n| Error 401 inmediato | La clave es errónea o fue revocada | Genera una nueva clave en Google AI Studio. |\n| Error 403 en lugar de 401 | API no habilitada o problema de facturación | Habilita la *Generative Language API* en Google Cloud. |"
+    },
+    {
+      "entrada": "Recibo HTTP 429",
+      "tipo_error": "GoogleRateLimitError"
+    },
+    {
+      "entrada": "Cómo creo un venv Python",
+      "tipo_error": "GoogleRateLimitError"
+    }
+  ],
+  "memoria": [
+    {
+      "entrada": "Mi error es el código HTTP 401. Consulta su significado.",
+      "respuesta": "El código HTTP **401** significa **\"Unauthorized\"** (Autenticación inválida o requerida). \n\nIndica que la solicitud no ha sido procesada porque carece de credenciales de autenticación válidas para el recurso solicitado (por ejemplo, un token de API ausente, caducado o incorrecto).",
+      "herramientas": [
+        "consultar_error_http"
+      ]
+    },
+    {
+      "entrada": "¿Qué código te mencioné antes?",
+      "respuesta": "Me mencionaste el código HTTP **401**.",
+      "herramientas": []
+    }
+  ]
+}

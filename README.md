@@ -142,3 +142,31 @@ antecedente. No se fabrican resultados ni se excluyen intentos fallidos.
 `.env`, `venv/` y las cachés están excluidos por `.gitignore`. Cada persona que
 clone el repositorio configura su propia clave; ninguna entrega incluye `.env`.
 El historial de Git conserva los avances y pruebas de los bloques del módulo.
+
+## Módulo 2 y API del Módulo 3
+
+Los avances actuales están en la carpeta local `mi-primero-repositorio`. Entorno probado: Python 3.14, con versiones fijadas en `requirements.txt`.
+
+```powershell
+python -m venv venv
+.\venv\Scripts\python.exe -m pip install -r requirements.txt
+.\venv\Scripts\python.exe -m pytest -q
+.\venv\Scripts\python.exe indexar_documentos.py
+.\venv\Scripts\python.exe servicio_rag.py
+.\venv\Scripts\python.exe -m uvicorn api:app --host 127.0.0.1 --port 8000
+```
+
+La clave `API_KEY` o `GEMINI_API_KEY` se configura en `.env`, ignorado por Git. No la pegues en capturas ni entregas. El índice `vectorstore/` es regenerable e ignorado. Tras crearlo, las siguientes corridas lo reabren sin volver a indexar; si cambia el corpus se debe usar un directorio nuevo. No se mezcla contenido de versiones.
+
+- Cliente, backoff y costo: `cliente.py`, `test_cliente.py`, `docs/cliente_modular_evidencia.json`.
+- Pipeline, 20 respuestas reales y revisión asistida de 10 casos: `pipeline_texto.py`, `resultados_metricas.json`, `revision_manual.json`, `docs/limites_metrica.md`.
+- Cadenas y rutas: `cadena_tres_pasos.py`, `enrutamiento.py`, `test_orquestacion.py`.
+- Agente, herramientas y memoria: `agente_con_herramientas.py`, `trazas_agente.jsonl`, `docs/limites_autonomia.md`. Se usa el API clásico solicitado por el curso; LangChain señala su deprecación y una migración futura a LangGraph.
+- RAG: `indexar_documentos.py`, `servicio_rag.py`, corpus propio en `corpus/`, `evaluacion_recuperacion.py`, `resultados_evaluacion.txt`, `registro_rag.py`, `docs/evaluacion_rag.md`.
+- Personalización: `dataset_tuning.py`, `decision.py`, `decision_personalizacion.md`. Preparar datos no envía un trabajo de entrenamiento.
+- Riesgos y supervisión: `docs/matriz_riesgos.md`, `docs/registro_prompts.json`, `gobernanza.py`, `docs/supervision_evidencia.json`. La pausa está probada; la identidad y persistencia de aprobaciones no son funciones de producción implementadas.
+- API: `api.py`, `casos.py`, `registrar_pruebas.py`, `docs/endpoints_evidencia.json`. Con el servidor activo, ejecutar `python registrar_pruebas.py` para registrar casos internos y externos del contrato.
+
+La API publica `GET /salud`, `GET /errores/{codigo}`, `POST /consultas`, `/docs` y `/openapi.json`. Salud indica que el proceso está vivo; no prueba disponibilidad o cuota de Gemini. Las respuestas con fuentes deben revisarse: una cita existente no garantiza fidelidad semántica.
+
+La revisión por pares permanece pendiente. `docs/revision_propuesta_javier.md` es una propuesta de observaciones para el compañero, no una revisión atribuida a él.
