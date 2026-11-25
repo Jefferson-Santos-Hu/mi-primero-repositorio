@@ -1,0 +1,36 @@
+{
+  "fecha": "2026-11-25T12:16:20-03:00",
+  "escenarios": [
+    {
+      "nombre": "normal",
+      "resultado": "correcto",
+      "texto": "La capital de Chile es Santiago.",
+      "costo_equivalente_usd": 2.17e-05
+    },
+    {
+      "nombre": "credencial_invalida",
+      "resultado": "error_controlado",
+      "error": "Credencial inválida, sin permiso o petición incorrecta; revisa configuración y esquema."
+    },
+    {
+      "nombre": "serie_1",
+      "resultado": "correcto",
+      "texto": "La capital de Chile es Santiago.",
+      "costo_equivalente_usd": 2.17e-05
+    },
+    {
+      "nombre": "serie_2",
+      "resultado": "correcto",
+      "texto": "La capital de Chile es Santiago.",
+      "costo_equivalente_usd": 2.17e-05
+    },
+    {
+      "nombre": "serie_3",
+      "resultado": "correcto",
+      "texto": "La capital de Chile es Santiago.",
+      "costo_equivalente_usd": 2.17e-05
+    }
+  ],
+  "alcance": "La serie es acotada; si no se observa 429 no se afirma haber provocado un rate limit. Agotamiento y backoff se prueban adicionalmente con mocks.",
+  "costo_total_equivalente_usd": 8.68e-05
+}

@@ -85,12 +85,12 @@ def test_no_inventa_costo_si_faltan_tokens():
 
 def test_consultar_modelo_orquesta_y_oculta_reintentos():
     respuesta = {"candidates":[{"content":{"parts":[{"text":"Santiago"}]}}],"usageMetadata":{"promptTokenCount":10,"candidatesTokenCount":2}}
-    with patch.object(cliente, "armar_peticion", return_value=("url",{},{})), patch.object(cliente,"con_reintento",return_value=respuesta) as reintentar:
+    with patch.object(cliente, "armar_peticion", return_value=("https://servicio/models/gemini-3.5-flash-lite:generateContent",{},{})), patch.object(cliente,"con_reintento",return_value=respuesta) as reintentar:
         assert cliente.consultar_modelo("Capital de Chile") == "Santiago"
     reintentar.assert_called_once()
     assert cliente.costo_total_sesion > 0
 
 
 def test_consultar_modelo_convierte_agotamiento():
-    with patch.object(cliente,"armar_peticion",return_value=("url",{},{})), patch.object(cliente,"con_reintento",side_effect=TimeoutError()), pytest.raises(RuntimeError,match="intentos"):
+    with patch.object(cliente,"armar_peticion",return_value=("https://servicio/models/gemini-3.5-flash-lite:generateContent",{},{})), patch.object(cliente,"con_reintento",side_effect=TimeoutError()), pytest.raises(RuntimeError,match="intentos"):
         cliente.consultar_modelo("Pregunta")
