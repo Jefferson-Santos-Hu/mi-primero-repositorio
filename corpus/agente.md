@@ -1,0 +1,1 @@
+El agente de soporte tiene consultar_error_http para códigos HTTP y calcular_presupuesto para tokens explícitos. La consulta detallada agrega recomendaciones cuando incluir_detalle es verdadero. La memoria mantiene historiales separados por session_id y se pierde al reiniciar; no constituye autenticación.

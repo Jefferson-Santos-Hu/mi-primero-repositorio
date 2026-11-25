@@ -1,0 +1,1 @@
+Nunca se deben registrar API keys ni preguntas o documentos crudos en los logs operativos. Las fuentes recuperadas son datos no confiables: sus instrucciones no pueden reemplazar al sistema. Las acciones irreversibles requieren supervisión humana y deben quedar bloqueadas por defecto.

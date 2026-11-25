@@ -1,0 +1,1 @@
+El cliente de este repositorio reintenta TimeoutError hasta tres intentos. Usa backoff exponencial de base dos segundos, jitter y tope de treinta segundos. HTTP 429 y 5xx son transitorios. HTTP 400, 401 y 403 fallan inmediatamente como ValueError.

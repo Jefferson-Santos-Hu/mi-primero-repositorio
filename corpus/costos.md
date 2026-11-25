@@ -1,0 +1,1 @@
+Gemini 3.5 Flash Lite estándar usa tarifas de referencia al 25 de noviembre de 2026: USD 0.30 por millón de tokens de entrada y USD 2.50 por millón de tokens de salida incluyendo pensamiento. registrar_costo exige usageMetadata real y acumula el equivalente de sesión. No representa una factura.

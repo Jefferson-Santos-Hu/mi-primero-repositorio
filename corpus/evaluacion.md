@@ -1,0 +1,1 @@
+El pipeline normaliza Unicode NFC, convierte a minúsculas, elimina puntuación y tokeniza palabras. Calcula precisión, cobertura y F1 mediante Counter para respetar repeticiones. El solapamiento léxico no valida verdad, orden, negaciones ni completitud: requiere revisión cualitativa.

@@ -1,0 +1,1 @@
+El proyecto usa Python dentro de venv. En Windows se ejecuta venv\Scripts\python.exe. Las dependencias se instalan con pip install -r requirements.txt. API_KEY se guarda exclusivamente en .env ignorado por Git. .env.example contiene un marcador sin credenciales.
