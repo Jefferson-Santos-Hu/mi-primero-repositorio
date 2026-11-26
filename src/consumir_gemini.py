@@ -21,7 +21,8 @@ def armar_peticion(pregunta, system_instruction=None, response_schema=None):
     if response_schema is not None and not isinstance(response_schema, dict):
         raise ValueError("El esquema de respuesta debe ser un diccionario.")
 
-    load_dotenv(Path(__file__).resolve().parents[1] / ".env", override=False)
+    if os.getenv("CARGAR_DOTENV", "true").lower() != "false":
+        load_dotenv(Path(__file__).resolve().parents[1] / ".env", override=False)
     clave = (os.getenv("GEMINI_API_KEY") or os.getenv("API_KEY") or "").strip()
     if not clave:
         raise ValueError("Configura API_KEY o GEMINI_API_KEY en tu archivo .env.")

@@ -20,7 +20,7 @@ En PowerShell, desde una carpeta donde quieras guardar el proyecto:
 git clone https://github.com/Jefferson-Santos-Hu/mi-primero-repositorio.git
 cd mi-primero-repositorio
 python -m venv venv
-.\venv\Scripts\python.exe -m pip install -r requirements.txt
+.\venv\Scripts\python.exe -m pip install -r requirements-dev.txt
 .\venv\Scripts\python.exe -m pip check
 if (-not (Test-Path .env)) { Copy-Item .env.example .env }
 ```
@@ -149,7 +149,7 @@ Los avances actuales están en la carpeta local `mi-primero-repositorio`. Entorn
 
 ```powershell
 python -m venv venv
-.\venv\Scripts\python.exe -m pip install -r requirements.txt
+.\venv\Scripts\python.exe -m pip install -r requirements-dev.txt
 .\venv\Scripts\python.exe -m pytest -q
 .\venv\Scripts\python.exe indexar_documentos.py
 .\venv\Scripts\python.exe servicio_rag.py
@@ -180,3 +180,95 @@ La revisión por pares permanece pendiente. `docs/revision_propuesta_javier.md` 
 ```
 
 `verificar_gate2.py` realiza una consulta con embeddings y generación reales, comprueba reapertura del índice, fuentes, logs sin contenido crudo y la pausa/reanudación de LangGraph. Las decisiones de aprobación y rechazo del ensayo están marcadas como simuladas: no autorizan despliegue. Guarda `docs/gate2_evidencia.json`. La autoevaluación, los entregables y límites están en [docs/gate2.md](docs/gate2.md). Las consultas reales consumen cuota del proveedor; las pruebas pytest usan dobles explícitos.
+
+## Decisiones del Módulo 3
+
+- D-01: interfaz Nginx y FastAPI separadas.
+- D-02: modo real o simulado explícito; sin sustitución silenciosa.
+- D-03: Chroma persistente con actualización deliberada.
+- D-04: validación estructural y revisión semántica humana.
+- D-05: secretos en ejecución y puertos locales.
+- D-06: supervisión didáctica, sin identidad ni persistencia durable.
+
+Contexto, alternativas y costos: [docs/decisiones.md](docs/decisiones.md).
+
+## Limitaciones del Módulo 3
+
+- LIM-01: el control estructural no prueba verdad semántica.
+- LIM-02: el filtro de patrones admite evasiones.
+- LIM-03: el modo simulado es una demo limitada, sin consumo de Gemini.
+- LIM-04: la aprobación local no es un control de producción.
+
+Origen, riesgos y decisiones: [docs/limitaciones.md](docs/limitaciones.md).
+
+## Módulo 3: requisitos y configuración
+
+Se probó en Windows con Python 3.14.8 y Docker Desktop con motor Linux. Se necesitan Git, Docker Compose y los puertos locales 8000 y 8080 libres. Las bases de imágenes se fijan por digest en ambos Dockerfiles. `requirements.txt` contiene ejecución; `requirements-dev.txt` agrega pytest y coverage.
+
+Variables: `API_KEY` o `GEMINI_API_KEY` identifica la credencial del proveedor; `GEMINI_MODEL` selecciona el modelo real. `MODELO` elige `real` o `simulado`. `INDICE_DIR` apunta al volumen `/app/vectorstore` dentro del contenedor. `CARGAR_DOTENV=false` permite probar ausencia real de credenciales sin leer un archivo local. Ninguna clave se compila en las imágenes.
+
+### Cómo arrancar
+
+```powershell
+Copy-Item .env.example .env
+# Configurar una clave propia en .env para modo real; no compartirla.
+$env:MODELO='simulado'
+docker compose up -d --build --wait --wait-timeout 120
+```
+
+La demostración funciona en modo simulado incluso con el marcador de clave de `.env.example`. Para consultar Gemini, configurar una credencial real y ejecutar `$env:MODELO='real'` antes de `docker compose up -d --wait`. Nunca se cambia automáticamente a simulación si falla el proveedor.
+
+### Cómo comprobar
+
+Abrir http://127.0.0.1:8080 para la interfaz y http://127.0.0.1:8000/docs para OpenAPI. La pantalla muestra el modo. El endpoint `/salud` solo comprueba el proceso; una consulta real comprueba proveedor y recuperación.
+
+```powershell
+.\venv\Scripts\python.exe verificar_stack.py
+.\venv\Scripts\python.exe verificar_dockerfile.py
+.\venv\Scripts\python.exe verificar_imagen.py
+.\venv\Scripts\python.exe verificar_matriz.py --generar
+.\venv\Scripts\python.exe verificar_riesgos.py
+.\venv\Scripts\python.exe verificar_decisiones.py
+.\venv\Scripts\python.exe verificar_mitigaciones.py
+```
+
+### Cómo detener
+
+```powershell
+docker compose down
+```
+
+El volumen `indice` se conserva. La actualización de corpus exige detener consultas y ejecutar `indexar_documentos.py --actualizar` en el entorno que contiene ese índice; no reutilizar un índice incompatible. Para reiniciar, repetir el comando de arranque.
+
+### Problemas frecuentes del despliegue
+
+- Motor Docker no disponible: abrir Docker Desktop y comprobar `docker version` antes de construir.
+- Puertos ocupados: detener la instancia local que los usa o la composición anterior.
+- Estado 503: revisar clave, cuota, conectividad o fundamentación; no se devuelve una respuesta de respaldo silenciosa.
+- Registro desactualizado: confirmar el código, volver a ejecutar escenarios y regenerar `registrar_ejecucion.py`.
+- El banner no cambia tras reconstruir: recargar la interfaz; el script lleva versión y cabecera no-store.
+
+### Estructura y pruebas del Módulo 3
+
+`api.py`, `modelo_simulado.py`, `fundamentacion.py`, `interfaz/`, `Dockerfile` y `compose.yaml` forman la aplicación. `tests/parciales/` prueba contratos sin proveedor. `escenarios.py`, `matriz_pruebas.py`, `riesgos.py` y los verificadores mantienen registros reproducibles en `docs/`. `verificar_defectos.py` solo modifica copias temporales. [Ficha funcional](docs/ficha_diseno_funcional.md), [diagrama](docs/diagrama_arquitectura.png) y [pruebas parciales](docs/pruebas_parciales.md).
+
+### Cierre, transferencia y defensa
+
+Los ejemplos de endpoints se generan con `python generar_api_md.py` y se comprueban con `python generar_api_md.py --comprobar`. [API y ejemplos](docs/api.md), [matriz de pruebas](docs/matriz_pruebas.md), [riesgos](docs/matriz_riesgos.md), [decisiones](docs/decisiones.md), [limitaciones](docs/limitaciones.md), [presentación ejecutiva](docs/presentacion.md) y [PowerPoint](docs/defensa_gate3.pptx).
+
+```powershell
+.\venv\Scripts\python.exe verificar_parciales.py
+.\venv\Scripts\python.exe verificar_defectos.py
+.\venv\Scripts\python.exe ensayo_demo.py --respaldo
+.\venv\Scripts\python.exe ensayo_demo.py --comprobar
+.\venv\Scripts\python.exe medir_guion.py
+.\venv\Scripts\python.exe transferencia.py
+.\venv\Scripts\python.exe registrar_ejecucion.py
+.\venv\Scripts\python.exe verificar_registro.py
+.\venv\Scripts\python.exe probar_en_frio.py
+.\venv\Scripts\python.exe verificar_gate3.py --con-docker --escribir
+```
+
+El ensayo usa los puertos temporales 18000 y 18001, sin interferir con Compose. La prueba en frío crea un clon local y un entorno nuevo; no usa credenciales reales. Las pruebas parciales no llaman al proveedor. `registrar_ejecucion.py` conserva las secciones manuales y actualiza hechos, commit y huella del código; repetirlo después de modificar código o escenarios. El verificador del Gate 3 conserva pesos y umbral del programa; indica PROVISIONAL mientras falten revisiones por personas o defensa oral, incluso si las comprobaciones técnicas pasan.
+
+Las revisiones de alcance, composición y transferencia contienen propuestas para Javier pendientes de confirmación. Se pueden comprobar técnicamente con `--sin-revision`, pero esa opción no acredita que él haya revisado el proyecto. El alumno debe ensayar la defensa oral con cronómetro delante de alguien; los scripts solo estiman su duración.

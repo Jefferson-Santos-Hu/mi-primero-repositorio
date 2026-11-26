@@ -24,6 +24,10 @@ class Consulta(BaseModel):
 
 def crear_app(servicio=None):
     app=FastAPI(title='Asistente técnico Python/Gemini',version='2.0.0',description='RAG sobre corpus sintético del proyecto con fuentes y auditoría.')
+    modo=os.getenv('MODELO','real')
+    if modo not in {'real','simulado'}:
+        raise ValueError('MODELO debe ser real o simulado')
+    app.state.modo=modo
     app.state.servicio=servicio
     app.state.lock=threading.Lock()
 
@@ -37,7 +41,7 @@ def crear_app(servicio=None):
 
     @app.get('/salud',summary='Comprueba el proceso sin llamar a Gemini')
     def salud():
-        return {'estado':'ok','modelo_activo':'real','servicio':'asistente_tecnico'}
+        return {'estado':'ok','modelo_activo':app.state.modo,'servicio':'asistente_tecnico'}
 
     @app.get('/errores/{codigo}',summary='Consulta el catálogo HTTP local')
     def errores(codigo:int):
@@ -53,7 +57,11 @@ def crear_app(servicio=None):
         try:
             with app.state.lock:
                 if app.state.servicio is None:
-                    app.state.servicio,_=crear_servicio(os.getenv('INDICE_DIR','vectorstore'))
+                    if app.state.modo=='simulado':
+                        from modelo_simulado import ServicioSimulado
+                        app.state.servicio=ServicioSimulado()
+                    else:
+                        app.state.servicio,_=crear_servicio(os.getenv('INDICE_DIR','vectorstore'))
                 return app.state.servicio.consultar(consulta.pregunta,consulta.k)
         except (RuntimeError,TimeoutError,ValueError,ConnectionError):
             return JSONResponse(status_code=503,content={'codigo':'modelo_no_disponible','mensaje':'No se pudo generar una respuesta validada. Revisa configuración, cuota y conexión.'})

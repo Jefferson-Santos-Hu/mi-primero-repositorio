@@ -1,0 +1,28 @@
+services:
+  api:
+    image: asistente-tecnico-api:1.0.0
+    build: .
+    ports:
+      - "127.0.0.1:8000:8000"
+    env_file:
+      - .env
+    environment:
+      MODELO: ${MODELO:-real}
+      INDICE_DIR: /app/vectorstore
+      LANGSMITH_TRACING: "false"
+      LANGCHAIN_TRACING_V2: "false"
+      ANONYMIZED_TELEMETRY: "false"
+    volumes:
+      - indice:/app/vectorstore
+    restart: unless-stopped
+  interfaz:
+    image: asistente-tecnico-interfaz:1.0.0
+    build: ./interfaz
+    ports:
+      - "127.0.0.1:8080:8080"
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+volumes:
+  indice:

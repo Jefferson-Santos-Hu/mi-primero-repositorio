@@ -1,0 +1,266 @@
+{
+  "fecha": "2026-11-25T16:15:08.077301+00:00",
+  "base": "http://127.0.0.1:8080",
+  "modo": "simulado",
+  "huella": "9694761bb420769342eff3eaa796620a0f353016e7f6acdf3111eb362895b4ce",
+  "resultados": [
+    {
+      "id": "S-01",
+      "categoria": "normal",
+      "estado": 200,
+      "esperado": 200,
+      "pasa": true,
+      "latencia_ms": 3.43,
+      "respuesta": {
+        "estado": "ok",
+        "modo": "simulado",
+        "respuesta": "Ante HTTP 429 el cliente usa backoff exponencial con jitter y tres intentos [1].",
+        "fuentes": [
+          "cliente.md"
+        ],
+        "trace_id": "trace-6512643cb3874d619d8ca8b6198948ec",
+        "tokens": null,
+        "costo_generacion_usd": null,
+        "auditoria": [
+          {
+            "evento": "respuesta_simulada",
+            "trace_id": "trace-6512643cb3874d619d8ca8b6198948ec",
+            "pregunta_len": 33
+          }
+        ]
+      }
+    },
+    {
+      "id": "S-02",
+      "categoria": "normal",
+      "estado": 200,
+      "esperado": 200,
+      "pasa": true,
+      "latencia_ms": 2.49,
+      "respuesta": {
+        "estado": "ok",
+        "modo": "simulado",
+        "respuesta": "Usa el intérprete del venv y conserva la clave exclusivamente en .env [1].",
+        "fuentes": [
+          "entorno.md"
+        ],
+        "trace_id": "trace-c5f38b9f560a4533a71058c6bf0b01dd",
+        "tokens": null,
+        "costo_generacion_usd": null,
+        "auditoria": [
+          {
+            "evento": "respuesta_simulada",
+            "trace_id": "trace-c5f38b9f560a4533a71058c6bf0b01dd",
+            "pregunta_len": 14
+          }
+        ]
+      }
+    },
+    {
+      "id": "S-03",
+      "categoria": "control",
+      "estado": 200,
+      "esperado": 200,
+      "pasa": true,
+      "latencia_ms": 5.89,
+      "respuesta": {
+        "codigo_http": 429,
+        "detalle": "Límite de cuota o frecuencia. Usar backoff exponencial con jitter y máximo de intentos; revisar la cuota."
+      }
+    },
+    {
+      "id": "S-04",
+      "categoria": "control",
+      "estado": 200,
+      "esperado": 200,
+      "pasa": true,
+      "latencia_ms": 2.02,
+      "respuesta": {
+        "estado": "ok",
+        "modelo_activo": "simulado",
+        "servicio": "asistente_tecnico"
+      }
+    },
+    {
+      "id": "S-05",
+      "categoria": "error esperado",
+      "estado": 422,
+      "esperado": 422,
+      "pasa": true,
+      "latencia_ms": 2.08,
+      "respuesta": {
+        "codigo": "entrada_invalida",
+        "mensaje": "Revisa pregunta (1–4000 caracteres), k (1–6) y campos permitidos."
+      }
+    },
+    {
+      "id": "S-06",
+      "categoria": "error esperado",
+      "estado": 422,
+      "esperado": 422,
+      "pasa": true,
+      "latencia_ms": 1.84,
+      "respuesta": {
+        "codigo": "entrada_invalida",
+        "mensaje": "Revisa pregunta (1–4000 caracteres), k (1–6) y campos permitidos."
+      }
+    },
+    {
+      "id": "S-07",
+      "categoria": "error esperado",
+      "estado": 404,
+      "esperado": 404,
+      "pasa": true,
+      "latencia_ms": 1.6,
+      "respuesta": {
+        "codigo": "no_encontrado",
+        "mensaje": "Recurso no disponible."
+      }
+    },
+    {
+      "id": "S-08",
+      "categoria": "fuera de alcance",
+      "estado": 200,
+      "esperado": 200,
+      "pasa": true,
+      "latencia_ms": 2.11,
+      "respuesta": {
+        "estado": "sin_contexto",
+        "modo": "simulado",
+        "respuesta": "No encuentro esa información en el corpus de demostración.",
+        "fuentes": [],
+        "trace_id": "trace-0df2b3c0a72f4e8786dd3ec4f1996787",
+        "tokens": null,
+        "costo_generacion_usd": null,
+        "auditoria": [
+          {
+            "evento": "respuesta_simulada",
+            "trace_id": "trace-0df2b3c0a72f4e8786dd3ec4f1996787",
+            "pregunta_len": 30
+          }
+        ]
+      }
+    },
+    {
+      "id": "S-09",
+      "categoria": "seguridad",
+      "estado": 200,
+      "esperado": 200,
+      "pasa": true,
+      "latencia_ms": 2.09,
+      "respuesta": {
+        "estado": "rechazado",
+        "respuesta": "No puedo atender instrucciones que alteren las reglas del sistema.",
+        "fuentes": [],
+        "trace_id": "trace-2f2ff255f22e4aa18988badfea29678e"
+      }
+    },
+    {
+      "id": "S-10",
+      "categoria": "fuera de alcance",
+      "estado": 200,
+      "esperado": 200,
+      "pasa": true,
+      "latencia_ms": 1.89,
+      "respuesta": {
+        "estado": "sin_contexto",
+        "modo": "simulado",
+        "respuesta": "No encuentro esa información en el corpus de demostración.",
+        "fuentes": [],
+        "trace_id": "trace-64a87090ba364a1d9c4688430e320863",
+        "tokens": null,
+        "costo_generacion_usd": null,
+        "auditoria": [
+          {
+            "evento": "respuesta_simulada",
+            "trace_id": "trace-64a87090ba364a1d9c4688430e320863",
+            "pregunta_len": 29
+          }
+        ]
+      }
+    },
+    {
+      "id": "S-11",
+      "categoria": "control",
+      "estado": 200,
+      "esperado": 200,
+      "pasa": true,
+      "latencia_ms": 2.18,
+      "respuesta": {
+        "estado": "sin_contexto",
+        "modo": "simulado",
+        "respuesta": "No encuentro esa información en el corpus de demostración.",
+        "fuentes": [],
+        "trace_id": "trace-4554eb69032c4ce3bd26c853fc7bd41a",
+        "tokens": null,
+        "costo_generacion_usd": null,
+        "auditoria": [
+          {
+            "evento": "respuesta_simulada",
+            "trace_id": "trace-4554eb69032c4ce3bd26c853fc7bd41a",
+            "pregunta_len": 4000
+          }
+        ]
+      }
+    },
+    {
+      "id": "S-12",
+      "categoria": "error esperado",
+      "estado": 422,
+      "esperado": 422,
+      "pasa": true,
+      "latencia_ms": 1.85,
+      "respuesta": {
+        "codigo": "entrada_invalida",
+        "mensaje": "Revisa pregunta (1–4000 caracteres), k (1–6) y campos permitidos."
+      }
+    },
+    {
+      "id": "S-13",
+      "categoria": "error esperado",
+      "estado": 405,
+      "esperado": 405,
+      "pasa": true,
+      "latencia_ms": 1.49,
+      "respuesta": {
+        "codigo": "error_http",
+        "mensaje": "Recurso no disponible."
+      }
+    },
+    {
+      "id": "S-14",
+      "categoria": "control",
+      "estado": 200,
+      "esperado": 200,
+      "pasa": true,
+      "latencia_ms": 1.81,
+      "respuesta": {
+        "estado": "ok",
+        "modo": "simulado",
+        "respuesta": "Ante HTTP 429 el cliente usa backoff exponencial con jitter y tres intentos [1].",
+        "fuentes": [
+          "cliente.md"
+        ],
+        "trace_id": "trace-2f7efec1f2244b7e8d176ceab17d5ae7",
+        "tokens": null,
+        "costo_generacion_usd": null,
+        "auditoria": [
+          {
+            "evento": "respuesta_simulada",
+            "trace_id": "trace-2f7efec1f2244b7e8d176ceab17d5ae7",
+            "pregunta_len": 21
+          }
+        ]
+      }
+    },
+    {
+      "id": "S-15",
+      "categoria": "control",
+      "estado": 200,
+      "esperado": 200,
+      "pasa": true,
+      "latencia_ms": 2.15,
+      "respuesta": "<!doctype html><html lang=\"es\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>Asistente técnico</title><style>body{font:18px system-ui;max-width:760px;margin:40px auto;padding:20px;background:#f4f7fb;color:#17233a}textarea{width:100%;min-height:110px;box-sizing:border-box;font:inherit}button{padding:12px 22px;background:#174ea6;color:white;border:0;border-radius:8px;font:inherit}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:white;padding:20px}label{display:block;margin-bottom:12px}small{display:block;margin:16px 0}</style></head><body><h1>Asistente técnico Python y Gemini</h1><p>Consulta el funcionamiento documentado de este proyecto y revisa las fuentes de la respuesta.</p><p id=\"modo\" role=\"status\">Comprobando modo del servicio…</p><form id=\"consulta\"><label for=\"pregunta\">Tu pregunta</label><textarea id=\"pregunta\" required maxlength=\"4000\" placeholder=\"¿Qué hace el cliente ante HTTP 429?\"></textarea><small>No incluyas claves API ni datos personales.</small><button id=\"enviar\">Consultar</button></form><p id=\"estado\" role=\"status\" aria-live=\"polite\"></p><pre id=\"respuesta\"></pre><p id=\"fuentes\"></p><script src=\"app.js\"></script></body></html>\r\n"
+    }
+  ]
+}

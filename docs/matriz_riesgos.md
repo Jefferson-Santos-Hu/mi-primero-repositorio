@@ -1,41 +1,20 @@
-# Matriz de riesgos del asistente técnico
+# Matriz de riesgos verificada
+Huella: 8449862d3bef901d3062bc03b85da298e9ba9032e3847cd9254f874b4fa0bbe4
 
-Escala cualitativa de probabilidad e impacto de 1 a 5. Puntaje=P×I; bajo <4, medio 4–8, alto 9–14 y crítico ≥15. Son estimaciones de diseño para este MVP sintético, no probabilidades medidas. Residual considera únicamente controles implementados; una prueba no elimina el riesgo.
+Estimaciones de diseño, no probabilidades medidas. Un estado parcial mantiene residual alto.
 
-| ID | Riesgo concreto | P | I | Puntaje / categoría | Mitigación implementada y bloque | Verificación | Residual P×I |
-|---|---|---|---|---|---|---|---|
-| R-01 | Un chunk instruye ignorar el sistema y obtener secretos | 3 | 4 | 12 alto | Patrón de inyección, exclusión previa, rol sistema y delimitación (31) | test_inyeccion_se_excluye_antes_del_modelo | 2×4=8 medio |
-| R-02 | Una respuesta cita una fuente inexistente | 3 | 3 | 9 alto | Validación de índices de citas, rechazo cerrado (26/31) | test_cita_inventada_falla_cerrado | 2×3=6 medio |
-| R-03 | Se filtra una pregunta o clave en un error HTTP o log | 3 | 5 | 15 crítico | Errores externos uniformes; logs con tipos, longitudes y conteos; .env ignorado (14/31/36) | test_error_proveedor_y_ruta_no_exponen_datos y test_servicio_cita_y_traza_sin_texto; escaneo de Git previo a push | 1×5=5 medio |
-| R-04 | La API consume cuota sin límite ante fallos transitorios | 3 | 3 | 9 alto | Backoff con jitter, 3 intentos y tope; auth no se reintenta (13) | test_cliente.py: recuperación, agotamiento y no-reintento | 2×3=6 medio |
-| R-05 | Un cambio del corpus mezcla chunks de versiones diferentes | 3 | 3 | 9 alto | Huella del corpus, IDs estables y rechazo de índice incompatible (24) | test_chunks_estables_y_metadata; reapertura real de índice | 1×3=3 bajo |
-| R-06 | La respuesta usa una cita existente pero afirma algo no sustentado | 4 | 3 | 12 alto | Contexto limitado, pedido de abstención y evaluación cualitativa (17/26/27) | evaluación de 11 consultas y revisión asistida de 10 salidas | 3×3=9 alto |
-| R-07 | Se mezclan historiales de sesiones | 3 | 3 | 9 alto | Diccionario por session_id y pruebas de aislamiento (22) | test_memoria_dos_turnos_y_aislamiento | 1×3=3 bajo |
+| ID | Riesgo | P | I | Inicial | Mitigación | Evidencia ejecutable | Estado | Residual | Supervisión |
+|---|---|---|---|---|---|---|---|---|---|
+| R-01 | Inyección mediante contexto no confiable | 3 | 4 | 12 | Filtro de patrones y separación de roles | test_servicio_rag.py::test_inyeccion_se_excluye_antes_del_modelo | parcial | 12 ALTO | Revisión humana del corpus y descartes antes de cada indexación |
+| R-06 | Afirmación falsa con cita existente | 4 | 3 | 12 | Control estructural y declaración de límite semántico | tests/parciales/test_fundamentacion.py::test_limite_parafrasis_falsa_puede_escapar | parcial | 12 ALTO | Usuario contrasta cada respuesta con el documento antes de actuar |
+| R-09 | Aprobación local sin identidad ni persistencia durable | 3 | 4 | 12 | Pausa LangGraph didáctica; no habilitar producción | test_gobernanza.py::test_interrupcion_y_aprobacion_o_rechazo | parcial | 12 ALTO | Titular vuelve a revisar tras reinicio; no usar como autorización de producción |
+| R-02 | Citas inexistentes o cifras inventadas | 3 | 3 | 9 | Validación de índices y números contra fuentes | tests/parciales/test_fundamentacion.py::test_rechaza_numero_inventado_y_cita | verificado | 6 MEDIO | Contrastar fuente antes de aplicar recomendaciones |
+| R-04 | Cuota consumida por reintentos ilimitados | 3 | 3 | 9 | Intentos y esperas acotados | tests/parciales/test_cliente_contrato.py::test_backoff_no_duerme_despues_del_ultimo_intento | verificado | 6 MEDIO | Titular revisa cuota cuando se agotan los intentos |
+| R-03 | Fuga de clave o pregunta en errores y logs | 3 | 5 | 15 | Errores uniformes, metadatos y exclusión .env | test_api.py::test_error_proveedor_y_ruta_no_exponen_datos, test_gate2.py::test_logs_json_correlacionados_sin_contenido | verificado | 5 MEDIO | Titular revisa diff y escaneo antes de publicar |
+| R-05 | Índice duplicado o de versiones mezcladas | 3 | 3 | 9 | IDs estables, manifiesto y actualización explícita | test_indice_incremental.py::test_actualizacion_incremental_solo_embedde_cambios | verificado | 3 BAJO | Detener servicio y revisar corpus antes de actualizar |
+| R-07 | Mezcla de historiales entre sesiones | 3 | 3 | 9 | Historial por session_id; servicio público RAG sin memoria de agente | test_agente.py::test_memoria_dos_turnos_y_aislamiento | verificado | 3 BAJO | Revisar aislamiento tras cambios de memoria |
+| R-08 | Demo simulada confundida con proveedor real | 3 | 3 | 9 | Modo explícito en salud, respuesta y banner; sin fallback silencioso | test_api.py::test_modo_simulado_explicito_sin_proveedor | verificado | 3 BAJO | Anunciar el modo antes de la demo |
 
-## Supervisión y límites
+R-01 y R-06 son parciales: A-07 y H-04 documentan evasiones, no éxitos de mitigación. R-09 prueba la pausa, no identidad del revisor ni persistencia durable. No se inventa una revisión de Javier; sigue pendiente.
 
-R-03 exige revisión humana de los archivos públicos antes de cambios de despliegue y de cualquier ampliación de logs. R-06 conserva residual alto: las respuestas del MVP son apoyo técnico que debe revisarse contra las fuentes; no se autoriza ejecutar comandos automáticamente. Una validación de número de cita no es entailment semántico. No existe revisión por pares acreditada: las revisiones presentes son asistidas y deben contrastarse por el alumno/evaluador.
-
-`gobernanza.py` implementa una pausa real con LangGraph antes de activar una huella propuesta. `docs/supervision_evidencia.json` muestra la pausa pendiente; `test_gobernanza.py` verifica los caminos de aprobación y rechazo con decisiones simuladas. El control de identidad del revisor, persistencia durable de aprobaciones y aplicación de versiones en producción quedan fuera del MVP local; no se anuncia su existencia.
-
-## Versionado
-
-`docs/registro_prompts.json` registra texto, versión y SHA-256 del sistema. Cada consulta de ServicioRAG incluye esa huella y los eventos la correlacionan con trace_id. Cambiar el prompt requiere nueva versión, repetir casos de regresión, revisar diferencias y resolver la revisión humana. Un reinicio pierde el checkpoint de memoria: se debe volver a solicitar revisión, nunca suponer aprobación.
-
-## Incertidumbre y frecuencia
-
-Revisar esta matriz en cada cambio de corpus, prompt, modelo, herramienta o endpoint, y semanalmente en uso. R-01, R-02, R-04, R-06 y R-07 están cerca de cambios de categoría al variar un punto una de sus estimaciones; requieren especial contraste con otra persona. Ante fuga, retirar publicación afectada y rotar la clave con el titular; ante respuestas incorrectas, suspender generación y conservar evidencia sintética del fallo.
-
-## Puntos de supervisión por riesgo inicial alto o crítico
-
-| Riesgo | Punto concreto de supervisión | Responsable previsto | Acción ante fallo |
-|---|---|---|---|
-| R-01 | Revisar corpus y descartes antes de indexar material nuevo y antes de autorizar un prompt | titular/revisor técnico | Retirar documento y repetir prueba de inyección |
-| R-02 | Revisar fuentes y resultados de citas antes de habilitar una versión | titular/revisor técnico | Mantener rechazo de respuesta y corregir generación |
-| R-03 | Revisión del diff y escaneo de secretos antes de publicar o ampliar logs | titular del repositorio | Bloquear publicación y rotar credencial si se expuso |
-| R-04 | Revisar cuota y consumo después de agotamiento de reintentos; no autorizar bucles ilimitados | titular de la API | Pausar consultas y resolver cuota manualmente |
-| R-05 | Aprobar cambios de corpus y ejecutar actualización incremental con servicio detenido | titular/revisor técnico | Restaurar versión anterior del corpus y directorio |
-| R-06 | Contrastar respuesta con fuente antes de aplicar cualquier recomendación técnica | usuario del asistente | No ejecutar recomendación no sustentada |
-| R-07 | Revisar pruebas de aislamiento antes de modificar el manejo de sesiones | titular/revisor técnico | Deshabilitar memoria y corregir contrato de sesión |
-
-La aprobación programática del cambio de prompt corresponde a `crear_supervision`; las revisiones anteriores son procedimientos operativos previstos, no afirmaciones de que otra persona ya los haya realizado.
+El prompt vigente y la pausa del Gate 2 siguen en docs/registro_prompts.json y gobernanza.py. La matriz se amplía para el Módulo 3, sin borrar la evidencia histórica del Gate 2.

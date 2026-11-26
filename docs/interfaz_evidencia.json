@@ -1,0 +1,9 @@
+{
+  "modo": "simulado",
+  "normal": true,
+  "banner": true,
+  "inyeccion_rechazada": true,
+  "html_insertado": false,
+  "prueba": "Interacción real mediante navegador con contenedores locales",
+  "fecha": "2026-11-25"
+}

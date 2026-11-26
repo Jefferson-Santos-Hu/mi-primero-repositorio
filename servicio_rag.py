@@ -8,6 +8,7 @@ import time
 import unicodedata
 import uuid
 from datetime import datetime, timezone
+from fundamentacion import comprobar_fundamentacion
 from indexar_documentos import formatear_contexto, crear_embeddings, cargar_indice
 from cliente import enviar_peticion, con_reintento, registrar_costo
 from src.consumir_gemini import armar_peticion, extraer_texto
@@ -65,6 +66,11 @@ class ServicioRAG:
             if any(n not in citas for n in numeros) or (not numeros and not re.search(r'(no (hay|tengo)|insuficiente|no (se |está )?(encuentra|dispone)|no contiene)',texto,re.I)):
                 evento('citas_invalidas')
                 raise ValueError('Respuesta sin citas válidas; no se entrega contenido no verificado')
+            if numeros:
+                fundamentacion=comprobar_fundamentacion(texto,limpios)
+                if not fundamentacion['valida']:
+                    evento('fundamentacion_rechazada',motivo=fundamentacion['motivo'])
+                    raise ValueError('Respuesta sin fundamentación estructural suficiente')
             fuentes=sorted({citas[n] for n in numeros})
             evento('respuesta_validada',n_fuentes=len(fuentes))
             return {'trace_id':trace_id_var.get(),'respuesta':texto,'fuentes':fuentes,'auditoria':auditoria,'estado':'ok','tokens':uso,'costo_generacion_usd':costo,'tiempos_ms':tiempos,'tiempo_total_ms':(time.perf_counter()-inicio)*1000,'prompt_version':PROMPT_VERSION}

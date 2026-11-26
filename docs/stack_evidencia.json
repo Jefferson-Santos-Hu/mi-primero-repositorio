@@ -1,0 +1,15 @@
+{
+  "servicios": {
+    "api": {
+      "estado": "running",
+      "salud": "healthy"
+    },
+    "interfaz": {
+      "estado": "running",
+      "salud": "healthy"
+    }
+  },
+  "modo": "simulado",
+  "api_local": 8000,
+  "interfaz_local": 8080
+}

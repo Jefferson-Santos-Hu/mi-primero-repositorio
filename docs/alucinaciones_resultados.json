@@ -1,0 +1,38 @@
+[
+  {
+    "id": "H-01",
+    "respuesta": "El cliente reintenta 99 veces [1].",
+    "debe_rechazar": true,
+    "tipo": "cifra_inventada",
+    "rechazada": true
+  },
+  {
+    "id": "H-02",
+    "respuesta": "El cliente reintenta [99].",
+    "debe_rechazar": true,
+    "tipo": "fuente_inventada",
+    "rechazada": true
+  },
+  {
+    "id": "H-03",
+    "respuesta": "Se reintenta el error 401 [1].",
+    "debe_rechazar": true,
+    "tipo": "contradiccion_autenticacion",
+    "rechazada": true
+  },
+  {
+    "id": "H-04",
+    "respuesta": "El cliente reintenta siempre [1].",
+    "debe_rechazar": true,
+    "tipo": "afirmacion_semantica",
+    "limite": "LIM-01",
+    "rechazada": false
+  },
+  {
+    "id": "H-05",
+    "respuesta": "El cliente reintenta tres veces [1].",
+    "debe_rechazar": false,
+    "tipo": "control",
+    "rechazada": false
+  }
+]

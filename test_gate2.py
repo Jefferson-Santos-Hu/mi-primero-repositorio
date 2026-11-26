@@ -32,7 +32,7 @@ def test_respuesta_tiene_cita_y_fuente():
 
 def test_logs_json_correlacionados_sin_contenido(caplog):
     pregunta='PREGUNTA_PRIVADA_DE_PRUEBA'
-    documento='DOCUMENTO_PRIVADO_DE_PRUEBA'
+    documento='Regla. DOCUMENTO_PRIVADO_DE_PRUEBA'
     store=Mock();store.similarity_search_by_vector.return_value=[Document(page_content=documento,metadata={'fuente':'sintetica.md'})]
     generar=lambda p:{'candidates':[{'content':{'parts':[{'text':'Regla [1].'}]}}],'usageMetadata':{'promptTokenCount':10,'candidatesTokenCount':4}}
     with caplog.at_level(logging.INFO,logger='servicio_rag'):

@@ -1,0 +1,98 @@
+{
+  "registros": [
+    {
+      "id": "PASO-1",
+      "titulo": "Servicio vivo",
+      "estado": 200,
+      "respuesta": {
+        "estado": "ok",
+        "modelo_activo": "simulado",
+        "servicio": "asistente_tecnico"
+      },
+      "pasa": true,
+      "segundos": 0.034
+    },
+    {
+      "id": "PASO-2",
+      "titulo": "Respuesta con fuente",
+      "estado": 200,
+      "respuesta": {
+        "estado": "ok",
+        "modo": "simulado",
+        "respuesta": "Ante HTTP 429 el cliente usa backoff exponencial con jitter y tres intentos [1].",
+        "fuentes": [
+          "cliente.md"
+        ],
+        "tokens": null,
+        "costo_generacion_usd": null
+      },
+      "pasa": true,
+      "segundos": 0.036
+    },
+    {
+      "id": "PASO-3",
+      "titulo": "Catálogo HTTP local",
+      "estado": 200,
+      "respuesta": {
+        "codigo_http": 429,
+        "detalle": "Límite de cuota o frecuencia. Usar backoff exponencial con jitter y máximo de intentos; revisar la cuota."
+      },
+      "pasa": true,
+      "segundos": 0.778
+    },
+    {
+      "id": "PASO-4",
+      "titulo": "Error uniforme",
+      "estado": 422,
+      "respuesta": {
+        "codigo": "entrada_invalida",
+        "mensaje": "Revisa pregunta (1–4000 caracteres), k (1–6) y campos permitidos."
+      },
+      "pasa": true,
+      "segundos": 0.034
+    },
+    {
+      "id": "PASO-5",
+      "titulo": "Ataque rechazado",
+      "estado": 200,
+      "respuesta": {
+        "estado": "rechazado",
+        "respuesta": "No puedo atender instrucciones que alteren las reglas del sistema.",
+        "fuentes": []
+      },
+      "pasa": true,
+      "segundos": 0.011
+    },
+    {
+      "id": "PASO-6",
+      "titulo": "Límite declarado",
+      "estado": 200,
+      "respuesta": {
+        "estado": "sin_contexto",
+        "modo": "simulado",
+        "respuesta": "No encuentro esa información en el corpus de demostración.",
+        "fuentes": [],
+        "tokens": null,
+        "costo_generacion_usd": null
+      },
+      "pasa": true,
+      "segundos": 0.011
+    },
+    {
+      "id": "PASO-7",
+      "titulo": "Falla honesta sin clave",
+      "estado": 503,
+      "respuesta": {
+        "codigo": "modelo_no_disponible",
+        "mensaje": "No se pudo generar una respuesta validada. Revisa configuración, cuota y conexión."
+      },
+      "pasa": true,
+      "segundos": 1.206
+    }
+  ],
+  "habla_s": 30.46,
+  "servicio_s": 2.11,
+  "teclado_s": 56,
+  "total_s": 88.57,
+  "tiempo_cumple": true
+}

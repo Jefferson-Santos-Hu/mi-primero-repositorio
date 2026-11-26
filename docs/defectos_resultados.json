@@ -1,0 +1,42 @@
+[
+  {
+    "componente": "cliente",
+    "archivo": "cliente.py",
+    "prueba": "tests/parciales/test_cliente_contrato.py",
+    "defecto": "if respuesta.status_code in (400,401,403): → if respuesta.status_code in (400,403):",
+    "detectado": true,
+    "codigo": 1
+  },
+  {
+    "componente": "recuperacion",
+    "archivo": "indexar_documentos.py",
+    "prueba": "tests/parciales/test_recuperar.py",
+    "defecto": "citas[i]=fuente → citas[i]='inventada.md'",
+    "detectado": true,
+    "codigo": 1
+  },
+  {
+    "componente": "modelo",
+    "archivo": "modelo_simulado.py",
+    "prueba": "tests/parciales/test_modelo.py",
+    "defecto": "'modo':'simulado' → 'modo':'real'",
+    "detectado": true,
+    "codigo": 1
+  },
+  {
+    "componente": "api",
+    "archivo": "api.py",
+    "prueba": "tests/parciales/test_api_contrato.py",
+    "defecto": "status_code=422 → status_code=200",
+    "detectado": true,
+    "codigo": 1
+  },
+  {
+    "componente": "fundamentacion",
+    "archivo": "fundamentacion.py",
+    "prueba": "tests/parciales/test_fundamentacion.py",
+    "defecto": "if not numeros<=soportados: → if False:",
+    "detectado": true,
+    "codigo": 1
+  }
+]

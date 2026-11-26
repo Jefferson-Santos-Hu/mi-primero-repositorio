@@ -1,0 +1,7 @@
+{
+  "salud": "healthy",
+  "usuario": "appuser",
+  "env_en_imagen": false,
+  "modo": "simulado",
+  "imagen": "sha256:bbde8725b24003af6c671a24533a3ab221607731917b8bed41f98449ff5b9bef"
+}

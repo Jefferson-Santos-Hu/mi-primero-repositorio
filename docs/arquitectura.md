@@ -3,7 +3,7 @@
 Fecha: 2026-10-23. Este diagrama se incorpora como prerrequisito documental del
 Bloque 9; representa el código actual, no una implementación de bloques futuros.
 
-![Diagrama de la miniaplicación](diagrama_arquitectura.png)
+![Diagrama de la miniaplicación](diagrama_modulo1.png)
 
 El usuario entrega una pregunta a `main`, que llama a
 `obtener_dato_de_prueba`. El orquestador ejecuta en orden:
