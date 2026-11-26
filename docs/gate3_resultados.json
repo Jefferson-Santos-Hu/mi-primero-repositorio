@@ -1,0 +1,149 @@
+{
+  "fecha": "2026-11-26T15:15:42.007490+00:00",
+  "modo": "con Docker",
+  "resultados": {
+    "ficha": {
+      "pasa": false,
+      "codigo": 1,
+      "detalle": "ERROR: Revisión cruzada pendiente; no se acredita una revisión ajena",
+      "fraccion": 0.0
+    },
+    "decisiones": {
+      "pasa": true,
+      "codigo": 0,
+      "detalle": "7 de 7 reglas cumplidas",
+      "fraccion": 1.0
+    },
+    "frio": {
+      "pasa": true,
+      "codigo": 0,
+      "detalle": "Ensayo en frío vigente",
+      "fraccion": 1.0
+    },
+    "demo": {
+      "pasa": true,
+      "codigo": 0,
+      "detalle": "8 de 8 comprobaciones cumplidas; 89.9 segundos incluyendo teclado",
+      "fraccion": 1.0
+    },
+    "respaldo": {
+      "pasa": true,
+      "codigo": 0,
+      "detalle": "8 de 8 comprobaciones cumplidas; 88.71 segundos incluyendo teclado",
+      "fraccion": 1.0
+    },
+    "mitigaciones": {
+      "pasa": true,
+      "codigo": 0,
+      "detalle": "Mitigaciones: True True límites observados: True regresiones: True",
+      "fraccion": 1.0
+    },
+    "ia": {
+      "pasa": true,
+      "codigo": 0,
+      "detalle": "16 passed, 18 warnings in 2.27s",
+      "fraccion": 1.0
+    },
+    "servicio": {
+      "pasa": true,
+      "codigo": 0,
+      "detalle": "11 de 11 casos de API cumplidos",
+      "fraccion": 1.0
+    },
+    "api_md": {
+      "pasa": true,
+      "codigo": 0,
+      "detalle": "API documentada vigente",
+      "fraccion": 1.0
+    },
+    "dockerfile": {
+      "pasa": true,
+      "codigo": 0,
+      "detalle": "7 de 7 comprobaciones cumplidas",
+      "fraccion": 1.0
+    },
+    "compose": {
+      "pasa": false,
+      "codigo": 1,
+      "detalle": "FALLA revisión por par confirmada",
+      "fraccion": 0.8571428571428571
+    },
+    "pytest": {
+      "pasa": true,
+      "codigo": 0,
+      "detalle": "135 passed, 21 warnings, 60 subtests passed in 3.04s",
+      "fraccion": 1.0
+    },
+    "matriz": {
+      "pasa": true,
+      "codigo": 0,
+      "detalle": "6 de 6 reglas cumplidas",
+      "fraccion": 1.0
+    },
+    "parciales": {
+      "pasa": true,
+      "codigo": 0,
+      "detalle": "Plan y contratos verificados",
+      "fraccion": 1.0
+    },
+    "riesgos": {
+      "pasa": true,
+      "codigo": 0,
+      "detalle": "6 de 6 reglas cumplidas",
+      "fraccion": 1.0
+    },
+    "secretos": {
+      "pasa": true,
+      "codigo": 0,
+      "detalle": "Escaneo público: 0 archivos con coincidencias",
+      "fraccion": 1.0
+    },
+    "readme": {
+      "pasa": true,
+      "codigo": 0,
+      "detalle": "8 de 8 reglas cumplidas",
+      "fraccion": 1.0
+    },
+    "transferencia": {
+      "pasa": false,
+      "codigo": 1,
+      "detalle": "FALLA confirmacion de revisor",
+      "fraccion": 0.8333333333333334
+    },
+    "guion": {
+      "pasa": true,
+      "codigo": 0,
+      "detalle": "9 de 9 reglas cumplidas",
+      "fraccion": 1.0
+    },
+    "stack": {
+      "pasa": true,
+      "codigo": 0,
+      "detalle": "Dos servicios sanos; proxy y salud verificados; modo simulado",
+      "fraccion": 1.0
+    },
+    "ejecucion": {
+      "pasa": true,
+      "codigo": 0,
+      "detalle": "5 de 5 comprobaciones cumplidas",
+      "fraccion": 1.0
+    },
+    "registro": {
+      "pasa": true,
+      "codigo": 0,
+      "detalle": "6 de 6 comprobaciones cumplidas",
+      "fraccion": 1.0
+    }
+  },
+  "omitidas": [],
+  "puntaje": 94.05,
+  "nota": 6.55,
+  "no_compensables_fallan": [],
+  "pendientes": [
+    "Revisión de alcance",
+    "Revisión de composición",
+    "Transferencia por compañero",
+    "Defensa oral del alumno y confirmaciones del evaluador"
+  ],
+  "veredicto": "APRUEBA"
+}

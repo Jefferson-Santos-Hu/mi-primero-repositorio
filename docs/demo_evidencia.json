@@ -10,7 +10,7 @@
         "servicio": "asistente_tecnico"
       },
       "pasa": true,
-      "segundos": 0.034
+      "segundos": 0.014
     },
     {
       "id": "PASO-2",
@@ -27,7 +27,7 @@
         "costo_generacion_usd": null
       },
       "pasa": true,
-      "segundos": 0.036
+      "segundos": 0.014
     },
     {
       "id": "PASO-3",
@@ -38,7 +38,7 @@
         "detalle": "Límite de cuota o frecuencia. Usar backoff exponencial con jitter y máximo de intentos; revisar la cuota."
       },
       "pasa": true,
-      "segundos": 0.778
+      "segundos": 0.873
     },
     {
       "id": "PASO-4",
@@ -61,7 +61,7 @@
         "fuentes": []
       },
       "pasa": true,
-      "segundos": 0.011
+      "segundos": 0.013
     },
     {
       "id": "PASO-6",
@@ -87,12 +87,12 @@
         "mensaje": "No se pudo generar una respuesta validada. Revisa configuración, cuota y conexión."
       },
       "pasa": true,
-      "segundos": 1.206
+      "segundos": 1.292
     }
   ],
   "habla_s": 30.46,
-  "servicio_s": 2.11,
+  "servicio_s": 2.25,
   "teclado_s": 56,
-  "total_s": 88.57,
+  "total_s": 88.71,
   "tiempo_cumple": true
 }

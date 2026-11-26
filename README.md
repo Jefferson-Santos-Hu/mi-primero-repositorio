@@ -272,3 +272,13 @@ Los ejemplos de endpoints se generan con `python generar_api_md.py` y se comprue
 El ensayo usa los puertos temporales 18000 y 18001, sin interferir con Compose. La prueba en frío crea un clon local y un entorno nuevo; no usa credenciales reales. Las pruebas parciales no llaman al proveedor. `registrar_ejecucion.py` conserva las secciones manuales y actualiza hechos, commit y huella del código; repetirlo después de modificar código o escenarios. El verificador del Gate 3 conserva pesos y umbral del programa; indica PROVISIONAL cuando omite comprobaciones con Docker. Con Docker, aplica los pesos y no compensables del programa: las revisiones por compañero pendientes restan puntos y aparecen como FALLA. La defensa oral y la condición de corpus sintético quedan para el evaluador. APRUEBA en el script no equivale a una calificación del instructor.
 
 Las revisiones de alcance, composición y transferencia contienen propuestas para Javier pendientes de confirmación. Se pueden comprobar técnicamente con `--sin-revision`, pero esa opción no acredita que él haya revisado el proyecto. El alumno debe ensayar la defensa oral con cronómetro delante de alguien; los scripts solo estiman su duración.
+
+### Informes y evidencia de entrega
+
+- [Informe del Gate 3 y comprobaciones](docs/gate3.md).
+- [Registro de ejecución con commit y huella](docs/registro_ejecucion.md).
+- [Índice de entregables por bloque del Módulo 3](docs/modulo3_entrega.md).
+- [Ensayo y respaldo de la demostración](docs/demo_respaldo.md).
+- [Presentación para la defensa](docs/defensa_gate3.pptx).
+
+El informe conserva los pendientes de revisión de alcance, composición y transferencia por Javier. La defensa oral corresponde al alumno y al evaluador. El resultado del verificador automático no sustituye esas acciones ni constituye una calificación.

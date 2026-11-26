@@ -1,0 +1,14 @@
+{
+  "commit": "5fd5628c7ba2f0bed8dccb85cb76f0febd716bb2",
+  "huella_codigo": "1ee24bc3f5574c3528f51b856dbf809bef61038245da75d901dc9fccfdc2f77b",
+  "venv_nuevo": true,
+  "instalacion": true,
+  "pruebas": true,
+  "salud": 200,
+  "consulta": 200,
+  "fuentes": [
+    "cliente.md"
+  ],
+  "modo": "simulado",
+  "nota": "Clon local del commit con venv nuevo, sin clave real. No es ejecución por Javier ni otro sistema operativo."
+}
