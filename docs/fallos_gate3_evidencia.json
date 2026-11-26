@@ -1,0 +1,20 @@
+[
+  {
+    "caso": "README ausente",
+    "codigo": 1,
+    "detectado": true,
+    "senal_esperada": "FALTA:"
+  },
+  {
+    "caso": "clave sintética detectada",
+    "codigo": 1,
+    "detectado": true,
+    "senal_esperada": "FALLA NC-4"
+  },
+  {
+    "caso": "ruta cambiada",
+    "codigo": 1,
+    "detectado": true,
+    "senal_esperada": "NO APRUEBA"
+  }
+]

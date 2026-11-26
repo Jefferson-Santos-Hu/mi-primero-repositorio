@@ -6,6 +6,7 @@ from registrar_ejecucion import huella_codigo
 
 
 def ejecutar():
+    huella_inicial=huella_codigo()
     raiz=Path.cwd();destino=Path(tempfile.gettempdir())/('skillnest-frio-'+uuid.uuid4().hex[:10])
     commit=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
     subprocess.run(['git','clone','--quiet',str(raiz),str(destino)],check=True,timeout=60)
@@ -29,7 +30,9 @@ def ejecutar():
         else:raise RuntimeError('No arrancó el clon limpio')
         r=httpx.post(f'http://127.0.0.1:{puerto}/consultas',json={'pregunta':'HTTP 429'},timeout=10)
         assert r.status_code==200 and 'cliente.md' in r.json()['fuentes']
-        evidencia={'commit':commit,'huella_codigo':huella_codigo(),'venv_nuevo':True,'instalacion':True,'pruebas':True,'salud':salud.status_code,'consulta':r.status_code,'fuentes':r.json()['fuentes'],'modo':'simulado','nota':'Clon local del commit con venv nuevo, sin clave real. No es ejecución por Javier ni otro sistema operativo.'}
+        if huella_codigo()!=huella_inicial:
+            raise RuntimeError('El código cambió durante el ensayo; confirmar cambios y repetir')
+        evidencia={'commit':commit,'huella_codigo':huella_inicial,'venv_nuevo':True,'instalacion':True,'pruebas':True,'salud':salud.status_code,'consulta':r.status_code,'fuentes':r.json()['fuentes'],'modo':'simulado','nota':'Clon local del commit con venv nuevo, sin clave real. No es ejecución por Javier ni otro sistema operativo.'}
         Path('docs/frio_evidencia.json').write_text(json.dumps(evidencia,ensure_ascii=False,indent=2),encoding='utf8')
         print('5 de 5 comprobaciones cumplidas: clon, instalación, pruebas, salud y consulta')
     finally:
