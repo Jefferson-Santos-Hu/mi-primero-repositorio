@@ -6,7 +6,7 @@ from rubrica_gate3 import CRITERIOS,NO_COMPENSABLES,ENTREGABLES,UMBRAL
 from buscar_secretos import buscar
 PY=sys.executable
 FUENTES={
-'ficha':([PY,'verificar_ficha_completa.py','--sin-revision'],False),
+'ficha':([PY,'verificar_ficha_completa.py'],False),
 'decisiones':([PY,'verificar_decisiones.py'],False),
 'frio':([PY,'probar_en_frio.py','--comprobar'],False),
 'demo':([PY,'ensayo_demo.py'],False),
@@ -16,14 +16,14 @@ FUENTES={
 'servicio':([PY,'verificar_servicio.py'],False),
 'api_md':([PY,'generar_api_md.py','--comprobar'],False),
 'dockerfile':([PY,'verificar_dockerfile.py'],False),
-'compose':([PY,'verificar_entrega.py','--sin-revision'],False),
+'compose':([PY,'verificar_entrega.py'],False),
 'pytest':([PY,'-m','pytest','-q'],False),
 'matriz':([PY,'verificar_matriz.py'],False),
 'parciales':([PY,'verificar_parciales.py'],False),
 'riesgos':([PY,'verificar_riesgos.py'],False),
 'secretos':([PY,'buscar_secretos.py'],False),
 'readme':([PY,'verificar_readme.py'],False),
-'transferencia':([PY,'verificar_transferencia.py','--sin-revision'],False),
+'transferencia':([PY,'verificar_transferencia.py'],False),
 'guion':([PY,'medir_guion.py'],False),
 'stack':([PY,'verificar_stack.py'],True),
 'ejecucion':([PY,'verificar_ejecucion.py'],True),
@@ -34,7 +34,7 @@ def faltantes():return {n:[p for p in ps if not Path(p).is_file()] for n,ps in E
 
 
 def puntuar(resultados):
-    return [(c,c['peso']*sum(bool(resultados.get(f,{}).get('pasa')) for f in c['fuentes'])/len(c['fuentes'])) for c in CRITERIOS]
+    return [(c,c['peso']*sum(resultados.get(f,{}).get('fraccion',float(bool(resultados.get(f,{}).get('pasa')))) for f in c['fuentes'])/len(c['fuentes'])) for c in CRITERIOS]
 
 
 def no_compensables_que_fallan(resultados,omitidas):
@@ -65,17 +65,20 @@ def evaluar(con_docker=False):
         try:
             r=subprocess.run(orden,capture_output=True,text=True,encoding='utf8',errors='replace',timeout=180,env={**os.environ,'PYTHONUTF8':'1'})
             lineas=(r.stdout+r.stderr).strip().splitlines();detalle=next((x for x in lineas if x.startswith(('FALLA','ERROR','FAILED'))),lineas[-1] if lineas else 'sin salida')
-            resultados[nombre]={'pasa':r.returncode==0,'codigo':r.returncode,'detalle':detalle[:300]}
+            cuentas=re.findall(r'(\d+) de (\d+) (?:comprobaciones|reglas|casos)',r.stdout)
+            bien,total=map(int,cuentas[-1]) if cuentas else (1,1) if r.returncode==0 else (0,1)
+            if r.returncode!=0 and bien==total:total+=1
+            resultados[nombre]={'pasa':r.returncode==0,'codigo':r.returncode,'detalle':detalle[:300],'fraccion':bien/total if total else 0}
         except subprocess.TimeoutExpired:resultados[nombre]={'pasa':False,'codigo':1,'detalle':'Tiempo agotado'}
         print('PASA' if resultados[nombre]['pasa'] else 'FALLA',nombre,'->',resultados[nombre]['detalle'],flush=True)
     filas=puntuar(resultados);total=sum(p for _,p in filas);fallan=no_compensables_que_fallan(resultados,omitidas)
     pendientes=omitidas+revisiones_pendientes()+['Defensa oral del alumno y confirmaciones del evaluador']
-    veredicto=decidir(total,fallan,pendientes)
+    veredicto=decidir(total,fallan,omitidas)
     return {'fecha':datetime.now(timezone.utc).isoformat(),'modo':'con Docker' if con_docker else 'sin Docker','resultados':resultados,'omitidas':omitidas,'puntaje':round(total,2),'nota':round(nota(total),2),'no_compensables_fallan':fallan,'pendientes':pendientes,'veredicto':veredicto}
 
 
 def escribir(d):
-    lineas=['# Informe del Gate 3',f"Fecha: {d['fecha']}",f"Modo: {d['modo']}",f"Resultado: {d['veredicto']}",f"Puntaje técnico: {d['puntaje']}/100 (umbral {UMBRAL}); nota orientativa {d['nota']}/7",'', 'El puntaje es una autoevaluación automática de fuentes ejecutadas, no calificación del instructor. Las fuentes de ficha, composición y transferencia verifican solo su parte técnica; su revisión humana está separada y pendiente. Una fuente omitida vale cero, nunca éxito.','', '| Criterio | Peso | Puntos | Evidencia |','|---|---|---|---|']
+    lineas=['# Informe del Gate 3',f"Fecha: {d['fecha']}",f"Modo: {d['modo']}",f"Resultado: {d['veredicto']}",f"Puntaje técnico: {d['puntaje']}/100 (umbral {UMBRAL}); nota orientativa {d['nota']}/7",'', 'El puntaje es una autoevaluación automática de fuentes ejecutadas, no calificación del instructor. Las fuentes de ficha, composición y transferencia incluyen sus revisiones humanas y muestran FALLA mientras falten. Esos fallos compensables reducen el puntaje. La defensa oral y la condición de corpus sintético se confirman por el evaluador; no las decide el programa. Una fuente omitida vale cero, nunca éxito. APRUEBA significa superar la rúbrica automática, no una calificación del instructor.','', '| Criterio | Peso | Puntos | Evidencia |','|---|---|---|---|']
     for c,p in puntuar(d['resultados']):lineas.append(f"| {c['id']} {c['nombre']} | {c['peso']} | {p:.2f} | {', '.join(c['fuentes'])} |")
     lineas+=['','## Comprobaciones','', '| Fuente | Resultado | Detalle |','|---|---|---|']
     for f,r in d['resultados'].items():lineas.append(f"| {f} | {'PASA' if r['pasa'] else 'FALLA'} | {r['detalle'].replace('|','/')} |")
