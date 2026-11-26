@@ -1,5 +1,5 @@
 {
-  "fecha": "2026-11-25T16:15:08.077301+00:00",
+  "fecha": "2026-11-26T15:03:50.844585+00:00",
   "base": "http://127.0.0.1:8080",
   "modo": "simulado",
   "huella": "9694761bb420769342eff3eaa796620a0f353016e7f6acdf3111eb362895b4ce",
@@ -10,7 +10,7 @@
       "estado": 200,
       "esperado": 200,
       "pasa": true,
-      "latencia_ms": 3.43,
+      "latencia_ms": 84.5,
       "respuesta": {
         "estado": "ok",
         "modo": "simulado",
@@ -18,13 +18,13 @@
         "fuentes": [
           "cliente.md"
         ],
-        "trace_id": "trace-6512643cb3874d619d8ca8b6198948ec",
+        "trace_id": "trace-4e2cfa4ae14e4d8eb5a42841e712e4ec",
         "tokens": null,
         "costo_generacion_usd": null,
         "auditoria": [
           {
             "evento": "respuesta_simulada",
-            "trace_id": "trace-6512643cb3874d619d8ca8b6198948ec",
+            "trace_id": "trace-4e2cfa4ae14e4d8eb5a42841e712e4ec",
             "pregunta_len": 33
           }
         ]
@@ -36,7 +36,7 @@
       "estado": 200,
       "esperado": 200,
       "pasa": true,
-      "latencia_ms": 2.49,
+      "latencia_ms": 6.17,
       "respuesta": {
         "estado": "ok",
         "modo": "simulado",
@@ -44,13 +44,13 @@
         "fuentes": [
           "entorno.md"
         ],
-        "trace_id": "trace-c5f38b9f560a4533a71058c6bf0b01dd",
+        "trace_id": "trace-cfd166a512384cfc981063f3d554da09",
         "tokens": null,
         "costo_generacion_usd": null,
         "auditoria": [
           {
             "evento": "respuesta_simulada",
-            "trace_id": "trace-c5f38b9f560a4533a71058c6bf0b01dd",
+            "trace_id": "trace-cfd166a512384cfc981063f3d554da09",
             "pregunta_len": 14
           }
         ]
@@ -62,7 +62,7 @@
       "estado": 200,
       "esperado": 200,
       "pasa": true,
-      "latencia_ms": 5.89,
+      "latencia_ms": 7.0,
       "respuesta": {
         "codigo_http": 429,
         "detalle": "Límite de cuota o frecuencia. Usar backoff exponencial con jitter y máximo de intentos; revisar la cuota."
@@ -74,7 +74,7 @@
       "estado": 200,
       "esperado": 200,
       "pasa": true,
-      "latencia_ms": 2.02,
+      "latencia_ms": 6.27,
       "respuesta": {
         "estado": "ok",
         "modelo_activo": "simulado",
@@ -87,7 +87,7 @@
       "estado": 422,
       "esperado": 422,
       "pasa": true,
-      "latencia_ms": 2.08,
+      "latencia_ms": 5.45,
       "respuesta": {
         "codigo": "entrada_invalida",
         "mensaje": "Revisa pregunta (1–4000 caracteres), k (1–6) y campos permitidos."
@@ -99,7 +99,7 @@
       "estado": 422,
       "esperado": 422,
       "pasa": true,
-      "latencia_ms": 1.84,
+      "latencia_ms": 4.1,
       "respuesta": {
         "codigo": "entrada_invalida",
         "mensaje": "Revisa pregunta (1–4000 caracteres), k (1–6) y campos permitidos."
@@ -111,7 +111,7 @@
       "estado": 404,
       "esperado": 404,
       "pasa": true,
-      "latencia_ms": 1.6,
+      "latencia_ms": 4.53,
       "respuesta": {
         "codigo": "no_encontrado",
         "mensaje": "Recurso no disponible."
@@ -123,19 +123,19 @@
       "estado": 200,
       "esperado": 200,
       "pasa": true,
-      "latencia_ms": 2.11,
+      "latencia_ms": 6.14,
       "respuesta": {
         "estado": "sin_contexto",
         "modo": "simulado",
         "respuesta": "No encuentro esa información en el corpus de demostración.",
         "fuentes": [],
-        "trace_id": "trace-0df2b3c0a72f4e8786dd3ec4f1996787",
+        "trace_id": "trace-cf81c99a4c644e46b7d14d0542b7b4e3",
         "tokens": null,
         "costo_generacion_usd": null,
         "auditoria": [
           {
             "evento": "respuesta_simulada",
-            "trace_id": "trace-0df2b3c0a72f4e8786dd3ec4f1996787",
+            "trace_id": "trace-cf81c99a4c644e46b7d14d0542b7b4e3",
             "pregunta_len": 30
           }
         ]
@@ -147,12 +147,12 @@
       "estado": 200,
       "esperado": 200,
       "pasa": true,
-      "latencia_ms": 2.09,
+      "latencia_ms": 6.24,
       "respuesta": {
         "estado": "rechazado",
         "respuesta": "No puedo atender instrucciones que alteren las reglas del sistema.",
         "fuentes": [],
-        "trace_id": "trace-2f2ff255f22e4aa18988badfea29678e"
+        "trace_id": "trace-59eeede201844a478c5d0cb55ec0625b"
       }
     },
     {
@@ -161,19 +161,19 @@
       "estado": 200,
       "esperado": 200,
       "pasa": true,
-      "latencia_ms": 1.89,
+      "latencia_ms": 7.11,
       "respuesta": {
         "estado": "sin_contexto",
         "modo": "simulado",
         "respuesta": "No encuentro esa información en el corpus de demostración.",
         "fuentes": [],
-        "trace_id": "trace-64a87090ba364a1d9c4688430e320863",
+        "trace_id": "trace-84bf35085e3243f3872c991d662a9213",
         "tokens": null,
         "costo_generacion_usd": null,
         "auditoria": [
           {
             "evento": "respuesta_simulada",
-            "trace_id": "trace-64a87090ba364a1d9c4688430e320863",
+            "trace_id": "trace-84bf35085e3243f3872c991d662a9213",
             "pregunta_len": 29
           }
         ]
@@ -185,19 +185,19 @@
       "estado": 200,
       "esperado": 200,
       "pasa": true,
-      "latencia_ms": 2.18,
+      "latencia_ms": 6.06,
       "respuesta": {
         "estado": "sin_contexto",
         "modo": "simulado",
         "respuesta": "No encuentro esa información en el corpus de demostración.",
         "fuentes": [],
-        "trace_id": "trace-4554eb69032c4ce3bd26c853fc7bd41a",
+        "trace_id": "trace-0fe6f066bc86426388dd66a05149b95b",
         "tokens": null,
         "costo_generacion_usd": null,
         "auditoria": [
           {
             "evento": "respuesta_simulada",
-            "trace_id": "trace-4554eb69032c4ce3bd26c853fc7bd41a",
+            "trace_id": "trace-0fe6f066bc86426388dd66a05149b95b",
             "pregunta_len": 4000
           }
         ]
@@ -209,7 +209,7 @@
       "estado": 422,
       "esperado": 422,
       "pasa": true,
-      "latencia_ms": 1.85,
+      "latencia_ms": 5.95,
       "respuesta": {
         "codigo": "entrada_invalida",
         "mensaje": "Revisa pregunta (1–4000 caracteres), k (1–6) y campos permitidos."
@@ -221,7 +221,7 @@
       "estado": 405,
       "esperado": 405,
       "pasa": true,
-      "latencia_ms": 1.49,
+      "latencia_ms": 4.55,
       "respuesta": {
         "codigo": "error_http",
         "mensaje": "Recurso no disponible."
@@ -233,7 +233,7 @@
       "estado": 200,
       "esperado": 200,
       "pasa": true,
-      "latencia_ms": 1.81,
+      "latencia_ms": 6.21,
       "respuesta": {
         "estado": "ok",
         "modo": "simulado",
@@ -241,13 +241,13 @@
         "fuentes": [
           "cliente.md"
         ],
-        "trace_id": "trace-2f7efec1f2244b7e8d176ceab17d5ae7",
+        "trace_id": "trace-6dd95b553bb349e1a4c940d312e49ad1",
         "tokens": null,
         "costo_generacion_usd": null,
         "auditoria": [
           {
             "evento": "respuesta_simulada",
-            "trace_id": "trace-2f7efec1f2244b7e8d176ceab17d5ae7",
+            "trace_id": "trace-6dd95b553bb349e1a4c940d312e49ad1",
             "pregunta_len": 21
           }
         ]
@@ -259,8 +259,8 @@
       "estado": 200,
       "esperado": 200,
       "pasa": true,
-      "latencia_ms": 2.15,
-      "respuesta": "<!doctype html><html lang=\"es\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>Asistente técnico</title><style>body{font:18px system-ui;max-width:760px;margin:40px auto;padding:20px;background:#f4f7fb;color:#17233a}textarea{width:100%;min-height:110px;box-sizing:border-box;font:inherit}button{padding:12px 22px;background:#174ea6;color:white;border:0;border-radius:8px;font:inherit}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:white;padding:20px}label{display:block;margin-bottom:12px}small{display:block;margin:16px 0}</style></head><body><h1>Asistente técnico Python y Gemini</h1><p>Consulta el funcionamiento documentado de este proyecto y revisa las fuentes de la respuesta.</p><p id=\"modo\" role=\"status\">Comprobando modo del servicio…</p><form id=\"consulta\"><label for=\"pregunta\">Tu pregunta</label><textarea id=\"pregunta\" required maxlength=\"4000\" placeholder=\"¿Qué hace el cliente ante HTTP 429?\"></textarea><small>No incluyas claves API ni datos personales.</small><button id=\"enviar\">Consultar</button></form><p id=\"estado\" role=\"status\" aria-live=\"polite\"></p><pre id=\"respuesta\"></pre><p id=\"fuentes\"></p><script src=\"app.js\"></script></body></html>\r\n"
+      "latencia_ms": 14.44,
+      "respuesta": "<!doctype html><html lang=\"es\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>Asistente técnico</title><style>body{font:18px system-ui;max-width:760px;margin:40px auto;padding:20px;background:#f4f7fb;color:#17233a}textarea{width:100%;min-height:110px;box-sizing:border-box;font:inherit}button{padding:12px 22px;background:#174ea6;color:white;border:0;border-radius:8px;font:inherit}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:white;padding:20px}label{display:block;margin-bottom:12px}small{display:block;margin:16px 0}</style></head><body><h1>Asistente técnico Python y Gemini</h1><p>Consulta el funcionamiento documentado de este proyecto y revisa las fuentes de la respuesta.</p><p id=\"modo\" role=\"status\">Comprobando modo del servicio…</p><form id=\"consulta\"><label for=\"pregunta\">Tu pregunta</label><textarea id=\"pregunta\" required maxlength=\"4000\" placeholder=\"¿Qué hace el cliente ante HTTP 429?\"></textarea><small>No incluyas claves API ni datos personales.</small><button id=\"enviar\">Consultar</button></form><p id=\"estado\" role=\"status\" aria-live=\"polite\"></p><pre id=\"respuesta\"></pre><p id=\"fuentes\"></p><script src=\"app.js?v=2\"></script></body></html>\r\n"
     }
   ]
 }

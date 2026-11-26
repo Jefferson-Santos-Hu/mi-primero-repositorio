@@ -1,0 +1,47 @@
+{
+  "autor": "ensayo técnico automatizado; revisión por Javier pendiente",
+  "resultados": [
+    {
+      "id": "T-01",
+      "descripcion": "salud",
+      "pasa": true,
+      "estado": 200,
+      "limitacion": null
+    },
+    {
+      "id": "T-02",
+      "descripcion": "respuesta con fuente",
+      "pasa": true,
+      "estado": 200,
+      "limitacion": null
+    },
+    {
+      "id": "T-03",
+      "descripcion": "validación",
+      "pasa": true,
+      "estado": 422,
+      "limitacion": null
+    },
+    {
+      "id": "T-04",
+      "descripcion": "catálogo",
+      "pasa": true,
+      "estado": 200,
+      "limitacion": null
+    },
+    {
+      "id": "T-05",
+      "descripcion": "fuera del catálogo simulado",
+      "pasa": true,
+      "estado": 200,
+      "limitacion": "LIM-03"
+    },
+    {
+      "id": "T-06",
+      "descripcion": "otro idioma sin regla de demo",
+      "pasa": true,
+      "estado": 200,
+      "limitacion": "LIM-03"
+    }
+  ]
+}

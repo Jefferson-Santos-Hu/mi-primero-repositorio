@@ -1,0 +1,17 @@
+Name                         Stmts   Miss  Cover
+------------------------------------------------
+agente_con_herramientas.py      48      8    83%
+api.py                          59      5    92%
+cadena_tres_pasos.py            10      2    80%
+cliente.py                      56      3    95%
+enrutamiento.py                 29      2    93%
+fundamentacion.py               19      0   100%
+indexar_documentos.py           67     17    75%
+modelo_simulado.py              11      1    91%
+pipeline_texto.py               23      0   100%
+servicio_rag.py                 79     12    85%
+src\__init__.py                  0      0   100%
+src\consumir_gemini.py          95      1    99%
+src\validacion_json.py          26      0   100%
+------------------------------------------------
+TOTAL                          522     51    90%
